@@ -1,0 +1,55 @@
+.co-author-network-container {
+  width: 100%;
+  height: 600px;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: #fafafa;
+
+  .co-author-network-search {
+    padding: 10px;
+    background: #fff;
+    border-bottom: 1px solid #e8e8e8;
+    flex-shrink: 0;
+  }
+
+  svg {
+    flex: 1;
+    display: block;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+      sans-serif;
+
+    .links {
+      line {
+        transition: stroke-opacity 0.2s;
+      }
+    }
+
+    .nodes {
+      circle {
+        transition: stroke-width 0.2s;
+      }
+    }
+
+    .labels {
+      text {
+        user-select: none;
+      }
+    }
+  }
+}
+
+:global(.coauthor-network-tooltip) {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    sans-serif;
+  line-height: 1.5;
+
+  strong {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 13px;
+  }
+}

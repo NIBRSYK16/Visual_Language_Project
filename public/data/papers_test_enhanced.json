@@ -1,0 +1,4775 @@
+[
+  {
+    "id": "conf/sosp/AdyaCMP11",
+    "title": "Thialfi: a client notification service for internet-scale applications.",
+    "authors": [
+      {
+        "id": "a/AAdya",
+        "name": "Atul Adya",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "68/29",
+        "name": "Gregory Cooper",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "48/9634",
+        "name": "Daniel Myers",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "74/4787",
+        "name": "Michael Piatek",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2011,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2043556.2043570",
+    "url": "https://doi.org/10.1145/2043556.2043570",
+    "dblpKey": "conf/sosp/AdyaCMP11"
+  },
+  {
+    "id": "conf/sosp/AndrusDHLN11",
+    "title": "Cells: a virtual mobile smartphone architecture.",
+    "authors": [
+      {
+        "id": "25/10322",
+        "name": "Jeremy Andrus",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "12/10322",
+        "name": "Christoffer Dall",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "19/10322",
+        "name": "Alexander Van&apos;t Hof",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "60/729",
+        "name": "Oren Laadan",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "n/JasonNieh",
+        "name": "Jason Nieh",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2011,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2043556.2043574",
+    "url": "https://doi.org/10.1145/2043556.2043574",
+    "dblpKey": "conf/sosp/AndrusDHLN11"
+  },
+  {
+    "id": "conf/sosp/CalderWONSMXSWSHUKEBMAAHHBDAMSMR11",
+    "title": "Windows Azure Storage: a highly available cloud storage service with strong consistency.",
+    "authors": [
+      {
+        "id": "c/BradCalder",
+        "name": "Brad Calder",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "65/4124-10",
+        "name": "Ju Wang 0010",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "13/10322",
+        "name": "Aaron Ogus",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "37/10322",
+        "name": "Niranjan Nilakantan",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "26/10322",
+        "name": "Arild Skjolsvold",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "20/10322",
+        "name": "Sam McKelvie",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "37/3729",
+        "name": "Yikang Xu",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "16/10322",
+        "name": "Shashwat Srivastav",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "64/2146",
+        "name": "Jiesheng Wu",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "45/6657",
+        "name": "Huseyin Simitci",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "39/6261",
+        "name": "Jaidev Haridas",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "35/10322",
+        "name": "Chakravarthy Uddaraju",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "24/1583",
+        "name": "Hemal Khatri",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "24/1928",
+        "name": "Andrew Edwards",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "27/10322",
+        "name": "Vaman Bedekar",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "21/10322",
+        "name": "Shane Mainali",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "29/10322",
+        "name": "Rafay Abbasi",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "52/9814",
+        "name": "Arpit Agarwal",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "32/10322",
+        "name": "Mian Fahim ul Haq",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "18/10322",
+        "name": "Muhammad Ikram ul Haq",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "60/5093",
+        "name": "Deepali Bhardwaj",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "22/10322",
+        "name": "Sowmya Dayanand",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "14/10322",
+        "name": "Anitha Adusumilli",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "75/5094",
+        "name": "Marvin McNett",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "00/7522",
+        "name": "Sriram Sankaran",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "08/10322",
+        "name": "Kavitha Manivannan",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "77/597",
+        "name": "Leonidas Rigas",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2011,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2043556.2043571",
+    "url": "https://doi.org/10.1145/2043556.2043571",
+    "dblpKey": "conf/sosp/CalderWONSMXSWSHUKEBMAAHHBDAMSMR11"
+  },
+  {
+    "id": "conf/sosp/ChandraKSNZ11",
+    "title": "Intrusion recovery for database-backed web applications.",
+    "authors": [
+      {
+        "id": "15/3784",
+        "name": "Ramesh Chandra",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "38/8882",
+        "name": "Taesoo Kim",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "30/10322",
+        "name": "Meelap Shah",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "78/6040",
+        "name": "Neha Narula",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "99/5780",
+        "name": "Nickolai Zeldovich",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2011,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2043556.2043567",
+    "url": "https://doi.org/10.1145/2043556.2043567",
+    "dblpKey": "conf/sosp/ChandraKSNZ11"
+  },
+  {
+    "id": "conf/sosp/ChenSGK11",
+    "title": "Design implications for enterprise storage systems via multi-dimensional trace analysis.",
+    "authors": [
+      {
+        "id": "35/940",
+        "name": "Yanpei Chen",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "75/6352",
+        "name": "Kiran Srinivasan",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "56/2610",
+        "name": "Garth R. Goodson",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "k/RandyHKatz",
+        "name": "Randy H. Katz",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2011,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2043556.2043562",
+    "url": "https://doi.org/10.1145/2043556.2043562",
+    "dblpKey": "conf/sosp/ChenSGK11"
+  },
+  {
+    "id": "conf/sosp/ColpNZACDLW11",
+    "title": "Breaking up is hard to do: security and functionality in a commodity hypervisor.",
+    "authors": [
+      {
+        "id": "15/10322",
+        "name": "Patrick Colp",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "24/10322",
+        "name": "Mihir Nanavati",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "50/2644",
+        "name": "Jun Zhu",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "a/WilliamAiello",
+        "name": "William Aiello",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "56/5351",
+        "name": "George Coker",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "76/6445",
+        "name": "Tim Deegan",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "35/6525",
+        "name": "Peter A. Loscocco",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "70/5879",
+        "name": "Andrew Warfield",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2011,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2043556.2043575",
+    "url": "https://doi.org/10.1145/2043556.2043575",
+    "dblpKey": "conf/sosp/ColpNZACDLW11"
+  },
+  {
+    "id": "conf/sosp/CuiWGGY11",
+    "title": "Efficient deterministic multithreading through schedule relaxation.",
+    "authors": [
+      {
+        "id": "59/5565",
+        "name": "Heming Cui",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "60/10014",
+        "name": "Jingyue Wu",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "23/10322",
+        "name": "John Gallagher",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "89/9044",
+        "name": "Huayang Guo",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "71/3724",
+        "name": "Junfeng Yang",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2011,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2043556.2043588",
+    "url": "https://doi.org/10.1145/2043556.2043588",
+    "dblpKey": "conf/sosp/CuiWGGY11"
+  },
+  {
+    "id": "conf/sosp/ErlingssonPPB11",
+    "title": "Fay: extensible distributed tracing from kernels to clusters.",
+    "authors": [
+      {
+        "id": "e/UErlingsson",
+        "name": "Úlfar Erlingsson",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "56/6925",
+        "name": "Marcus Peinado",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "43/3917",
+        "name": "Simon Peter 0001",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "b/MihaiBudiu",
+        "name": "Mihai Budiu",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2011,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2043556.2043585",
+    "url": "https://doi.org/10.1145/2043556.2043585",
+    "dblpKey": "conf/sosp/ErlingssonPPB11"
+  },
+  {
+    "id": "conf/sosp/GlendenningBKA11",
+    "title": "Scalable consistency in Scatter.",
+    "authors": [
+      {
+        "id": "10/10322",
+        "name": "Lisa Glendenning",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "98/5324",
+        "name": "Ivan Beschastnikh",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "k/AKrishnamurthy",
+        "name": "Arvind Krishnamurthy",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "a/ThomasEAnderson",
+        "name": "Thomas E. Anderson",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2011,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2043556.2043559",
+    "url": "https://doi.org/10.1145/2043556.2043559",
+    "dblpKey": "conf/sosp/GlendenningBKA11"
+  },
+  {
+    "id": "conf/sosp/GuoWZHYZ11",
+    "title": "Practical software model checking via dynamic interface reduction.",
+    "authors": [
+      {
+        "id": "89/9044",
+        "name": "Huayang Guo",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "32/2572-7",
+        "name": "Ming Wu 0007",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "z/LidongZhou",
+        "name": "Lidong Zhou",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "24/1820",
+        "name": "Gang Hu",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "71/3724",
+        "name": "Junfeng Yang",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "94/5689",
+        "name": "Lintao Zhang",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2011,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2043556.2043582",
+    "url": "https://doi.org/10.1145/2043556.2043582",
+    "dblpKey": "conf/sosp/GuoWZHYZ11"
+  },
+  {
+    "id": "conf/sosp/HarterDVAA11",
+    "title": "A file is not a file: understanding the I/O behavior of Apple desktop applications.",
+    "authors": [
+      {
+        "id": "09/10322",
+        "name": "Tyler Harter",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "17/10322",
+        "name": "Chris Dragga",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "36/10322",
+        "name": "Michael Vaughn",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "a/AndreaCArpaciDusseau",
+        "name": "Andrea C. Arpaci-Dusseau",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "a/RemziHArpaciDusseau",
+        "name": "Remzi H. Arpaci-Dusseau",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2011,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2043556.2043564",
+    "url": "https://doi.org/10.1145/2043556.2043564",
+    "dblpKey": "conf/sosp/HarterDVAA11"
+  },
+  {
+    "id": "conf/sosp/LaadanVTBYN11",
+    "title": "Pervasive detection of process races in deployed systems.",
+    "authors": [
+      {
+        "id": "60/729",
+        "name": "Oren Laadan",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "05/998",
+        "name": "Nicolas Viennot",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "277/2163",
+        "name": "Chia-Che Tsai",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "31/10322",
+        "name": "Chris Blinn",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "71/3724",
+        "name": "Junfeng Yang",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "n/JasonNieh",
+        "name": "Jason Nieh",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2011,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2043556.2043589",
+    "url": "https://doi.org/10.1145/2043556.2043589",
+    "dblpKey": "conf/sosp/LaadanVTBYN11"
+  },
+  {
+    "id": "conf/sosp/LenersWHAW11",
+    "title": "Detecting failures in distributed systems with the Falcon spy network.",
+    "authors": [
+      {
+        "id": "93/8373",
+        "name": "Joshua B. Leners",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "72/4250",
+        "name": "Hao Wu",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "43/6136",
+        "name": "Wei-Lun Hung",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "10/553",
+        "name": "Marcos Kawazoe Aguilera",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "00/2879",
+        "name": "Michael Walfish",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2011,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2043556.2043583",
+    "url": "https://doi.org/10.1145/2043556.2043583",
+    "dblpKey": "conf/sosp/LenersWHAW11"
+  },
+  {
+    "id": "conf/sosp/LimFAK11",
+    "title": "SILT: a memory-efficient, high-performance key-value store.",
+    "authors": [
+      {
+        "id": "57/2227",
+        "name": "Hyeontaek Lim",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "60/105",
+        "name": "Bin Fan",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "a/DavidGAndersen",
+        "name": "David G. Andersen",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "09/4259",
+        "name": "Michael Kaminsky",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2011,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2043556.2043558",
+    "url": "https://doi.org/10.1145/2043556.2043558",
+    "dblpKey": "conf/sosp/LimFAK11"
+  },
+  {
+    "id": "conf/sosp/LiuCB11",
+    "title": "Dthreads: efficient deterministic multithreading.",
+    "authors": [
+      {
+        "id": "15/4725",
+        "name": "Tongping Liu",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "34/10322",
+        "name": "Charlie Curtsinger",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "98/4487",
+        "name": "Emery D. Berger",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2011,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2043556.2043587",
+    "url": "https://doi.org/10.1145/2043556.2043587",
+    "dblpKey": "conf/sosp/LiuCB11"
+  },
+  {
+    "id": "conf/sosp/LloydFKA11",
+    "title": "Don&apos;t settle for eventual: scalable causal consistency for wide-area storage with COPS.",
+    "authors": [
+      {
+        "id": "21/1059",
+        "name": "Wyatt Lloyd",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "65/1370",
+        "name": "Michael J. Freedman",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "09/4259",
+        "name": "Michael Kaminsky",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "a/DavidGAndersen",
+        "name": "David G. Andersen",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2011,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2043556.2043593",
+    "url": "https://doi.org/10.1145/2043556.2043593",
+    "dblpKey": "conf/sosp/LloydFKA11"
+  },
+  {
+    "id": "conf/sosp/MaoCZWZK11",
+    "title": "Software fault isolation with API integrity and multi-principal modules.",
+    "authors": [
+      {
+        "id": "77/190",
+        "name": "Yandong Mao",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "12/3578-1",
+        "name": "Haogang Chen 0001",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "15/2101-6",
+        "name": "Dong Zhou 0006",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "08/5760-5",
+        "name": "Xi Wang 0005",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "99/5780",
+        "name": "Nickolai Zeldovich",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "k/MFransKaashoek",
+        "name": "M. Frans Kaashoek",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2011,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2043556.2043568",
+    "url": "https://doi.org/10.1145/2043556.2043568",
+    "dblpKey": "conf/sosp/MaoCZWZK11"
+  },
+  {
+    "id": "conf/sosp/MesnierCLA11",
+    "title": "Differentiated storage services.",
+    "authors": [
+      {
+        "id": "m/MichaelPMesnier",
+        "name": "Michael P. Mesnier",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "21/3047-5",
+        "name": "Feng Chen 0005",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "23/563",
+        "name": "Tian Luo",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "38/9465",
+        "name": "Jason B. Akers",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2011,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2043556.2043563",
+    "url": "https://doi.org/10.1145/2043556.2043563",
+    "dblpKey": "conf/sosp/MesnierCLA11"
+  },
+  {
+    "id": "conf/sosp/MickensD11",
+    "title": "Atlantis: robust, extensible execution environments for web applications.",
+    "authors": [
+      {
+        "id": "90/1843",
+        "name": "James W. Mickens",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "09/4218",
+        "name": "Mohan Dhawan",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2011,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2043556.2043577",
+    "url": "https://doi.org/10.1145/2043556.2043577",
+    "dblpKey": "conf/sosp/MickensD11"
+  },
+  {
+    "id": "conf/sosp/OngaroRSOR11",
+    "title": "Fast crash recovery in RAMCloud.",
+    "authors": [
+      {
+        "id": "43/3194",
+        "name": "Diego Ongaro",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "02/4684",
+        "name": "Stephen M. Rumble",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "02/1650",
+        "name": "Ryan Stutsman",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "o/JohnKOusterhout",
+        "name": "John K. Ousterhout",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "r/MendelRosenblum",
+        "name": "Mendel Rosenblum",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2011,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2043556.2043560",
+    "url": "https://doi.org/10.1145/2043556.2043560",
+    "dblpKey": "conf/sosp/OngaroRSOR11"
+  },
+  {
+    "id": "conf/sosp/PopaRZB11",
+    "title": "CryptDB: protecting confidentiality with encrypted query processing.",
+    "authors": [
+      {
+        "id": "91/275",
+        "name": "Raluca A. Popa",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "11/10322",
+        "name": "Catherine M. S. Redfield",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "99/5780",
+        "name": "Nickolai Zeldovich",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "b/HariBalakrishnan",
+        "name": "Hari Balakrishnan",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2011,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2043556.2043566",
+    "url": "https://doi.org/10.1145/2043556.2043566",
+    "dblpKey": "conf/sosp/PopaRZB11"
+  },
+  {
+    "id": "conf/sosp/RossbachCSRW11",
+    "title": "PTask: operating system abstractions to manage GPUs as compute devices.",
+    "authors": [
+      {
+        "id": "46/991",
+        "name": "Christopher J. Rossbach",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "60/5888",
+        "name": "Jon Currey",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "94/2996",
+        "name": "Mark Silberstein",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "74/1969",
+        "name": "Baishakhi Ray",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "76/6082",
+        "name": "Emmett Witchel",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2011,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2043556.2043579",
+    "url": "https://doi.org/10.1145/2043556.2043579",
+    "dblpKey": "conf/sosp/RossbachCSRW11"
+  },
+  {
+    "id": "conf/sosp/SirerBRSWWS11",
+    "title": "Logical attestation: an authorization architecture for trustworthy computing.",
+    "authors": [
+      {
+        "id": "s/EminGunSirer",
+        "name": "Emin Gün Sirer",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "86/4441",
+        "name": "Willem de Bruijn",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "08/2847",
+        "name": "Patrick Reynolds",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "36/3616",
+        "name": "Alan Shieh",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "50/5661-1",
+        "name": "Kevin Walsh 0001",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "96/2005",
+        "name": "Dan Williams 0001",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "s/FredBSchneider",
+        "name": "Fred B. Schneider",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2011,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2043556.2043580",
+    "url": "https://doi.org/10.1145/2043556.2043580",
+    "dblpKey": "conf/sosp/SirerBRSWWS11"
+  },
+  {
+    "id": "conf/sosp/SovranPAL11",
+    "title": "Transactional storage for geo-replicated systems.",
+    "authors": [
+      {
+        "id": "54/8142",
+        "name": "Yair Sovran",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "48/9376",
+        "name": "Russell Power",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "10/553",
+        "name": "Marcos K. Aguilera",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "79/572-1",
+        "name": "Jinyang Li 0001",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2011,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2043556.2043592",
+    "url": "https://doi.org/10.1145/2043556.2043592",
+    "dblpKey": "conf/sosp/SovranPAL11"
+  },
+  {
+    "id": "conf/sosp/VeeraraghavanCFN11",
+    "title": "Detecting and surviving data races using complementary schedules.",
+    "authors": [
+      {
+        "id": "52/1896",
+        "name": "Kaushik Veeraraghavan",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "c/PeterMChen",
+        "name": "Peter M. Chen",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "14/85",
+        "name": "Jason Flinn",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "27/3820",
+        "name": "Satish Narayanasamy",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2011,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2043556.2043590",
+    "url": "https://doi.org/10.1145/2043556.2043590",
+    "dblpKey": "conf/sosp/VeeraraghavanCFN11"
+  },
+  {
+    "id": "conf/sosp/YinMZZBP11",
+    "title": "An empirical study on configuration errors in commercial and open source systems.",
+    "authors": [
+      {
+        "id": "21/4635",
+        "name": "Zuoning Yin",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "35/573-14",
+        "name": "Xiao Ma 0014",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "15/2171",
+        "name": "Jing Zheng",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "99/2747-1",
+        "name": "Yuanyuan Zhou 0001",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "94/6213",
+        "name": "Lakshmi N. Bairavasundaram",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "60/5379",
+        "name": "Shankar Pasupathy",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2011,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2043556.2043572",
+    "url": "https://doi.org/10.1145/2043556.2043572",
+    "dblpKey": "conf/sosp/YinMZZBP11"
+  },
+  {
+    "id": "conf/sosp/ZhangCCZ11",
+    "title": "CloudVisor: retrofitting protection of virtual machines in multi-tenant cloud with nested virtualization.",
+    "authors": [
+      {
+        "id": "76/4754",
+        "name": "Fengzhe Zhang",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "03/5287",
+        "name": "Jin Chen",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "31/6601-1",
+        "name": "Haibo Chen 0001",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "86/680",
+        "name": "Binyu Zang",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2011,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2043556.2043576",
+    "url": "https://doi.org/10.1145/2043556.2043576",
+    "dblpKey": "conf/sosp/ZhangCCZ11"
+  },
+  {
+    "id": "conf/sosp/ZhouFNHLS11",
+    "title": "Secure network provenance.",
+    "authors": [
+      {
+        "id": "72/1077",
+        "name": "Wenchao Zhou",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "76/9726",
+        "name": "Qiong Fei",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "28/10322",
+        "name": "Arjun Narayan",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "60/4358",
+        "name": "Andreas Haeberlen",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "75/3108",
+        "name": "Boon Thau Loo",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "57/3752",
+        "name": "Micah Sherr",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2011,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2043556.2043584",
+    "url": "https://doi.org/10.1145/2043556.2043584",
+    "dblpKey": "conf/sosp/ZhouFNHLS11"
+  },
+  {
+    "id": "conf/sosp/BalakrishnanMWWPWDRZZ13",
+    "title": "Tango: distributed data structures over a shared log.",
+    "authors": [
+      {
+        "id": "b/MBalakrishnan",
+        "name": "Mahesh Balakrishnan 0001",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "m/DahliaMalkhi",
+        "name": "Dahlia Malkhi",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "76/4863",
+        "name": "Ted Wobber",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "32/2572-7",
+        "name": "Ming Wu 0007",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "93/843",
+        "name": "Vijayan Prabhakaran",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "132/0329",
+        "name": "Michael Wei",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "72/1381",
+        "name": "John D. Davis",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "07/1315",
+        "name": "Sriram Rao",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "61/6876-2",
+        "name": "Tao Zou 0002",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "08/7454",
+        "name": "Aviad Zuck",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2013,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2517349.2522732",
+    "url": "https://doi.org/10.1145/2517349.2522732",
+    "dblpKey": "conf/sosp/BalakrishnanMWWPWDRZZ13"
+  },
+  {
+    "id": "conf/sosp/BraunFRSBW13",
+    "title": "Verifying computations with state.",
+    "authors": [
+      {
+        "id": "16/2964",
+        "name": "Benjamin Braun",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "59/3702",
+        "name": "Ariel J. Feldman",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "132/0854",
+        "name": "Zuocheng Ren",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "68/8463",
+        "name": "Srinath T. V. Setty",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "93/1054",
+        "name": "Andrew J. Blumberg",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "00/2879",
+        "name": "Michael Walfish",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2013,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2517349.2522733",
+    "url": "https://doi.org/10.1145/2517349.2522733",
+    "dblpKey": "conf/sosp/BraunFRSBW13"
+  },
+  {
+    "id": "conf/sosp/ChandraKZ13",
+    "title": "Asynchronous intrusion recovery for interconnected web services.",
+    "authors": [
+      {
+        "id": "15/3784",
+        "name": "Ramesh Chandra",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "38/8882",
+        "name": "Taesoo Kim",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "99/5780",
+        "name": "Nickolai Zeldovich",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2013,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2517349.2522725",
+    "url": "https://doi.org/10.1145/2517349.2522725",
+    "dblpKey": "conf/sosp/ChandraKZ13"
+  },
+  {
+    "id": "conf/sosp/ChidambaramPAA13",
+    "title": "Optimistic crash consistency.",
+    "authors": [
+      {
+        "id": "07/10563",
+        "name": "Vijay Chidambaram",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "135/6845",
+        "name": "Thanumalayan Sankaranarayana Pillai",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "a/AndreaCArpaciDusseau",
+        "name": "Andrea C. Arpaci-Dusseau",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "a/RemziHArpaciDusseau",
+        "name": "Remzi H. Arpaci-Dusseau",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2013,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2517349.2522726",
+    "url": "https://doi.org/10.1145/2517349.2522726",
+    "dblpKey": "conf/sosp/ChidambaramPAA13"
+  },
+  {
+    "id": "conf/sosp/ClementsKZMK13",
+    "title": "The scalable commutativity rule: designing scalable software for multicore processors.",
+    "authors": [
+      {
+        "id": "21/659",
+        "name": "Austin T. Clements",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "k/MFransKaashoek",
+        "name": "M. Frans Kaashoek",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "99/5780",
+        "name": "Nickolai Zeldovich",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "27/7070",
+        "name": "Robert T. Morris",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "78/5231",
+        "name": "Eddie Kohler",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2013,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2517349.2522712",
+    "url": "https://doi.org/10.1145/2517349.2522712",
+    "dblpKey": "conf/sosp/ClementsKZMK13"
+  },
+  {
+    "id": "conf/sosp/CoburnBSGS13",
+    "title": "From ARIES to MARS: transaction support for next-generation, solid-state drives.",
+    "authors": [
+      {
+        "id": "39/3448",
+        "name": "Joel Coburn",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "126/3562",
+        "name": "Trevor Bunker",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "135/6769",
+        "name": "Meir Schwarz",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "213/9138-1",
+        "name": "Rajesh Gupta 0001",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "97/3886",
+        "name": "Steven Swanson",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2013,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2517349.2522724",
+    "url": "https://doi.org/10.1145/2517349.2522724",
+    "dblpKey": "conf/sosp/CoburnBSGS13"
+  },
+  {
+    "id": "conf/sosp/CuiSLLBXYGB13",
+    "title": "Parrot: a practical runtime for deterministic, stable, and reliable threads.",
+    "authors": [
+      {
+        "id": "59/5565",
+        "name": "Heming Cui",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "276/0168",
+        "name": "Jirí Simsa",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "135/6809",
+        "name": "Yi-Hong Lin",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "17/5705",
+        "name": "Hao Li",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "28/2548",
+        "name": "Ben Blum",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "135/6796",
+        "name": "Xinan Xu",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "71/3724",
+        "name": "Junfeng Yang",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "g/GarthAGibson",
+        "name": "Garth A. Gibson",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "b/REBryant",
+        "name": "Randal E. Bryant",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2013,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2517349.2522735",
+    "url": "https://doi.org/10.1145/2517349.2522735",
+    "dblpKey": "conf/sosp/CuiSLLBXYGB13"
+  },
+  {
+    "id": "conf/sosp/DavidGT13",
+    "title": "Everything you always wanted to know about synchronization but were afraid to ask.",
+    "authors": [
+      {
+        "id": "70/9867",
+        "name": "Tudor David",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "g/RachidGuerraoui",
+        "name": "Rachid Guerraoui",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "93/11190",
+        "name": "Vasileios Trigonakis",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2013,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2517349.2522714",
+    "url": "https://doi.org/10.1145/2517349.2522714",
+    "dblpKey": "conf/sosp/DavidGT13"
+  },
+  {
+    "id": "conf/sosp/ElphinstoneH13",
+    "title": "From L3 to seL4 what have we learnt in 20 years of L4 microkernels?",
+    "authors": [
+      {
+        "id": "e/KElphinstone",
+        "name": "Kevin Elphinstone",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "h/GernotHeiser",
+        "name": "Gernot Heiser",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2013,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2517349.2522720",
+    "url": "https://doi.org/10.1145/2517349.2522720",
+    "dblpKey": "conf/sosp/ElphinstoneH13"
+  },
+  {
+    "id": "conf/sosp/HuangBRLKL13",
+    "title": "An analysis of Facebook photo caching.",
+    "authors": [
+      {
+        "id": "46/4397",
+        "name": "Qi Huang",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "b/KPBirman",
+        "name": "Ken Birman",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "r/RvRenesse",
+        "name": "Robbert van Renesse",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "21/1059",
+        "name": "Wyatt Lloyd",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "27/343",
+        "name": "Sanjeev Kumar",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "07/3117",
+        "name": "Harry C. Li",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2013,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2517349.2522722",
+    "url": "https://doi.org/10.1145/2517349.2522722",
+    "dblpKey": "conf/sosp/HuangBRLKL13"
+  },
+  {
+    "id": "conf/sosp/KasikciZC13",
+    "title": "RaceMob: crowdsourced data race detection.",
+    "authors": [
+      {
+        "id": "31/11029",
+        "name": "Baris Kasikci",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "44/6654",
+        "name": "Cristian Zamfir",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "c/GeorgeCandea",
+        "name": "George Candea",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2013,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2517349.2522736",
+    "url": "https://doi.org/10.1145/2517349.2522736",
+    "dblpKey": "conf/sosp/KasikciZC13"
+  },
+  {
+    "id": "conf/sosp/KediaB13",
+    "title": "Fast dynamic binary translation for the kernel.",
+    "authors": [
+      {
+        "id": "201/4871",
+        "name": "Piyus Kedia",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "97/6573",
+        "name": "Sorav Bansal",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2013,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2517349.2522718",
+    "url": "https://doi.org/10.1145/2517349.2522718",
+    "dblpKey": "conf/sosp/KediaB13"
+  },
+  {
+    "id": "conf/sosp/MashtizadehBHM13",
+    "title": "Replication, history, and grafting in the Ori file system.",
+    "authors": [
+      {
+        "id": "135/6767",
+        "name": "Ali José Mashtizadeh",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "70/1811",
+        "name": "Andrea Bittau",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "135/6706",
+        "name": "Yifeng Frank Huang",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "m/DMazieres",
+        "name": "David Mazières",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2013,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2517349.2522721",
+    "url": "https://doi.org/10.1145/2517349.2522721",
+    "dblpKey": "conf/sosp/MashtizadehBHM13"
+  },
+  {
+    "id": "conf/sosp/MoraruAK13",
+    "title": "There is more consensus in Egalitarian parliaments.",
+    "authors": [
+      {
+        "id": "96/8181",
+        "name": "Iulian Moraru",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "a/DavidGAndersen",
+        "name": "David G. Andersen",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "09/4259",
+        "name": "Michael Kaminsky",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2013,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2517349.2517350",
+    "url": "https://doi.org/10.1145/2517349.2517350",
+    "dblpKey": "conf/sosp/MoraruAK13"
+  },
+  {
+    "id": "conf/sosp/MurrayMIIBA13",
+    "title": "Naiad: a timely dataflow system.",
+    "authors": [
+      {
+        "id": "82/1824",
+        "name": "Derek Gordon Murray",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "59/563",
+        "name": "Frank McSherry",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "89/4883",
+        "name": "Rebecca Isaacs",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "17/5751",
+        "name": "Michael Isard",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "b/PaulBarham",
+        "name": "Paul Barham 0001",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "a/MartinAbadi",
+        "name": "Martín Abadi",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2013,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2517349.2522738",
+    "url": "https://doi.org/10.1145/2517349.2522738",
+    "dblpKey": "conf/sosp/MurrayMIIBA13"
+  },
+  {
+    "id": "conf/sosp/NguyenLP13",
+    "title": "A lightweight infrastructure for graph analytics.",
+    "authors": [
+      {
+        "id": "48/4701",
+        "name": "Donald Nguyen",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "15/2621",
+        "name": "Andrew Lenharth",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "71/5735",
+        "name": "Keshav Pingali",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2013,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2517349.2522739",
+    "url": "https://doi.org/10.1145/2517349.2522739",
+    "dblpKey": "conf/sosp/NguyenLP13"
+  },
+  {
+    "id": "conf/sosp/NikolaevB13",
+    "title": "VirtuOS: an operating system with kernel virtualization.",
+    "authors": [
+      {
+        "id": "98/9727-1",
+        "name": "Ruslan Nikolaev 0001",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "47/2634",
+        "name": "Godmar Back",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2013,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2517349.2522719",
+    "url": "https://doi.org/10.1145/2517349.2522719",
+    "dblpKey": "conf/sosp/NikolaevB13"
+  },
+  {
+    "id": "conf/sosp/OusterhoutWZS13",
+    "title": "Sparrow: distributed, low latency scheduling.",
+    "authors": [
+      {
+        "id": "10/10299",
+        "name": "Kay Ousterhout",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "03/8397",
+        "name": "Patrick Wendell",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "36/2133",
+        "name": "Matei Zaharia",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "s/IonStoica",
+        "name": "Ion Stoica",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2013,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2517349.2522716",
+    "url": "https://doi.org/10.1145/2517349.2522716",
+    "dblpKey": "conf/sosp/OusterhoutWZS13"
+  },
+  {
+    "id": "conf/sosp/RavindranathPMB13",
+    "title": "Timecard: controlling user-perceived delays in server-based mobile applications.",
+    "authors": [
+      {
+        "id": "22/4453",
+        "name": "Lenin Ravindranath",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "p/JPadhye",
+        "name": "Jitendra Padhye",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "81/6327",
+        "name": "Ratul Mahajan",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "b/HariBalakrishnan",
+        "name": "Hari Balakrishnan",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2013,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2517349.2522717",
+    "url": "https://doi.org/10.1145/2517349.2522717",
+    "dblpKey": "conf/sosp/RavindranathPMB13"
+  },
+  {
+    "id": "conf/sosp/RossbachYCMF13",
+    "title": "Dandelion: a compiler and runtime for heterogeneous systems.",
+    "authors": [
+      {
+        "id": "46/991",
+        "name": "Christopher J. Rossbach",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "98/809",
+        "name": "Yuan Yu",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "60/5888",
+        "name": "Jon Currey",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "99/1869",
+        "name": "Jean-Philippe Martin",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "36/593",
+        "name": "Dennis Fetterly",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2013,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2517349.2522715",
+    "url": "https://doi.org/10.1145/2517349.2522715",
+    "dblpKey": "conf/sosp/RossbachYCMF13"
+  },
+  {
+    "id": "conf/sosp/RoyMZ13",
+    "title": "X-Stream: edge-centric graph processing using streaming partitions.",
+    "authors": [
+      {
+        "id": "r/AmitabhaRoy0002",
+        "name": "Amitabha Roy 0002",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "135/6810",
+        "name": "Ivo Mihailovic",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "z/WZwaenepoel",
+        "name": "Willy Zwaenepoel",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2013,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2517349.2522740",
+    "url": "https://doi.org/10.1145/2517349.2522740",
+    "dblpKey": "conf/sosp/RoyMZ13"
+  },
+  {
+    "id": "conf/sosp/TerryPKBAA13",
+    "title": "Consistency-based service level agreements for cloud storage.",
+    "authors": [
+      {
+        "id": "06/965",
+        "name": "Douglas B. Terry",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "93/843",
+        "name": "Vijayan Prabhakaran",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "15/5513",
+        "name": "Ramakrishna Kotla",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "b/MBalakrishnan",
+        "name": "Mahesh Balakrishnan 0001",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "10/553",
+        "name": "Marcos K. Aguilera",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "17/8279",
+        "name": "Hussam Abu-Libdeh",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2013,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2517349.2522731",
+    "url": "https://doi.org/10.1145/2517349.2522731",
+    "dblpKey": "conf/sosp/TerryPKBAA13"
+  },
+  {
+    "id": "conf/sosp/ThereskaBOKRTBZ13",
+    "title": "IOFlow: a software-defined storage architecture.",
+    "authors": [
+      {
+        "id": "44/5931",
+        "name": "Eno Thereska",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "68/4437",
+        "name": "Hitesh Ballani",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "82/5545",
+        "name": "Greg O&apos;Shea",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "76/1767",
+        "name": "Thomas Karagiannis",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "r/AITRowstron",
+        "name": "Antony I. T. Rowstron",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "135/6825",
+        "name": "Tom Talpey",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "46/5660",
+        "name": "Richard Black",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "121/1838",
+        "name": "Timothy Zhu",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2013,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2517349.2522723",
+    "url": "https://doi.org/10.1145/2517349.2522723",
+    "dblpKey": "conf/sosp/ThereskaBOKRTBZ13"
+  },
+  {
+    "id": "conf/sosp/TuZKLM13",
+    "title": "Speedy transactions in multicore in-memory databases.",
+    "authors": [
+      {
+        "id": "09/8165",
+        "name": "Stephen Tu",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "94/4314",
+        "name": "Wenting Zheng",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "78/5231",
+        "name": "Eddie Kohler",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "l/BarbaraLiskov",
+        "name": "Barbara Liskov",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "m/SamuelMadden",
+        "name": "Samuel Madden 0001",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2013,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2517349.2522713",
+    "url": "https://doi.org/10.1145/2517349.2522713",
+    "dblpKey": "conf/sosp/TuZKLM13"
+  },
+  {
+    "id": "conf/sosp/WangZKS13",
+    "title": "Towards optimization-safe systems: analyzing the impact of undefined behavior.",
+    "authors": [
+      {
+        "id": "08/5760-5",
+        "name": "Xi Wang 0005",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "99/5780",
+        "name": "Nickolai Zeldovich",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "k/MFransKaashoek",
+        "name": "M. Frans Kaashoek",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "95/6919",
+        "name": "Armando Solar-Lezama",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2013,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2517349.2522728",
+    "url": "https://doi.org/10.1145/2517349.2522728",
+    "dblpKey": "conf/sosp/WangZKS13"
+  },
+  {
+    "id": "conf/sosp/WeissHAA13",
+    "title": "ROOT: replaying multithreaded traces with resource-oriented ordering.",
+    "authors": [
+      {
+        "id": "135/6818",
+        "name": "Zev Weiss",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "09/10322",
+        "name": "Tyler Harter",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "a/AndreaCArpaciDusseau",
+        "name": "Andrea C. Arpaci-Dusseau",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "a/RemziHArpaciDusseau",
+        "name": "Remzi H. Arpaci-Dusseau",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2013,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2517349.2522734",
+    "url": "https://doi.org/10.1145/2517349.2522734",
+    "dblpKey": "conf/sosp/WeissHAA13"
+  },
+  {
+    "id": "conf/sosp/WuBPKM13",
+    "title": "SPANStore: cost-effective geo-replicated storage spanning multiple cloud services.",
+    "authors": [
+      {
+        "id": "11/5670-3",
+        "name": "Zhe Wu 0003",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "121/4959",
+        "name": "Michael Butkiewicz",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "199/6926",
+        "name": "Dorian Jean Perkins",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "66/2080",
+        "name": "Ethan Katz-Bassett",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "45/2026",
+        "name": "Harsha V. Madhyastha",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2013,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2517349.2522730",
+    "url": "https://doi.org/10.1145/2517349.2522730",
+    "dblpKey": "conf/sosp/WuBPKM13"
+  },
+  {
+    "id": "conf/sosp/XuZHZSYZP13",
+    "title": "Do not blame users for misconfigurations.",
+    "authors": [
+      {
+        "id": "90/7566",
+        "name": "Tianyin Xu",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "58/3021",
+        "name": "Jiaqi Zhang",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "29/1726-5",
+        "name": "Peng Huang 0005",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "15/2171",
+        "name": "Jing Zheng",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "52/7553",
+        "name": "Tianwei Sheng",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "230/9043-4",
+        "name": "Ding Yuan 0004",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "99/2747-1",
+        "name": "Yuanyuan Zhou 0001",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "60/5379",
+        "name": "Shankar Pasupathy",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2013,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2517349.2522727",
+    "url": "https://doi.org/10.1145/2517349.2522727",
+    "dblpKey": "conf/sosp/XuZHZSYZP13"
+  },
+  {
+    "id": "conf/sosp/ZahariaDLHSS13",
+    "title": "Discretized streams: fault-tolerant streaming computation at scale.",
+    "authors": [
+      {
+        "id": "36/2133",
+        "name": "Matei Zaharia",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "31/6214",
+        "name": "Tathagata Das",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "46/3744-1",
+        "name": "Haoyuan Li 0001",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "01/877",
+        "name": "Timothy Hunter",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "34/5593",
+        "name": "Scott Shenker",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "s/IonStoica",
+        "name": "Ion Stoica",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2013,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2517349.2522737",
+    "url": "https://doi.org/10.1145/2517349.2522737",
+    "dblpKey": "conf/sosp/ZahariaDLHSS13"
+  },
+  {
+    "id": "conf/sosp/ZhangPZSAL13",
+    "title": "Transaction chains: achieving serializability with low latency in geo-distributed storage systems.",
+    "authors": [
+      {
+        "id": "06/6785",
+        "name": "Yang Zhang",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "48/9376",
+        "name": "Russell Power",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "135/6608",
+        "name": "Siyuan Zhou",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "54/8142",
+        "name": "Yair Sovran",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "10/553",
+        "name": "Marcos K. Aguilera",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "79/572-1",
+        "name": "Jinyang Li 0001",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2013,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2517349.2522729",
+    "url": "https://doi.org/10.1145/2517349.2522729",
+    "dblpKey": "conf/sosp/ZhangPZSAL13"
+  },
+  {
+    "id": "conf/kpdays/BrunnertNK14",
+    "title": "Evaluating the Prediction Accuracy of Generated Performance Models in Up- and Downscaling Scenarios.",
+    "authors": [
+      {
+        "id": "49/516",
+        "name": "Andreas Brunnert",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "211/1678",
+        "name": "Stefan Neubig",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "k/HelmutKrcmar",
+        "name": "Helmut Krcmar",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2014,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "",
+    "url": "http://www.performance-symposium.org/fileadmin/user_upload/palladio-conference/2014/papers/paper3.pdf",
+    "dblpKey": "conf/kpdays/BrunnertNK14"
+  },
+  {
+    "id": "conf/kpdays/DanciuBK14",
+    "title": "Towards Performance Awareness in Java EE Development Environments.",
+    "authors": [
+      {
+        "id": "10/10221",
+        "name": "Alexandru Danciu",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "49/516",
+        "name": "Andreas Brunnert",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "k/HelmutKrcmar",
+        "name": "Helmut Krcmar",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2014,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "",
+    "url": "http://www.performance-symposium.org/fileadmin/user_upload/palladio-conference/2014/papers/paper18.pdf",
+    "dblpKey": "conf/kpdays/DanciuBK14"
+  },
+  {
+    "id": "conf/kpdays/Dirlewanger14",
+    "title": "The DIN/ISO Definition and a Measurement Procedure of SW-Efficiency.",
+    "authors": [
+      {
+        "id": "53/5065",
+        "name": "Werner Dirlewanger",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2014,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "",
+    "url": "http://www.performance-symposium.org/fileadmin/user_upload/palladio-conference/2014/papers/paper23.pdf",
+    "dblpKey": "conf/kpdays/Dirlewanger14"
+  },
+  {
+    "id": "conf/kpdays/KistowskiHK14",
+    "title": "Using and Extending LIMBO for the Descriptive Modeling of Arrival Behaviors.",
+    "authors": [
+      {
+        "id": "143/4734",
+        "name": "Jóakim von Kistowski",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "130/4084",
+        "name": "Nikolas Herbst",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "k/SamuelKounev",
+        "name": "Samuel Kounev",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2014,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "",
+    "url": "http://www.performance-symposium.org/fileadmin/user_upload/palladio-conference/2014/papers/paper7.pdf",
+    "dblpKey": "conf/kpdays/KistowskiHK14"
+  },
+  {
+    "id": "conf/kpdays/KlaussnerL14",
+    "title": "Using Java EE ProtoCom for SAP HANA Cloud.",
+    "authors": [
+      {
+        "id": "211/1705",
+        "name": "Christian Klaussner",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "130/4245",
+        "name": "Sebastian Lehrig",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2014,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "",
+    "url": "http://www.performance-symposium.org/fileadmin/user_upload/palladio-conference/2014/papers/paper10.pdf",
+    "dblpKey": "conf/kpdays/KlaussnerL14"
+  },
+  {
+    "id": "conf/kpdays/LehrigB14",
+    "title": "Approaching the Cloud: Using Palladio for Scalability, Elasticity, and Efficiency Analyses.",
+    "authors": [
+      {
+        "id": "130/4245",
+        "name": "Sebastian Lehrig",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "69/3369-1",
+        "name": "Matthias Becker 0001",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2014,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "",
+    "url": "http://www.performance-symposium.org/fileadmin/user_upload/palladio-conference/2014/papers/paper9.pdf",
+    "dblpKey": "conf/kpdays/LehrigB14"
+  },
+  {
+    "id": "conf/kpdays/SkouradakiFPRL14",
+    "title": "Benchmarking Workflow Management Systems.",
+    "authors": [
+      {
+        "id": "143/6749",
+        "name": "Marigianna Skouradaki",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "137/8881",
+        "name": "Vincenzo Ferme",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "p/CesarePautasso",
+        "name": "Cesare Pautasso",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "r/DieterRoller0001",
+        "name": "Dieter Roller 0001",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "l/FrankLeymann",
+        "name": "Frank Leymann",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2014,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "",
+    "url": "http://www.performance-symposium.org/fileadmin/user_upload/palladio-conference/2014/papers/paper25.pdf",
+    "dblpKey": "conf/kpdays/SkouradakiFPRL14"
+  },
+  {
+    "id": "conf/kpdays/StierGK14",
+    "title": "Towards Modeling and Analysis of Power Consumption of Self-Adaptive Software Systems in Palladio.",
+    "authors": [
+      {
+        "id": "26/11534",
+        "name": "Christian Stier",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "71/1528",
+        "name": "Henning Groenda",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "51/1757",
+        "name": "Anne Koziolek",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2014,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "",
+    "url": "http://www.performance-symposium.org/fileadmin/user_upload/palladio-conference/2014/papers/paper12.pdf",
+    "dblpKey": "conf/kpdays/StierGK14"
+  },
+  {
+    "id": "conf/kpdays/StrittmatterL14",
+    "title": "Identifying Semantically Cohesive Modules within the Palladio Meta-Model.",
+    "authors": [
+      {
+        "id": "16/11366",
+        "name": "Misha Strittmatter",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "138/6366",
+        "name": "Michael Langhammer",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2014,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "",
+    "url": "http://www.performance-symposium.org/fileadmin/user_upload/palladio-conference/2014/papers/paper13.pdf",
+    "dblpKey": "conf/kpdays/StrittmatterL14"
+  },
+  {
+    "id": "conf/kpdays/Vidakovic14",
+    "title": "Evaluation of Alternative Instrumentation Frameworks.",
+    "authors": [
+      {
+        "id": "126/3427",
+        "name": "Dusan Okanovic",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "36/5182",
+        "name": "Milan Vidakovic",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2014,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "",
+    "url": "http://www.performance-symposium.org/fileadmin/user_upload/palladio-conference/2014/papers/paper22.pdf",
+    "dblpKey": "conf/kpdays/Vidakovic14"
+  },
+  {
+    "id": "conf/kpdays/WallerFH14",
+    "title": "Application Performance Monitoring: Trade-Off between Overhead Reduction and Maintainability.",
+    "authors": [
+      {
+        "id": "97/10781",
+        "name": "Jan Waller",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "117/9728",
+        "name": "Florian Fittkau",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "h/WilhelmHasselbring",
+        "name": "Wilhelm Hasselbring",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2014,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "",
+    "url": "http://www.performance-symposium.org/fileadmin/user_upload/palladio-conference/2014/papers/paper1.pdf",
+    "dblpKey": "conf/kpdays/WallerFH14"
+  },
+  {
+    "id": "conf/kpdays/WillneckerBK14",
+    "title": "Predicting Energy Consumption by Extending the Palladio Component Model.",
+    "authors": [
+      {
+        "id": "152/0907",
+        "name": "Felix Willnecker",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "49/516",
+        "name": "Andreas Brunnert",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "k/HelmutKrcmar",
+        "name": "Helmut Krcmar",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2014,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "",
+    "url": "http://www.performance-symposium.org/fileadmin/user_upload/palladio-conference/2014/papers/paper5.pdf",
+    "dblpKey": "conf/kpdays/WillneckerBK14"
+  },
+  {
+    "id": "conf/kpdays/WulfEH14",
+    "title": "Toward a Generic and Concurrency-Aware Pipes &amp; Filters Framework.",
+    "authors": [
+      {
+        "id": "137/0553",
+        "name": "Christian Wulf",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "138/6395",
+        "name": "Nils Christian Ehmke",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "h/WilhelmHasselbring",
+        "name": "Wilhelm Hasselbring",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2014,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "",
+    "url": "http://www.performance-symposium.org/fileadmin/user_upload/palladio-conference/2014/papers/paper21.pdf",
+    "dblpKey": "conf/kpdays/WulfEH14"
+  },
+  {
+    "id": "conf/kpdays/X14",
+    "title": "Preface.",
+    "authors": [],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2014,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "",
+    "url": "http://www.performance-symposium.org/fileadmin/user_upload/palladio-conference/2014/papers/preface.pdf",
+    "dblpKey": "conf/kpdays/X14"
+  },
+  {
+    "id": "conf/sosp/0002BMZ15",
+    "title": "Chaos: scale-out graph processing from secondary storage.",
+    "authors": [
+      {
+        "id": "r/AmitabhaRoy0002",
+        "name": "Amitabha Roy 0002",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "116/5046",
+        "name": "Laurent Bindschaedler",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "162/2187",
+        "name": "Jasmina Malicevic",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "z/WZwaenepoel",
+        "name": "Willy Zwaenepoel",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2015,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2815400.2815408",
+    "url": "https://doi.org/10.1145/2815400.2815408",
+    "dblpKey": "conf/sosp/0002BMZ15"
+  },
+  {
+    "id": "conf/sosp/AguileraLW15",
+    "title": "Yesquel: scalable sql storage for web applications.",
+    "authors": [
+      {
+        "id": "10/553",
+        "name": "Marcos K. Aguilera",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "93/8373",
+        "name": "Joshua B. Leners",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "00/2879",
+        "name": "Michael Walfish",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2015,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2815400.2815413",
+    "url": "https://doi.org/10.1145/2815400.2815413",
+    "dblpKey": "conf/sosp/AguileraLW15"
+  },
+  {
+    "id": "conf/sosp/AmitTSAS15",
+    "title": "Virtual CPU validation.",
+    "authors": [
+      {
+        "id": "52/10949",
+        "name": "Nadav Amit",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "26/914",
+        "name": "Dan Tsafrir",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "s/AssafSchuster",
+        "name": "Assaf Schuster",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "168/9008",
+        "name": "Ahmad Ayoub",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "122/0417",
+        "name": "Eran Shlomo",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2015,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2815400.2815420",
+    "url": "https://doi.org/10.1145/2815400.2815420",
+    "dblpKey": "conf/sosp/AmitTSAS15"
+  },
+  {
+    "id": "conf/sosp/AmvrosiadisBG15",
+    "title": "Opportunistic storage maintenance.",
+    "authors": [
+      {
+        "id": "20/11514",
+        "name": "George Amvrosiadis",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "b/AngelaDemkeBrown",
+        "name": "Angela Demke Brown",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "g/AshvinGoel",
+        "name": "Ashvin Goel",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2015,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2815400.2815424",
+    "url": "https://doi.org/10.1145/2815400.2815424",
+    "dblpKey": "conf/sosp/AmvrosiadisBG15"
+  },
+  {
+    "id": "conf/sosp/BadamCDFHHMMPS15",
+    "title": "Software defined batteries.",
+    "authors": [
+      {
+        "id": "51/8142",
+        "name": "Anirudh Badam",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "99/2097",
+        "name": "Ranveer Chandra",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "168/8968",
+        "name": "Jon Dutra",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "168/8911",
+        "name": "Anthony Ferrese",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "h/SteveHodges",
+        "name": "Steve Hodges 0001",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "96/3740-3",
+        "name": "Pan Hu 0003",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "168/9004",
+        "name": "Julia Meinershagen",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "m/ThomasMoscibroda",
+        "name": "Thomas Moscibroda",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "74/4695",
+        "name": "Bodhi Priyantha",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "94/11513",
+        "name": "Evangelia D. Skiani",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2015,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2815400.2815429",
+    "url": "https://doi.org/10.1145/2815400.2815429",
+    "dblpKey": "conf/sosp/BadamCDFHHMMPS15"
+  },
+  {
+    "id": "conf/sosp/ChenZCCKZ15",
+    "title": "Using Crash Hoare logic for certifying the FSCQ file system.",
+    "authors": [
+      {
+        "id": "12/3578-1",
+        "name": "Haogang Chen 0001",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "136/6397-2",
+        "name": "Daniel Ziegler 0002",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "141/9176",
+        "name": "Tej Chajed",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "52/796",
+        "name": "Adam Chlipala",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "k/MFransKaashoek",
+        "name": "M. Frans Kaashoek",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "99/5780",
+        "name": "Nickolai Zeldovich",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2015,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2815400.2815402",
+    "url": "https://doi.org/10.1145/2815400.2815402",
+    "dblpKey": "conf/sosp/ChenZCCKZ15"
+  },
+  {
+    "id": "conf/sosp/CuiGLCY15",
+    "title": "Paxos made transparent.",
+    "authors": [
+      {
+        "id": "59/5565",
+        "name": "Heming Cui",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "38/1778",
+        "name": "Rui Gu",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "15/2288",
+        "name": "Cheng Liu",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "83/10146",
+        "name": "Tianyu Chen",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "71/3724",
+        "name": "Junfeng Yang",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2015,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2815400.2815427",
+    "url": "https://doi.org/10.1145/2815400.2815427",
+    "dblpKey": "conf/sosp/CuiGLCY15"
+  },
+  {
+    "id": "conf/sosp/CurtsingerB15",
+    "title": "Coz: finding code that counts with causal profiling.",
+    "authors": [
+      {
+        "id": "34/10322",
+        "name": "Charlie Curtsinger",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "98/4487",
+        "name": "Emery D. Berger",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2015,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2815400.2815409",
+    "url": "https://doi.org/10.1145/2815400.2815409",
+    "dblpKey": "conf/sosp/CurtsingerB15"
+  },
+  {
+    "id": "conf/sosp/DragojevicNNRSB15",
+    "title": "No compromises: distributed transactions with consistency, availability, and performance.",
+    "authors": [
+      {
+        "id": "94/7061",
+        "name": "Aleksandar Dragojevic",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "45/2517",
+        "name": "Dushyanth Narayanan",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "97/1336",
+        "name": "Edmund B. Nightingale",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "21/709",
+        "name": "Matthew Renzelmann",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "168/8978",
+        "name": "Alex Shamis",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "51/8142",
+        "name": "Anirudh Badam",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "c/MiguelCastro",
+        "name": "Miguel Castro 0001",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2015,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2815400.2815425",
+    "url": "https://doi.org/10.1145/2815400.2815425",
+    "dblpKey": "conf/sosp/DragojevicNNRSB15"
+  },
+  {
+    "id": "conf/sosp/FangNXDL15",
+    "title": "Interruptible tasks: treating memory pressure as interrupts for highly scalable data-parallel programs.",
+    "authors": [
+      {
+        "id": "33/8116-3",
+        "name": "Lu Fang 0003",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "53/6791-1",
+        "name": "Khanh Nguyen 0001",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "90/8705",
+        "name": "Guoqing Xu 0001",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "47/3381",
+        "name": "Brian Demsky",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "31/5916-1",
+        "name": "Shan Lu 0001",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2015,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2815400.2815407",
+    "url": "https://doi.org/10.1145/2815400.2815407",
+    "dblpKey": "conf/sosp/FangNXDL15"
+  },
+  {
+    "id": "conf/sosp/HawblitzelHKLPR15",
+    "title": "IronFleet: proving practical distributed systems correct.",
+    "authors": [
+      {
+        "id": "22/3053",
+        "name": "Chris Hawblitzel",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "55/3274",
+        "name": "Jon Howell",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "23/6695",
+        "name": "Manos Kapritsos",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "25/3228",
+        "name": "Jacob R. Lorch",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "49/6324",
+        "name": "Bryan Parno",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "241/7500",
+        "name": "Michael Lowell Roberts",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "68/8463",
+        "name": "Srinath T. V. Setty",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "26/1494",
+        "name": "Brian Zill",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2015,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2815400.2815428",
+    "url": "https://doi.org/10.1145/2815400.2815428",
+    "dblpKey": "conf/sosp/HawblitzelHKLPR15"
+  },
+  {
+    "id": "conf/sosp/Hoffmann15",
+    "title": "JouleGuard: energy guarantees for approximate applications.",
+    "authors": [
+      {
+        "id": "h/HenryHoffmann",
+        "name": "Henry Hoffmann",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2015,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2815400.2815403",
+    "url": "https://doi.org/10.1145/2815400.2815403",
+    "dblpKey": "conf/sosp/Hoffmann15"
+  },
+  {
+    "id": "conf/sosp/HooffLZZ15",
+    "title": "Vuvuzela: scalable private messaging resistant to traffic analysis.",
+    "authors": [
+      {
+        "id": "153/5808",
+        "name": "Jelle van den Hooff",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "117/9944",
+        "name": "David Lazar",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "36/2133",
+        "name": "Matei Zaharia",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "99/5780",
+        "name": "Nickolai Zeldovich",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2015,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2815400.2815417",
+    "url": "https://doi.org/10.1145/2815400.2815417",
+    "dblpKey": "conf/sosp/HooffLZZ15"
+  },
+  {
+    "id": "conf/sosp/KasikciSPPC15",
+    "title": "Failure sketching: a technique for automated root cause diagnosis of in-production failures.",
+    "authors": [
+      {
+        "id": "31/11029",
+        "name": "Baris Kasikci",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "121/1174",
+        "name": "Benjamin Schubert",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "36/6883",
+        "name": "Cristiano Pereira",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "78/3196",
+        "name": "Gilles Pokam",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "c/GeorgeCandea",
+        "name": "George Candea",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2015,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2815400.2815412",
+    "url": "https://doi.org/10.1145/2815400.2815412",
+    "dblpKey": "conf/sosp/KasikciSPPC15"
+  },
+  {
+    "id": "conf/sosp/LeePKMO15",
+    "title": "Implementing linearizability at large scale and low latency.",
+    "authors": [
+      {
+        "id": "164/7947",
+        "name": "Collin Lee",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "168/3492",
+        "name": "Seo Jin Park",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "144/6273",
+        "name": "Ankita Kejriwal",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "42/3065",
+        "name": "Satoshi Matsushita",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "o/JohnKOusterhout",
+        "name": "John K. Ousterhout",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2015,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2815400.2815416",
+    "url": "https://doi.org/10.1145/2815400.2815416",
+    "dblpKey": "conf/sosp/LeePKMO15"
+  },
+  {
+    "id": "conf/sosp/LentzLB15",
+    "title": "Drowsy power management.",
+    "authors": [
+      {
+        "id": "143/5702",
+        "name": "Matthew Lentz",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "168/8953",
+        "name": "James Litton",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "b/BobbyBhattacharjee",
+        "name": "Bobby Bhattacharjee",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2015,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2815400.2815414",
+    "url": "https://doi.org/10.1145/2815400.2815414",
+    "dblpKey": "conf/sosp/LentzLB15"
+  },
+  {
+    "id": "conf/sosp/LuVAHSTKL15",
+    "title": "Existential consistency: measuring and understanding consistency at Facebook.",
+    "authors": [
+      {
+        "id": "129/0998",
+        "name": "Haonan Lu",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "52/1896",
+        "name": "Kaushik Veeraraghavan",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "162/2033",
+        "name": "Philippe Ajoux",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "21/10863",
+        "name": "Jim Hunt",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "93/2816",
+        "name": "Yee Jiun Song",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "168/8928",
+        "name": "Wendy Tobagus",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "27/343",
+        "name": "Sanjeev Kumar",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "21/1059",
+        "name": "Wyatt Lloyd",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2015,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2815400.2815426",
+    "url": "https://doi.org/10.1145/2815400.2815426",
+    "dblpKey": "conf/sosp/LuVAHSTKL15"
+  },
+  {
+    "id": "conf/sosp/MaceRF15",
+    "title": "Pivot tracing: dynamic causal monitoring for distributed systems.",
+    "authors": [
+      {
+        "id": "154/0937",
+        "name": "Jonathan Mace",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "168/8962",
+        "name": "Ryan Roelke",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "f/RFonseca",
+        "name": "Rodrigo Fonseca",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2015,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2815400.2815415",
+    "url": "https://doi.org/10.1145/2815400.2815415",
+    "dblpKey": "conf/sosp/MaceRF15"
+  },
+  {
+    "id": "conf/sosp/MatveevSFM15",
+    "title": "Read-log-update: a lightweight synchronization mechanism for concurrent programming.",
+    "authors": [
+      {
+        "id": "119/6301",
+        "name": "Alexander Matveev",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "s/NirShavit",
+        "name": "Nir Shavit",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "f/PascalFelber",
+        "name": "Pascal Felber",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "03/7750",
+        "name": "Patrick Marlier",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2015,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2815400.2815406",
+    "url": "https://doi.org/10.1145/2815400.2815406",
+    "dblpKey": "conf/sosp/MatveevSFM15"
+  },
+  {
+    "id": "conf/sosp/MinKLSK15",
+    "title": "Cross-checking semantic correctness: the case of finding file system bugs.",
+    "authors": [
+      {
+        "id": "19/10203",
+        "name": "Changwoo Min",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "145/0912",
+        "name": "Sanidhya Kashyap",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "45/7986",
+        "name": "Byoungyoung Lee",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "69/6818",
+        "name": "Chengyu Song",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "38/8882",
+        "name": "Taesoo Kim",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2015,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2815400.2815422",
+    "url": "https://doi.org/10.1145/2815400.2815422",
+    "dblpKey": "conf/sosp/MinKLSK15"
+  },
+  {
+    "id": "conf/sosp/PalkarLHJPRRS15",
+    "title": "E2: a framework for NFV applications.",
+    "authors": [
+      {
+        "id": "168/9023",
+        "name": "Shoumik Palkar",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "116/8770",
+        "name": "Chang Lan",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "87/6455",
+        "name": "Sangjin Han",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "40/503",
+        "name": "Keon Jang",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "55/925",
+        "name": "Aurojit Panda",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "68/5579",
+        "name": "Sylvia Ratnasamy",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "27/3297",
+        "name": "Luigi Rizzo",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "34/5593",
+        "name": "Scott Shenker",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2015,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2815400.2815423",
+    "url": "https://doi.org/10.1145/2815400.2815423",
+    "dblpKey": "conf/sosp/PalkarLHJPRRS15"
+  },
+  {
+    "id": "conf/sosp/RaychevMM15",
+    "title": "Parallelizing user-defined aggregations using symbolic execution.",
+    "authors": [
+      {
+        "id": "28/8412",
+        "name": "Veselin Raychev",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "95/6578",
+        "name": "Madanlal Musuvathi",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "09/1276",
+        "name": "Todd Mytkowicz",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2015,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2815400.2815418",
+    "url": "https://doi.org/10.1145/2815400.2815418",
+    "dblpKey": "conf/sosp/RaychevMM15"
+  },
+  {
+    "id": "conf/sosp/RidgeSTGMS15",
+    "title": "SibylFS: formal specification and oracle-based testing for POSIX and real-world file systems.",
+    "authors": [
+      {
+        "id": "r/TomRidge",
+        "name": "Tom Ridge",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "67/11266",
+        "name": "David Sheets",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "96/5287",
+        "name": "Thomas Tuerk",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "168/8984",
+        "name": "Andrea Giugliano",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "32/1528",
+        "name": "Anil Madhavapeddy",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "74/185",
+        "name": "Peter Sewell",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2015,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2815400.2815411",
+    "url": "https://doi.org/10.1145/2815400.2815411",
+    "dblpKey": "conf/sosp/RidgeSTGMS15"
+  },
+  {
+    "id": "conf/sosp/TangKVCWNDK15",
+    "title": "Holistic configuration management at Facebook.",
+    "authors": [
+      {
+        "id": "81/4301",
+        "name": "Chunqiang Tang",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "18/10369",
+        "name": "Thawan Kooburat",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "168/8914",
+        "name": "Pradeep Venkatachalam",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "168/8943",
+        "name": "Akshay Chander",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "128/0219",
+        "name": "Zhe Wen",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "86/7802",
+        "name": "Aravind Narayanan",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "24/10950",
+        "name": "Patrick Dowell",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "168/8884",
+        "name": "Robert Karl",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2015,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2815400.2815401",
+    "url": "https://doi.org/10.1145/2815400.2815401",
+    "dblpKey": "conf/sosp/TangKVCWNDK15"
+  },
+  {
+    "id": "conf/sosp/TeixeiraFSSZA15",
+    "title": "Arabesque: a system for distributed graph mining.",
+    "authors": [
+      {
+        "id": "119/6795",
+        "name": "Carlos H. C. Teixeira",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "168/8975",
+        "name": "Alexandre J. Fonseca",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "02/6087",
+        "name": "Marco Serafini",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "41/5119",
+        "name": "Georgos Siganos",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "z/MohammedJaveedZaki",
+        "name": "Mohammed J. Zaki",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "01/3996",
+        "name": "Ashraf Aboulnaga",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2015,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2815400.2815410",
+    "url": "https://doi.org/10.1145/2815400.2815410",
+    "dblpKey": "conf/sosp/TeixeiraFSSZA15"
+  },
+  {
+    "id": "conf/sosp/TsaiZRJZP15",
+    "title": "How to get more value from your file system directory cache.",
+    "authors": [
+      {
+        "id": "277/2163",
+        "name": "Chia-Che Tsai",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "01/2142-1",
+        "name": "Yang Zhan 0001",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "168/9028",
+        "name": "Jayashree Reddy",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "135/5282",
+        "name": "Yizheng Jiao",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "15/4777-45",
+        "name": "Tao Zhang 0045",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "08/4732",
+        "name": "Donald E. Porter",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2015,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2815400.2815405",
+    "url": "https://doi.org/10.1145/2815400.2815405",
+    "dblpKey": "conf/sosp/TsaiZRJZP15"
+  },
+  {
+    "id": "conf/sosp/WeiSCCC15",
+    "title": "Fast in-memory transaction processing using RDMA and HTM.",
+    "authors": [
+      {
+        "id": "168/9037",
+        "name": "Xingda Wei",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "151/7509",
+        "name": "Jiaxin Shi",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "158/9200",
+        "name": "Yanzhe Chen",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "22/6904-1",
+        "name": "Rong Chen 0001",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "31/6601-1",
+        "name": "Haibo Chen 0001",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2015,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2815400.2815419",
+    "url": "https://doi.org/10.1145/2815400.2815419",
+    "dblpKey": "conf/sosp/WeiSCCC15"
+  },
+  {
+    "id": "conf/sosp/XieSLAK015",
+    "title": "High-performance ACID via modular concurrency control.",
+    "authors": [
+      {
+        "id": "04/5576",
+        "name": "Chao Xie",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "18/10537",
+        "name": "Chunzhi Su",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "142/3140",
+        "name": "Cody Littley",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "a/LAlvisi",
+        "name": "Lorenzo Alvisi",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "23/6695",
+        "name": "Manos Kapritsos",
+        "affiliations": [],
+        "country": null
+      },
+      {
+        "id": "w/YangWang9",
+        "name": "Yang Wang 0009",
+        "affiliations": [],
+        "country": null
+      }
+    ],
+    "venue": {
+      "name": "SOSP",
+      "type": "conference",
+      "tier": "顶会"
+    },
+    "year": 2015,
+    "keywords": [],
+    "abstract": "",
+    "references": [],
+    "citations": 0,
+    "doi": "10.1145/2815400.2815430",
+    "url": "https://doi.org/10.1145/2815400.2815430",
+    "dblpKey": "conf/sosp/XieSLAK015"
+  }
+]

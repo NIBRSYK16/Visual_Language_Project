@@ -1,0 +1,56 @@
+{
+  "name": "literature-analysis-platform",
+  "version": "1.0.0",
+  "description": "学术文献全景分析系统 - 多维可视化分析平台",
+  "private": true,
+  "scripts": {
+    "start": "umi dev",
+    "build": "umi build",
+    "postinstall": "umi generate tmp",
+    "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
+    "test": "umi-test",
+    "test:coverage": "umi-test --coverage",
+    "crawl": "node scripts/crawler/index.js",
+    "process": "node scripts/processor/index.js"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,jsx,less,md,json}": [
+      "prettier --write"
+    ],
+    "*.ts?(x)": [
+      "prettier --parser=typescript --write"
+    ]
+  },
+  "dependencies": {
+    "@types/d3": "^7.4.3",
+    "antd": "^5.22.7",
+    "csv-loader": "^3.0.5",
+    "d3": "^7.9.0",
+    "d3-cloud": "^1.2.7",
+    "d3-tip": "^0.9.1",
+    "react": "17.x",
+    "react-dom": "17.x",
+    "topojson-client": "^3.1.0",
+    "umi": "^3.5.34",
+    "umi-request": "^1.4.0"
+  },
+  "devDependencies": {
+    "@types/d3-cloud": "^1.2.9",
+    "@types/node": "^18.0.0",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@types/topojson-client": "^3.0.0",
+    "@umijs/preset-react": "1.x",
+    "@umijs/test": "^3.5.34",
+    "lint-staged": "^10.0.7",
+    "prettier": "^2.2.0",
+    "typescript": "^4.1.2",
+    "yorkie": "^2.0.0"
+  },
+  "resolutions": {
+    "chokidar": "3.5.1"
+  }
+}
