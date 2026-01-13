@@ -83,15 +83,18 @@ const GeoMap: React.FC<GeoMapProps> = ({ papers, filter, onFilterChange }) => {
     const path = d3.geoPath().projection(projection);
 
     // 计算国家统计数据
-          // 使用传入的 papers（已经应用了筛选条件）
-          const countryData = aggregateByCountry(papers);
-          const countryMap = new Map<string, CountryData>();
-          countryData.forEach((data) => {
-            const iso = getCountryISO(data.country);
-            if (iso) {
-              countryMap.set(iso, data);
-            }
-          });
+    // 使用传入的 papers（已经应用了筛选条件）
+    const countryData = aggregateByCountry(papers);
+    const countryMap = new Map<string, CountryData>();
+    countryData.forEach((data) => {
+      const iso = getCountryISO(data.country);
+      if (iso) {
+        countryMap.set(iso, data);
+      } else {
+        // 调试：输出无法映射的国家
+        console.warn(`无法映射国家: ${data.country}, 论文数: ${data.count}`);
+      }
+    });
 
     // 计算颜色比例尺
     const counts = Array.from(countryMap.values()).map((d) => d.count);
@@ -132,9 +135,12 @@ const GeoMap: React.FC<GeoMapProps> = ({ papers, filter, onFilterChange }) => {
       .attr('d', path as any)
       .attr('fill', (d: any) => {
         const props = d.properties || {};
-        // world-atlas 使用 name 字段，需要转换为 ISO 代码
-        const countryName = props.name || '';
-        const iso = getNameToISO(countryName);
+        // 优先使用 ISO_A3 字段（如果存在），否则使用 NAME 或 NAME_LONG 转换
+        let iso = props.ISO_A3 || '';
+        if (!iso) {
+          const countryName = props.NAME || props.NAME_LONG || props.name || '';
+          iso = getNameToISO(countryName);
+        }
         const data = countryMap.get(iso);
         if (data) {
           return colorScale(data.count);
@@ -146,16 +152,25 @@ const GeoMap: React.FC<GeoMapProps> = ({ papers, filter, onFilterChange }) => {
       .style('cursor', 'pointer')
       .attr('class', (d: any) => {
         const props = d.properties || {};
-        const countryName = props.name || '';
-        const iso = getNameToISO(countryName);
+        // 优先使用 ISO_A3 字段（如果存在），否则使用 NAME 或 NAME_LONG 转换
+        let iso = props.ISO_A3 || '';
+        if (!iso) {
+          const countryName = props.NAME || props.NAME_LONG || props.name || '';
+          iso = getNameToISO(countryName);
+        }
         const data = countryMap.get(iso);
         return data ? 'country-with-data' : 'country-no-data';
       })
       .on('mouseover', function (event, d: any) {
         event.stopPropagation();
         const props = d.properties || {};
-        const countryName = props.name || '';
-        const iso = getNameToISO(countryName);
+        // 优先使用 ISO_A3 字段（如果存在），否则使用 NAME 或 NAME_LONG 转换
+        let iso = props.ISO_A3 || '';
+        if (!iso) {
+          const countryName = props.NAME || props.NAME_LONG || props.name || '';
+          iso = getNameToISO(countryName);
+        }
+        const countryName = props.NAME || props.NAME_LONG || props.name || '';
         const data = countryMap.get(iso);
         const displayName = countryName || isoToCountryName[iso] || '未知国家';
 
@@ -198,8 +213,13 @@ const GeoMap: React.FC<GeoMapProps> = ({ papers, filter, onFilterChange }) => {
       })
       .on('click', function (event, d: any) {
         const props = d.properties || {};
-        const countryName = props.name || '';
-        const iso = getNameToISO(countryName);
+        // 优先使用 ISO_A3 字段（如果存在），否则使用 NAME 或 NAME_LONG 转换
+        let iso = props.ISO_A3 || '';
+        if (!iso) {
+          const countryName = props.NAME || props.NAME_LONG || props.name || '';
+          iso = getNameToISO(countryName);
+        }
+        const countryName = props.NAME || props.NAME_LONG || props.name || '';
         const data = countryMap.get(iso);
         const displayName = countryName || isoToCountryName[iso] || '未知国家';
 
@@ -223,8 +243,12 @@ const GeoMap: React.FC<GeoMapProps> = ({ papers, filter, onFilterChange }) => {
         .selectAll('.country-with-data')
         .filter((d: any) => {
           const props = d.properties || {};
-          const countryName = props.name || '';
-          const iso = getNameToISO(countryName);
+          // 优先使用 ISO_A3 字段（如果存在），否则使用 NAME 或 NAME_LONG 转换
+          let iso = props.ISO_A3 || '';
+          if (!iso) {
+            const countryName = props.NAME || props.NAME_LONG || props.name || '';
+            iso = getNameToISO(countryName);
+          }
           return iso === selectedCountry;
         })
         .attr('stroke', '#1890ff')

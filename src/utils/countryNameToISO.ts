@@ -58,6 +58,7 @@ export const countryNameToISO: Record<string, string> = {
   'Vietnam': 'VNM',
   'Saudi Arabia': 'SAU',
   'United Arab Emirates': 'ARE',
+  'Romania': 'ROU',
 };
 
 /**

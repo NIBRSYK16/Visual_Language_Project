@@ -109,6 +109,8 @@ export const countryToISO: Record<string, string> = {
   'United Arab Emirates': 'ARE',
   'UAE': 'ARE',
   'AE': 'ARE',
+  'Romania': 'ROU',
+  'RO': 'ROU',
   'Unknown': '',
 };
 
