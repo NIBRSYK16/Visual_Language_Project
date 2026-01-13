@@ -3,7 +3,7 @@
  * 横向柱状图展示关键词排名变化，支持动画播放
  */
 
-import React, { useEffect, useRef, useCallback, useState } from 'react';
+import React, { useEffect, useRef, useCallback, useState, useImperativeHandle, forwardRef } from 'react';
 import { Button, Space } from 'antd';
 import { PlayCircleOutlined, PauseCircleOutlined } from '@ant-design/icons';
 import * as d3 from 'd3';
@@ -14,6 +14,15 @@ import './index.less';
 interface KeywordEvolutionProps {
   papers: Paper[];
   filter: FilterCondition;
+  onPlayStateChange?: (isPlaying: boolean) => void;
+  externalYear?: number | null;
+  externalIsPlaying?: boolean;
+}
+
+export interface KeywordEvolutionRef {
+  play: () => void;
+  pause: () => void;
+  setYear: (year: number | null) => void;
 }
 
 interface KeywordData {
@@ -21,7 +30,8 @@ interface KeywordData {
   count: number;
 }
 
-const KeywordEvolution: React.FC<KeywordEvolutionProps> = ({ papers, filter }) => {
+const KeywordEvolution = forwardRef<KeywordEvolutionRef, KeywordEvolutionProps>(
+  ({ papers, filter, onPlayStateChange, externalYear, externalIsPlaying }, ref) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
   const tooltipRef = useRef<HTMLDivElement | null>(null);
@@ -29,6 +39,41 @@ const KeywordEvolution: React.FC<KeywordEvolutionProps> = ({ papers, filter }) =
   const [isPlaying, setIsPlaying] = useState(false);
   const animationTimerRef = useRef<NodeJS.Timeout | null>(null);
   const isInitializedRef = useRef(false);
+
+  // 暴露方法给父组件
+  useImperativeHandle(ref, () => ({
+    play: () => {
+      if (!isPlaying) {
+        handlePlayPause();
+      }
+    },
+    pause: () => {
+      if (isPlaying) {
+        handlePlayPause();
+      }
+    },
+    setYear: (year: number | null) => {
+      setCurrentYear(year);
+    },
+  }));
+
+  // 同步外部播放状态
+  useEffect(() => {
+    if (externalIsPlaying !== undefined) {
+      if (externalIsPlaying && !isPlaying) {
+        handlePlayPause();
+      } else if (!externalIsPlaying && isPlaying) {
+        handlePlayPause();
+      }
+    }
+  }, [externalIsPlaying]);
+
+  // 同步外部年份
+  useEffect(() => {
+    if (externalYear !== undefined && externalYear !== currentYear) {
+      setCurrentYear(externalYear);
+    }
+  }, [externalYear]);
 
   // 获取年份范围
   const getYearRange = useCallback(() => {
@@ -103,7 +148,7 @@ const KeywordEvolution: React.FC<KeywordEvolutionProps> = ({ papers, filter }) =
 
       const container = containerRef.current;
       const width = container.clientWidth || 800;
-      const height = Math.min(width * 0.8, 600);
+      const height = Math.min(width * 0.4, 350); // 更扁的高度
 
       const svg = d3.select(svgRef.current);
 
@@ -156,7 +201,19 @@ const KeywordEvolution: React.FC<KeywordEvolutionProps> = ({ papers, filter }) =
 
       // 创建比例尺
       const xScale = d3.scaleLinear().domain([0, d3.max(data, (d) => d.count) || 1]).range([0, chartWidth]).nice();
-      const yScale = d3.scaleBand().domain(data.map((d) => d.keyword)).range([0, chartHeight]).padding(0.2);
+      
+      // 固定显示15个位置，即使数据不足也保持一致的柱子宽度
+      const maxItems = 15;
+      const displayItems: (KeywordData | null)[] = [];
+      for (let i = 0; i < maxItems; i++) {
+        if (i < data.length) {
+          displayItems.push(data[i]);
+        } else {
+          displayItems.push(null); // 占位符
+        }
+      }
+      const yDomain = displayItems.map((d, i) => d ? d.keyword : `_placeholder_${i}`);
+      const yScale = d3.scaleBand().domain(yDomain).range([0, chartHeight]).padding(0.2);
 
       // 创建颜色比例尺（固定颜色映射）
       const allKeywords = new Set<string>();
@@ -168,36 +225,39 @@ const KeywordEvolution: React.FC<KeywordEvolutionProps> = ({ papers, filter }) =
 
       const tooltip = getTooltip();
 
-      // 绘制柱状图 - 使用 key function 确保平滑过渡
+      // 绘制柱状图 - 使用 key function 确保平滑过渡（只绘制有数据的项）
+      const barsData = displayItems.filter(d => d !== null) as KeywordData[];
       const bars = g
         .selectAll<SVGRectElement, KeywordData>('.bar')
-        .data(data, (d) => d.keyword);
+        .data(barsData, (d) => d.keyword);
 
       bars
         .exit()
         .transition()
-        .duration(500)
+        .duration(300)
+        .ease(d3.easeCubicInOut)
         .attr('width', 0)
         .attr('y', chartHeight)
         .remove();
 
-      const barsEnter = bars
-        .enter()
-        .append('rect')
-        .attr('class', 'bar')
-        .attr('x', 0)
-        .attr('y', (d) => yScale(d.keyword)!)
-        .attr('width', 0)
-        .attr('height', yScale.bandwidth())
-        .attr('fill', (d) => colorScale(d.keyword) as string)
-        .attr('rx', 4)
-        .attr('ry', 4)
-        .style('cursor', 'pointer');
+        const barsEnter = bars
+          .enter()
+          .append('rect')
+          .attr('class', 'bar')
+          .attr('x', 0)
+          .attr('y', (d) => yScale(d.keyword)!)
+          .attr('width', 0)
+          .attr('height', yScale.bandwidth())
+          .attr('fill', (d) => colorScale(d.keyword) as string)
+          .attr('rx', 4)
+          .attr('ry', 4)
+          .style('cursor', 'pointer');
 
       barsEnter
         .merge(bars as any)
         .transition()
-        .duration(500)
+        .duration(300)
+        .ease(d3.easeCubicInOut)
         .attr('y', (d) => yScale(d.keyword)!)
         .attr('width', (d) => xScale(d.count))
         .attr('fill', (d) => colorScale(d.keyword) as string);
@@ -220,58 +280,62 @@ const KeywordEvolution: React.FC<KeywordEvolutionProps> = ({ papers, filter }) =
           tooltip.style('visibility', 'hidden');
         });
 
-      // 绘制标签 - 使用 key function
+      // 绘制标签 - 使用 key function（只绘制有数据的项）
+      const labelsData = displayItems.filter(d => d !== null) as KeywordData[];
       const labels = g
         .selectAll<SVGTextElement, KeywordData>('.label')
-        .data(data, (d) => d.keyword);
+        .data(labelsData, (d) => d.keyword);
 
       labels.exit().remove();
 
-      const labelsEnter = labels
-        .enter()
-        .append('text')
-        .attr('class', 'label')
-        .attr('x', -5)
-        .attr('y', (d) => yScale(d.keyword)! + yScale.bandwidth() / 2)
-        .attr('dy', '0.35em')
-        .attr('text-anchor', 'end')
-        .style('font-size', '12px')
-        .style('fill', '#333')
-        .text((d) => d.keyword);
+        const labelsEnter = labels
+          .enter()
+          .append('text')
+          .attr('class', 'label')
+          .attr('x', -5)
+          .attr('y', (d) => yScale(d.keyword)! + yScale.bandwidth() / 2)
+          .attr('dy', '0.35em')
+          .attr('text-anchor', 'end')
+          .style('font-size', '10px')
+          .style('fill', '#333')
+          .text((d) => d.keyword);
 
-      labelsEnter
-        .merge(labels as any)
-        .transition()
-        .duration(500)
-        .attr('y', (d) => yScale(d.keyword)! + yScale.bandwidth() / 2);
+        labelsEnter
+          .merge(labels as any)
+          .transition()
+          .duration(300)
+          .ease(d3.easeCubicInOut)
+          .attr('y', (d) => yScale(d.keyword)! + yScale.bandwidth() / 2);
 
-      // 绘制数值标签
+      // 绘制数值标签（只绘制有数据的项）
+      const valueLabelsData = displayItems.filter(d => d !== null) as KeywordData[];
       const valueLabels = g
         .selectAll<SVGTextElement, KeywordData>('.value-label')
-        .data(data, (d) => d.keyword);
+        .data(valueLabelsData, (d) => d.keyword);
 
       valueLabels.exit().remove();
 
-      const valueLabelsEnter = valueLabels
-        .enter()
-        .append('text')
-        .attr('class', 'value-label')
-        .attr('x', (d) => xScale(d.count) + 5)
-        .attr('y', (d) => yScale(d.keyword)! + yScale.bandwidth() / 2)
-        .attr('dy', '0.35em')
-        .style('font-size', '11px')
-        .style('fill', '#666')
-        .text((d) => d.count.toString())
-        .attr('opacity', 0);
+        const valueLabelsEnter = valueLabels
+          .enter()
+          .append('text')
+          .attr('class', 'value-label')
+          .attr('x', (d) => xScale(d.count) + 5)
+          .attr('y', (d) => yScale(d.keyword)! + yScale.bandwidth() / 2)
+          .attr('dy', '0.35em')
+          .style('font-size', '9px')
+          .style('fill', '#666')
+          .text((d) => d.count.toString())
+          .attr('opacity', 0);
 
-      valueLabelsEnter
-        .merge(valueLabels as any)
-        .transition()
-        .duration(500)
-        .attr('x', (d) => xScale(d.count) + 5)
-        .attr('y', (d) => yScale(d.keyword)! + yScale.bandwidth() / 2)
-        .attr('opacity', 1)
-        .text((d) => d.count.toString());
+        valueLabelsEnter
+          .merge(valueLabels as any)
+          .transition()
+          .duration(300)
+          .ease(d3.easeCubicInOut)
+          .attr('x', (d) => xScale(d.count) + 5)
+          .attr('y', (d) => yScale(d.keyword)! + yScale.bandwidth() / 2)
+          .attr('opacity', 1)
+          .text((d) => d.count.toString());
 
       // 绘制或更新坐标轴
       let axesGroup = g.select('g.axes-group');
@@ -285,18 +349,18 @@ const KeywordEvolution: React.FC<KeywordEvolutionProps> = ({ papers, filter }) =
       if (xAxisGroup.empty()) {
         xAxisGroup = axesGroup.append('g').attr('class', 'x-axis').attr('transform', `translate(0, ${chartHeight})`);
         xAxisGroup.call(xAxis);
-        xAxisGroup.selectAll('text').style('font-size', '11px').style('fill', '#666');
+        xAxisGroup.selectAll('text').style('font-size', '9px').style('fill', '#666');
 
-        axesGroup
-          .append('text')
-          .attr('class', 'x-axis-label')
-          .attr('transform', `translate(${chartWidth / 2}, ${chartHeight + 35})`)
-          .style('text-anchor', 'middle')
-          .style('font-size', '12px')
-          .style('fill', '#666')
-          .text('出现次数');
-      } else {
-        xAxisGroup.transition().duration(500).call(xAxis);
+          axesGroup
+            .append('text')
+            .attr('class', 'x-axis-label')
+            .attr('transform', `translate(${chartWidth / 2}, ${chartHeight + 30})`)
+            .style('text-anchor', 'middle')
+            .style('font-size', '10px')
+            .style('fill', '#666')
+            .text('出现次数');
+        } else {
+          xAxisGroup.transition().duration(300).ease(d3.easeCubicInOut).call(xAxis);
       }
 
       // 更新年份标题
@@ -308,7 +372,7 @@ const KeywordEvolution: React.FC<KeywordEvolutionProps> = ({ papers, filter }) =
           .attr('x', chartWidth / 2)
           .attr('y', -5)
           .attr('text-anchor', 'middle')
-          .style('font-size', '18px')
+          .style('font-size', '16px')
           .style('font-weight', 'bold')
           .style('fill', '#333');
       }
@@ -320,11 +384,11 @@ const KeywordEvolution: React.FC<KeywordEvolutionProps> = ({ papers, filter }) =
   // 初始化显示第一个年份
   useEffect(() => {
     const years = getYearRange();
-    if (years.length > 0 && currentYear === null) {
+    if (years.length > 0 && currentYear === null && externalYear === undefined) {
       setCurrentYear(years[0]);
       isInitializedRef.current = false; // 重置初始化标志
     }
-  }, [getYearRange, currentYear]);
+  }, [getYearRange, currentYear, externalYear]);
 
   // 绘制图表
   useEffect(() => {
@@ -340,6 +404,7 @@ const KeywordEvolution: React.FC<KeywordEvolutionProps> = ({ papers, filter }) =
         animationTimerRef.current = null;
       }
       setIsPlaying(false);
+      onPlayStateChange?.(false);
     } else {
       // 播放
       const years = getYearRange();
@@ -349,6 +414,7 @@ const KeywordEvolution: React.FC<KeywordEvolutionProps> = ({ papers, filter }) =
       if (currentIndex === -1) currentIndex = 0;
 
       setIsPlaying(true);
+      onPlayStateChange?.(true);
       animationTimerRef.current = setInterval(() => {
         currentIndex = (currentIndex + 1) % years.length;
         setCurrentYear(years[currentIndex]);
@@ -386,11 +452,13 @@ const KeywordEvolution: React.FC<KeywordEvolutionProps> = ({ papers, filter }) =
           )}
         </Space>
       </div>
-      <div ref={containerRef} style={{ width: '100%', height: '500px' }}>
+      <div ref={containerRef} style={{ width: '100%', height: '350px' }}>
         <svg ref={svgRef} style={{ width: '100%', height: '100%' }} />
       </div>
     </div>
   );
-};
+});
+
+KeywordEvolution.displayName = 'KeywordEvolution';
 
 export default KeywordEvolution;

@@ -1,3 +1,33 @@
 .layout-content {
   min-height: calc(100vh - 64px);
 }
+
+.fixed-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+// 论文列表侧边栏样式
+:global(.ant-drawer-body) {
+  padding: 16px !important;
+}
+
+// 论文列表项样式
+.paper-list-item {
+  padding: 12px;
+  margin-bottom: 12px;
+  border: 1px solid #e8e8e8;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    border-color: #1890ff;
+    box-shadow: 0 2px 8px rgba(24, 144, 255, 0.2);
+  }
+}

@@ -1,0 +1,53 @@
+.institution-evolution-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: #fafafa;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  padding: 16px;
+  overflow: hidden;
+
+  .institution-evolution-controls {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  svg {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+      sans-serif;
+
+    .bar {
+      transition: opacity 0.2s;
+    }
+
+    .axis {
+      .domain {
+        stroke: #999;
+      }
+
+      .tick {
+        line {
+          stroke: #999;
+        }
+
+        text {
+          fill: #666;
+        }
+      }
+    }
+  }
+}
+
+:global(.institution-evolution-tooltip) {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    sans-serif;
+  line-height: 1.5;
+
+  strong {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 13px;
+  }
+}
