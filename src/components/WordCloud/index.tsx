@@ -49,7 +49,7 @@ const WordCloud: React.FC<WordCloudProps> = ({ papers, filter, onKeywordClick })
                .attr('y', height / 2 - 10)
                .attr('text-anchor', 'middle')
                .style('font-size', '16px')
-               .style('fill', '#999')
+               .style('fill', '#aaa')
                .text('暂无词云数据');
              svg
                .append('text')
@@ -57,7 +57,7 @@ const WordCloud: React.FC<WordCloudProps> = ({ papers, filter, onKeywordClick })
                .attr('y', height / 2 + 15)
                .attr('text-anchor', 'middle')
                .style('font-size', '12px')
-               .style('fill', '#999')
+               .style('fill', '#aaa')
                .text('（当前筛选结果中没有包含关键词的论文）');
              return;
            }
@@ -164,16 +164,16 @@ const WordCloud: React.FC<WordCloudProps> = ({ papers, filter, onKeywordClick })
     function draw(words: any[]) {
       const g = svg.append('g').attr('transform', `translate(${width / 2},${height / 2})`);
 
-      // 更简洁的颜色方案（适合白色背景）
+      // 深色主题适配的颜色方案（更亮的颜色）
       const colorSchemes = [
-        ['#1890ff', '#096dd9'], // 蓝色系
-        ['#52c41a', '#389e0d'], // 绿色系
-        ['#fa8c16', '#d46b08'], // 橙色系
-        ['#eb2f96', '#c41d7f'], // 粉色系
-        ['#722ed1', '#531dab'], // 紫色系
-        ['#13c2c2', '#08979c'], // 青色系
-        ['#f5222d', '#cf1322'], // 红色系
-        ['#2f54eb', '#1d39c4'], // 深蓝系
+        ['#4dabf7', '#339af0'], // 亮蓝色系
+        ['#51cf66', '#40c057'], // 亮绿色系
+        ['#ffa94d', '#ff922b'], // 亮橙色系
+        ['#f783ac', '#f06595'], // 亮粉色系
+        ['#b197fc', '#9775fa'], // 亮紫色系
+        ['#66d9ef', '#51cfcf'], // 亮青色系
+        ['#ff6b6b', '#ff5252'], // 亮红色系
+        ['#74c0fc', '#4dabf7'], // 亮深蓝系
       ];
 
       // 为每个词选择颜色（使用更智能的分配策略）

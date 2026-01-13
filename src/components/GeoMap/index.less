@@ -1,8 +1,10 @@
 .geo-map-container {
   position: relative;
-  background: #fafafa;
-  border-radius: 4px;
+  background: #1a1a2e;
+  border-radius: 8px;
   overflow: hidden;
+  border: 1px solid rgba(77, 171, 247, 0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 
   .countries {
     .country-with-data {
@@ -21,12 +23,16 @@
   .legend {
     .legend-axis {
       .domain {
-        stroke: #666;
+        stroke: #aaa;
       }
 
       .tick {
         line {
-          stroke: #666;
+          stroke: #aaa;
+        }
+        
+        text {
+          fill: #fff;
         }
       }
     }

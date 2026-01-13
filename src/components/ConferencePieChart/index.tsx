@@ -141,7 +141,7 @@ const ConferencePieChart: React.FC<ConferencePieChartProps> = ({ papers, filter 
       .attr('class', 'arc')
       .attr('d', arc)
       .attr('fill', (d) => colorScale(d.data.name) as string)
-      .attr('stroke', '#fff')
+      .attr('stroke', 'rgba(255, 255, 255, 0.2)')
       .attr('stroke-width', 2)
       .style('cursor', 'pointer')
       .on('mouseover', function (event, d) {
@@ -177,7 +177,7 @@ const ConferencePieChart: React.FC<ConferencePieChartProps> = ({ papers, filter 
       })
       .attr('text-anchor', 'middle')
       .style('font-size', '11px')
-      .style('fill', '#333')
+      .style('fill', '#fff')
       .text((d) => {
         const percentage = d.data.percentage;
         return percentage > 5 ? `${percentage.toFixed(1)}%` : '';
@@ -210,7 +210,7 @@ const ConferencePieChart: React.FC<ConferencePieChartProps> = ({ papers, filter 
       .attr('x', 15)
       .attr('y', 8)
       .style('font-size', '9px')
-      .style('fill', '#333')
+      .style('fill', '#fff')
       .text((d) => {
         const text = d.name;
         const maxLength = Math.floor((legendWidth - 15) / 6); // 根据可用宽度动态调整
@@ -224,14 +224,14 @@ const ConferencePieChart: React.FC<ConferencePieChartProps> = ({ papers, filter 
       .attr('dy', '-10')
       .style('font-size', '16px')
       .style('font-weight', 'bold')
-      .style('fill', '#333')
+      .style('fill', '#fff')
       .text('总计');
 
     g.append('text')
       .attr('text-anchor', 'middle')
       .attr('dy', '10')
       .style('font-size', '14px')
-      .style('fill', '#666')
+      .style('fill', '#aaa')
       .text(`${total} 篇论文`);
   }, [getConferenceData, getTooltip]);
 

@@ -1,0 +1,29 @@
+.co-author-network-3d-container {
+  width: 100%;
+  height: 600px;
+  border: 1px solid rgba(77, 171, 247, 0.2);
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: #1a1a2e;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+
+  .co-author-network-search {
+    padding: 10px;
+    background: #1a1a2e;
+    border-bottom: 1px solid rgba(77, 171, 247, 0.2);
+    flex-shrink: 0;
+  }
+
+  .network-3d-canvas {
+    flex: 1;
+    position: relative;
+    cursor: grab;
+
+    &:active {
+      cursor: grabbing;
+    }
+  }
+}

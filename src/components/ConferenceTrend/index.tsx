@@ -48,7 +48,7 @@ const ConferenceTrend: React.FC<ConferenceTrendProps> = ({ papers, filter }) => 
         .attr('y', height / 2)
         .attr('text-anchor', 'middle')
         .style('font-size', '16px')
-        .style('fill', '#999')
+        .style('fill', '#aaa')
         .text('暂无数据');
       return;
     }
@@ -64,7 +64,7 @@ const ConferenceTrend: React.FC<ConferenceTrendProps> = ({ papers, filter }) => 
         .attr('y', height / 2)
         .attr('text-anchor', 'middle')
         .style('font-size', '16px')
-        .style('fill', '#999')
+        .style('fill', '#aaa')
         .text('暂无有效数据');
       return;
     }
@@ -212,7 +212,7 @@ const ConferenceTrend: React.FC<ConferenceTrendProps> = ({ papers, filter }) => 
       .call(xAxis)
       .selectAll('text')
       .style('font-size', '11px')
-      .style('fill', '#666');
+      .style('fill', '#aaa');
 
     g.append('text')
       .attr('transform', `translate(${chartWidth / 2}, ${chartHeight + 35})`)
@@ -257,7 +257,7 @@ const ConferenceTrend: React.FC<ConferenceTrendProps> = ({ papers, filter }) => 
         .attr('x', 20)
         .attr('y', 12)
         .style('font-size', '11px')
-        .style('fill', '#333')
+        .style('fill', '#fff')
         .text(venue);
     });
 
@@ -266,7 +266,7 @@ const ConferenceTrend: React.FC<ConferenceTrendProps> = ({ papers, filter }) => 
     
     // 垂直参考线
     const focusLine = focus.append('line')
-      .attr('stroke', '#333')
+      .attr('stroke', '#fff')
       .attr('stroke-width', 2)
       .attr('stroke-dasharray', '3,3')
       .attr('y1', 0)

@@ -90,7 +90,7 @@ const CoAuthorNetwork: React.FC<CoAuthorNetworkProps> = ({ papers, filter }) => 
         .attr('y', height / 2)
         .attr('text-anchor', 'middle')
         .style('font-size', '16px')
-        .style('fill', '#999')
+        .style('fill', '#aaa')
         .text('暂无作者合作网络数据');
       return;
     }
@@ -155,7 +155,7 @@ const CoAuthorNetwork: React.FC<CoAuthorNetworkProps> = ({ papers, filter }) => 
           .attr('y', height / 2)
           .attr('text-anchor', 'middle')
           .style('font-size', '16px')
-          .style('fill', '#999')
+          .style('fill', '#aaa')
           .text(`未找到匹配 "${searchText}" 的作者`);
         return;
       }
@@ -249,9 +249,9 @@ const CoAuthorNetwork: React.FC<CoAuthorNetworkProps> = ({ papers, filter }) => 
         const sourceMatched = isNodeMatched(d.source);
         const targetMatched = isNodeMatched(d.target);
         if (sourceMatched || targetMatched) {
-          return '#1890ff';
+          return '#4dabf7';
         }
-        return '#999';
+        return 'rgba(255, 255, 255, 0.3)';
       })
       .attr('stroke-opacity', (d: any) => {
         const sourceMatched = isNodeMatched(d.source);
@@ -282,19 +282,21 @@ const CoAuthorNetwork: React.FC<CoAuthorNetworkProps> = ({ papers, filter }) => 
       .attr('fill', (d) => {
         // 匹配搜索的节点使用高亮颜色
         if (isNodeMatched(d)) {
-          return '#1890ff';
+          return '#4dabf7';
         }
-        return d3.schemeCategory10[Math.floor(Math.random() * 10)];
+        // 使用更亮的颜色方案适配深色主题
+        const brightColors = ['#4dabf7', '#51cf66', '#ffa94d', '#f783ac', '#b197fc', '#66d9ef', '#ff6b6b', '#74c0fc', '#ffd43b', '#ff922b'];
+        return brightColors[Math.floor(Math.random() * brightColors.length)];
       })
       .attr('stroke', (d) => {
         // 选中的节点使用高亮颜色
         if (selectedAuthor?.node.id === d.id) {
-          return '#1890ff';
+          return '#4dabf7';
         }
         if (isNodeMatched(d)) {
-          return '#0050b3';
+          return '#339af0';
         }
-        return '#fff';
+        return 'rgba(255, 255, 255, 0.5)';
       })
       .attr('stroke-width', (d) => {
         // 选中的节点使用更粗的边框
@@ -315,19 +317,19 @@ const CoAuthorNetwork: React.FC<CoAuthorNetworkProps> = ({ papers, filter }) => 
       )
       .on('mouseover', function (event, d) {
         // 鼠标悬停时高亮节点
-        d3.select(this).attr('stroke', '#1890ff').attr('stroke-width', 3);
+        d3.select(this).attr('stroke', '#4dabf7').attr('stroke-width', 3);
       })
       .on('mouseout', function (event, d) {
         // 恢复原始样式（如果未被选中）
         if (selectedAuthor?.node.id !== d.id) {
           if (isNodeMatched(d)) {
-            d3.select(this).attr('stroke', '#0050b3').attr('stroke-width', 3);
+            d3.select(this).attr('stroke', '#339af0').attr('stroke-width', 3);
           } else {
-            d3.select(this).attr('stroke', '#fff').attr('stroke-width', 1.5);
+            d3.select(this).attr('stroke', 'rgba(255, 255, 255, 0.5)').attr('stroke-width', 1.5);
           }
         } else {
           // 保持选中状态的高亮
-          d3.select(this).attr('stroke', '#1890ff').attr('stroke-width', 4);
+          d3.select(this).attr('stroke', '#4dabf7').attr('stroke-width', 4);
         }
       })
       .on('click', function (event, d) {
@@ -336,7 +338,7 @@ const CoAuthorNetwork: React.FC<CoAuthorNetworkProps> = ({ papers, filter }) => 
         if (selectedAuthor?.node.id === d.id) {
           setSelectedAuthor(null);
           // 恢复节点样式
-          d3.select(this).attr('stroke', isNodeMatched(d) ? '#0050b3' : '#fff').attr('stroke-width', isNodeMatched(d) ? 3 : 1.5);
+            d3.select(this).attr('stroke', isNodeMatched(d) ? '#339af0' : 'rgba(255, 255, 255, 0.5)').attr('stroke-width', isNodeMatched(d) ? 3 : 1.5);
         } else {
           // 获取节点在SVG容器中的坐标
           const container = containerRef.current;
@@ -356,7 +358,7 @@ const CoAuthorNetwork: React.FC<CoAuthorNetworkProps> = ({ papers, filter }) => 
           
           setSelectedAuthor({ node: d, x, y });
           // 高亮选中的节点
-          d3.select(this).attr('stroke', '#1890ff').attr('stroke-width', 4);
+          d3.select(this).attr('stroke', '#4dabf7').attr('stroke-width', 4);
         }
       });
 
@@ -379,10 +381,13 @@ const CoAuthorNetwork: React.FC<CoAuthorNetworkProps> = ({ papers, filter }) => 
       .style('fill', (d) => {
         // 匹配的节点使用高亮颜色
         if (isNodeMatched(d)) {
-          return '#1890ff';
+          return '#4dabf7';
         }
-        return '#333';
+        return '#fff';
       })
+      .style('stroke', 'rgba(0, 0, 0, 0.5)')
+      .style('stroke-width', '0.5px')
+      .style('paint-order', 'stroke')
       .style('font-weight', (d) => {
         if (isNodeMatched(d)) {
           return 'bold';

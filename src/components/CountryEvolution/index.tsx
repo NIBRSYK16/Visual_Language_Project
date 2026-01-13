@@ -167,7 +167,7 @@ const CountryEvolution = forwardRef<CountryEvolutionRef, CountryEvolutionProps>(
               .attr('y', height / 2)
               .attr('text-anchor', 'middle')
               .style('font-size', '16px')
-              .style('fill', '#999')
+              .style('fill', '#aaa')
               .text('请选择年份或点击播放');
           }
           return;
@@ -183,7 +183,7 @@ const CountryEvolution = forwardRef<CountryEvolutionRef, CountryEvolutionProps>(
             .attr('y', height / 2)
             .attr('text-anchor', 'middle')
             .style('font-size', '16px')
-            .style('fill', '#999')
+            .style('fill', '#aaa')
             .text(`${year}年暂无数据`);
           return;
         }
@@ -299,7 +299,7 @@ const CountryEvolution = forwardRef<CountryEvolutionRef, CountryEvolutionProps>(
           .attr('dy', '0.35em')
           .attr('text-anchor', 'end')
           .style('font-size', '10px')
-          .style('fill', '#333')
+          .style('fill', '#fff')
           .text((d) => d.country);
 
         labelsEnter
@@ -325,7 +325,7 @@ const CountryEvolution = forwardRef<CountryEvolutionRef, CountryEvolutionProps>(
           .attr('y', (d) => yScale(d.country)! + yScale.bandwidth() / 2)
           .attr('dy', '0.35em')
           .style('font-size', '9px')
-          .style('fill', '#666')
+          .style('fill', '#aaa')
           .text((d) => d.count.toString())
           .attr('opacity', 0);
 
@@ -359,7 +359,7 @@ const CountryEvolution = forwardRef<CountryEvolutionRef, CountryEvolutionProps>(
             .attr('transform', `translate(${chartWidth / 2}, ${chartHeight + 30})`)
             .style('text-anchor', 'middle')
             .style('font-size', '10px')
-            .style('fill', '#666')
+            .style('fill', '#aaa')
             .text('论文数量');
         } else {
           xAxisGroup.transition().duration(500).call(xAxis);
@@ -376,7 +376,7 @@ const CountryEvolution = forwardRef<CountryEvolutionRef, CountryEvolutionProps>(
             .attr('text-anchor', 'middle')
           .style('font-size', '16px')
           .style('font-weight', 'bold')
-          .style('fill', '#333');
+          .style('fill', '#fff');
         }
         yearLabel.text(`${year}年`);
       },

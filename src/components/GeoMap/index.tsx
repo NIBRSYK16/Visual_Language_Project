@@ -120,11 +120,12 @@ const GeoMap: React.FC<GeoMapProps> = ({ papers, filter, onFilterChange }) => {
       }
     });
 
-    // 计算颜色比例尺
+    // 计算颜色比例尺（深色主题适配）
     const counts = Array.from(countryMap.values()).map((d) => d.count);
     const maxCount = d3.max(counts) || 1;
+    // 使用更亮的颜色方案，从深蓝到亮黄
     const colorScale = d3
-      .scaleSequential(d3.interpolateYlOrRd)
+      .scaleSequential(d3.interpolateViridis)
       .domain([0, maxCount]);
 
     // 创建工具提示（使用全局选择器，避免类型问题）
@@ -169,9 +170,9 @@ const GeoMap: React.FC<GeoMapProps> = ({ papers, filter, onFilterChange }) => {
         if (data) {
           return colorScale(data.count);
         }
-        return '#e0e0e0'; // 默认灰色（无数据）
+        return '#2a2a3e'; // 默认深灰色（无数据）
       })
-      .attr('stroke', '#fff')
+      .attr('stroke', 'rgba(255, 255, 255, 0.2)')
       .attr('stroke-width', 0.5)
       .style('cursor', 'pointer')
       .attr('class', (d: any) => {
@@ -229,7 +230,7 @@ const GeoMap: React.FC<GeoMapProps> = ({ papers, filter, onFilterChange }) => {
         }
       })
       .on('mouseout', function () {
-        d3.select(this).attr('stroke', '#fff').attr('stroke-width', 0.5);
+        d3.select(this).attr('stroke', 'rgba(255, 255, 255, 0.2)').attr('stroke-width', 0.5);
         const tooltipElement = d3.select('.geo-map-tooltip');
         if (!tooltipElement.empty()) {
           tooltipElement.style('visibility', 'hidden');
@@ -414,7 +415,7 @@ const GeoMap: React.FC<GeoMapProps> = ({ papers, filter, onFilterChange }) => {
       .attr('width', legendWidth)
       .attr('height', legendHeight)
       .style('fill', `url(#${gradientId})`)
-      .attr('stroke', '#ccc')
+      .attr('stroke', 'rgba(255, 255, 255, 0.3)')
       .attr('stroke-width', 1);
 
     // 图例刻度

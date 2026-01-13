@@ -1,5 +1,6 @@
 .layout-content {
   min-height: calc(100vh - 64px);
+  background: #0a0a0a !important;
 }
 
 .fixed-header {
@@ -8,8 +9,22 @@
   left: 0;
   right: 0;
   z-index: 1000;
-  background: #fff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6), 
+              0 0 0 1px rgba(77, 171, 247, 0.2) inset !important;
+  border-bottom: 2px solid rgba(77, 171, 247, 0.3) !important;
+  
+  h1 {
+    color: #e8f4f8 !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+    font-weight: 600 !important;
+    letter-spacing: 1px !important;
+  }
+  
+  span {
+    color: #e8f4f8 !important;
+    font-weight: 500 !important;
+  }
 }
 
 // 论文列表侧边栏样式
@@ -21,13 +36,14 @@
 .paper-list-item {
   padding: 12px;
   margin-bottom: 12px;
-  border: 1px solid #e8e8e8;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 4px;
+  background: #1a1a2e;
   cursor: pointer;
   transition: all 0.2s;
 
   &:hover {
-    border-color: #1890ff;
-    box-shadow: 0 2px 8px rgba(24, 144, 255, 0.2);
+    border-color: #4dabf7;
+    box-shadow: 0 2px 8px rgba(77, 171, 247, 0.3);
   }
 }

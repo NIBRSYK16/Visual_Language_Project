@@ -11,13 +11,15 @@ import { Paper, FilterCondition } from '@/types';
 import { applyFilter } from '@/services/dataProcessor';
 import GeoMap from '@/components/GeoMap';
 import WordCloud from '@/components/WordCloud';
-import CoAuthorNetwork from '@/components/CoAuthorNetwork';
+import CoAuthorNetwork3D from '@/components/CoAuthorNetwork3D';
 import KeywordEvolution, { KeywordEvolutionRef } from '@/components/KeywordEvolution';
 import CountryEvolution, { CountryEvolutionRef } from '@/components/CountryEvolution';
 import InstitutionEvolution, { InstitutionEvolutionRef } from '@/components/InstitutionEvolution';
 import ConferenceTrend from '@/components/ConferenceTrend';
 import ConferencePieChart from '@/components/ConferencePieChart';
 import CitationCascade from '@/components/CitationCascade';
+import KeywordSphere3D from '@/components/KeywordSphere3D';
+import CursorEffect from '@/components/CursorEffect';
 import './index.less';
 
 const { Header, Content } = Layout;
@@ -328,6 +330,8 @@ const IndexPage: React.FC = () => {
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
+      {/* 鼠标特效 */}
+      <CursorEffect />
       {/* 固定Header */}
       <Header
         className="fixed-header"
@@ -337,7 +341,7 @@ const IndexPage: React.FC = () => {
           left: 0,
           right: 0,
           zIndex: 1000,
-          background: '#fff',
+          background: '#1a1a2e',
           padding: '0 24px',
           boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
           display: 'flex',
@@ -346,11 +350,11 @@ const IndexPage: React.FC = () => {
           height: '64px',
         }}
       >
-        <h1 style={{ margin: 0, fontSize: '20px', fontWeight: 500 }}>
+        <h1 style={{ margin: 0, fontSize: '20px', fontWeight: 500, color: '#fff' }}>
           学术文献全景分析系统
         </h1>
         <Space>
-          <span style={{ whiteSpace: 'nowrap' }}>年份范围:</span>
+          <span style={{ whiteSpace: 'nowrap', color: '#fff' }}>年份范围:</span>
           <Slider
             range
             min={minYear}
@@ -360,15 +364,15 @@ const IndexPage: React.FC = () => {
             style={{ width: 300, margin: '0 10px' }}
             disabled={loading}
           />
-          <span style={{ whiteSpace: 'nowrap' }}>
+          <span style={{ whiteSpace: 'nowrap', color: '#fff' }}>
             {filter.years ? `${filter.years[0]} - ${filter.years[1]}` : `${minYear} - ${maxYear}`}
           </span>
-          <span style={{ whiteSpace: 'nowrap', color: '#666' }}>
+          <span style={{ whiteSpace: 'nowrap', color: '#aaa' }}>
             ({filteredPapers.length} 篇论文)
           </span>
           {filter.keywords && filter.keywords.length > 0 && (
             <>
-              <span style={{ whiteSpace: 'nowrap', color: '#666', marginLeft: '16px' }}>
+              <span style={{ whiteSpace: 'nowrap', color: '#aaa', marginLeft: '16px' }}>
                 关键词筛选:
               </span>
               {filter.keywords.map((keyword) => (
@@ -405,7 +409,7 @@ const IndexPage: React.FC = () => {
       </Header>
       
       {/* 内容区域，添加顶部padding以避免被固定Header遮挡 */}
-      <Content style={{ padding: '24px', background: '#f0f2f5', marginTop: '64px' }}>
+      <Content style={{ padding: '24px', background: '#0a0a0a', marginTop: '64px' }}>
         {/* 第一行：地图和词云 */}
         <Row gutter={16} style={{ marginBottom: 16 }}>
           <Col span={12}>
@@ -438,7 +442,7 @@ const IndexPage: React.FC = () => {
         <Row gutter={16} style={{ marginBottom: 16 }}>
           <Col span={24}>
             <Card title="作者合作网络" loading={loading}>
-              <CoAuthorNetwork papers={filteredPapers} filter={filter} />
+              <CoAuthorNetwork3D papers={filteredPapers} filter={filter} />
             </Card>
           </Col>
         </Row>
@@ -513,6 +517,15 @@ const IndexPage: React.FC = () => {
           </Col>
         </Row>
 
+        {/* 第八行：3D关键词球形 */}
+        <Row gutter={16} style={{ marginBottom: 16 }}>
+          <Col span={24}>
+            <Card title="3D关键词球形" loading={loading}>
+              <KeywordSphere3D papers={filteredPapers} filter={filter} onKeywordClick={handleKeywordClick} />
+            </Card>
+          </Col>
+        </Row>
+
       </Content>
       
       {/* 论文列表侧边栏 */}
@@ -551,7 +564,7 @@ const IndexPage: React.FC = () => {
         
         <div style={{ height: 'calc(100vh - 180px)', overflowY: 'auto', paddingRight: '8px' }}>
           {displayedPapers.length === 0 ? (
-            <div style={{ textAlign: 'center', padding: '40px', color: '#999' }}>
+            <div style={{ textAlign: 'center', padding: '40px', color: '#b8d4e3' }}>
               {paperListSearchText ? '未找到匹配的论文' : '暂无论文数据'}
             </div>
           ) : (
@@ -561,17 +574,18 @@ const IndexPage: React.FC = () => {
               style={{
                 padding: '12px',
                 marginBottom: '12px',
-                border: '1px solid #e8e8e8',
+                border: '1px solid rgba(255, 255, 255, 0.1)',
                 borderRadius: '4px',
+                background: '#1a1a2e',
                 cursor: 'pointer',
                 transition: 'all 0.2s',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = '#1890ff';
-                e.currentTarget.style.boxShadow = '0 2px 8px rgba(24,144,255,0.2)';
+                e.currentTarget.style.borderColor = '#4dabf7';
+                e.currentTarget.style.boxShadow = '0 2px 8px rgba(77, 171, 247, 0.3)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = '#e8e8e8';
+                e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)';
                 e.currentTarget.style.boxShadow = 'none';
               }}
             >
@@ -626,7 +640,7 @@ const IndexPage: React.FC = () => {
                     fontSize: '14px',
                     fontWeight: '500',
                     marginBottom: '8px',
-                    color: '#1890ff',
+                    color: '#4dabf7',
                     lineHeight: '1.5',
                     overflow: 'hidden',
                     textOverflow: 'ellipsis',
@@ -637,31 +651,31 @@ const IndexPage: React.FC = () => {
                   {paper.title}
                 </div>
               </Tooltip>
-              <div style={{ fontSize: '12px', color: '#666', marginBottom: '6px', lineHeight: '1.6' }}>
+              <div style={{ fontSize: '12px', color: '#b8d4e3', marginBottom: '6px', lineHeight: '1.6' }}>
                 <div style={{ marginBottom: '4px' }}>
-                  <span style={{ fontWeight: '500' }}>年份:</span> {paper.year}
+                  <span style={{ fontWeight: '500', color: '#e8f4f8' }}>年份:</span> {paper.year}
                   {paper.venue?.name && (
                     <span style={{ marginLeft: '12px' }}>
-                      <span style={{ fontWeight: '500' }}>会议:</span> {paper.venue.name}
+                      <span style={{ fontWeight: '500', color: '#e8f4f8' }}>会议:</span> {paper.venue.name}
                     </span>
                   )}
                 </div>
                 {paper.citations !== undefined && (
                   <div style={{ marginBottom: '4px' }}>
-                    <span style={{ fontWeight: '500' }}>引用数:</span> {paper.citations}
+                    <span style={{ fontWeight: '500', color: '#e8f4f8' }}>引用数:</span> {paper.citations}
                   </div>
                 )}
               </div>
               {paper.authors && paper.authors.length > 0 && (
-                <div style={{ fontSize: '12px', color: '#666', marginBottom: '6px', lineHeight: '1.6' }}>
-                  <span style={{ fontWeight: '500' }}>作者:</span>{' '}
+                <div style={{ fontSize: '12px', color: '#b8d4e3', marginBottom: '6px', lineHeight: '1.6' }}>
+                  <span style={{ fontWeight: '500', color: '#e8f4f8' }}>作者:</span>{' '}
                   {paper.authors.slice(0, 3).map(a => a.name || a.id).join(', ')}
                   {paper.authors.length > 3 && ` +${paper.authors.length - 3}`}
                 </div>
               )}
               {paper.keywords && paper.keywords.length > 0 && (
                 <div style={{ fontSize: '12px', marginTop: '6px' }}>
-                  <span style={{ fontWeight: '500', marginRight: '4px' }}>关键词:</span>
+                  <span style={{ fontWeight: '500', marginRight: '4px', color: '#e8f4f8' }}>关键词:</span>
                   {paper.keywords.slice(0, 3).map((keyword, idx) => (
                     <Tag key={idx} color="blue" style={{ marginRight: '4px', marginBottom: '4px' }}>
                       {keyword}

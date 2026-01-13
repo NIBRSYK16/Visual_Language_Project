@@ -33,6 +33,7 @@
     "d3-tip": "^0.9.1",
     "react": "17.x",
     "react-dom": "17.x",
+    "three": "^0.182.0",
     "topojson-client": "^3.1.0",
     "umi": "^3.5.34",
     "umi-request": "^1.4.0"
@@ -42,6 +43,7 @@
     "@types/node": "^18.0.0",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
+    "@types/three": "^0.182.0",
     "@types/topojson-client": "^3.0.0",
     "@umijs/preset-react": "1.x",
     "@umijs/test": "^3.5.34",

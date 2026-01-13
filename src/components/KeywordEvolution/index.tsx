@@ -166,9 +166,9 @@ const KeywordEvolution = forwardRef<KeywordEvolutionRef, KeywordEvolutionProps>(
             .attr('x', width / 2)
             .attr('y', height / 2)
             .attr('text-anchor', 'middle')
-            .style('font-size', '16px')
-            .style('fill', '#999')
-            .text('请选择年份或点击播放');
+          .style('font-size', '16px')
+          .style('fill', '#aaa')
+          .text('请选择年份或点击播放');
         }
         return;
       }
@@ -183,7 +183,7 @@ const KeywordEvolution = forwardRef<KeywordEvolutionRef, KeywordEvolutionProps>(
           .attr('y', height / 2)
           .attr('text-anchor', 'middle')
           .style('font-size', '16px')
-          .style('fill', '#999')
+          .style('fill', '#aaa')
           .text(`${year}年暂无数据`);
         return;
       }
@@ -297,7 +297,7 @@ const KeywordEvolution = forwardRef<KeywordEvolutionRef, KeywordEvolutionProps>(
           .attr('dy', '0.35em')
           .attr('text-anchor', 'end')
           .style('font-size', '10px')
-          .style('fill', '#333')
+          .style('fill', '#fff')
           .text((d) => d.keyword);
 
         labelsEnter
@@ -349,7 +349,7 @@ const KeywordEvolution = forwardRef<KeywordEvolutionRef, KeywordEvolutionProps>(
       if (xAxisGroup.empty()) {
         xAxisGroup = axesGroup.append('g').attr('class', 'x-axis').attr('transform', `translate(0, ${chartHeight})`);
         xAxisGroup.call(xAxis);
-        xAxisGroup.selectAll('text').style('font-size', '9px').style('fill', '#666');
+        xAxisGroup.selectAll('text').style('font-size', '9px').style('fill', '#aaa');
 
           axesGroup
             .append('text')
@@ -357,7 +357,7 @@ const KeywordEvolution = forwardRef<KeywordEvolutionRef, KeywordEvolutionProps>(
             .attr('transform', `translate(${chartWidth / 2}, ${chartHeight + 30})`)
             .style('text-anchor', 'middle')
             .style('font-size', '10px')
-            .style('fill', '#666')
+            .style('fill', '#aaa')
             .text('出现次数');
         } else {
           xAxisGroup.transition().duration(300).ease(d3.easeCubicInOut).call(xAxis);
@@ -374,7 +374,7 @@ const KeywordEvolution = forwardRef<KeywordEvolutionRef, KeywordEvolutionProps>(
           .attr('text-anchor', 'middle')
           .style('font-size', '16px')
           .style('font-weight', 'bold')
-          .style('fill', '#333');
+          .style('fill', '#fff');
       }
       yearLabel.text(`${year}年`);
     },

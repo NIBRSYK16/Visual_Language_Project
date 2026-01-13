@@ -171,7 +171,7 @@ const InstitutionEvolution = forwardRef<InstitutionEvolutionRef, InstitutionEvol
               .attr('y', height / 2)
               .attr('text-anchor', 'middle')
               .style('font-size', '16px')
-              .style('fill', '#999')
+              .style('fill', '#aaa')
               .text('请选择年份或点击播放');
           }
           return;
@@ -187,7 +187,7 @@ const InstitutionEvolution = forwardRef<InstitutionEvolutionRef, InstitutionEvol
             .attr('y', height / 2)
             .attr('text-anchor', 'middle')
             .style('font-size', '16px')
-            .style('fill', '#999')
+            .style('fill', '#aaa')
             .text(`${year}年暂无数据`);
           return;
         }
@@ -301,7 +301,7 @@ const InstitutionEvolution = forwardRef<InstitutionEvolutionRef, InstitutionEvol
           .attr('dy', '0.35em')
           .attr('text-anchor', 'end')
           .style('font-size', '9px')
-          .style('fill', '#333')
+          .style('fill', '#fff')
           .text((d) => {
             const text = d.institution;
             return text.length > 40 ? text.substring(0, 40) + '...' : text;
@@ -330,7 +330,7 @@ const InstitutionEvolution = forwardRef<InstitutionEvolutionRef, InstitutionEvol
           .attr('y', (d) => yScale(d.institution)! + yScale.bandwidth() / 2)
           .attr('dy', '0.35em')
           .style('font-size', '9px')
-          .style('fill', '#666')
+          .style('fill', '#aaa')
           .text((d) => d.count.toString())
           .attr('opacity', 0);
 
@@ -364,7 +364,7 @@ const InstitutionEvolution = forwardRef<InstitutionEvolutionRef, InstitutionEvol
             .attr('transform', `translate(${chartWidth / 2}, ${chartHeight + 30})`)
             .style('text-anchor', 'middle')
             .style('font-size', '10px')
-            .style('fill', '#666')
+            .style('fill', '#aaa')
             .text('论文数量');
         } else {
           xAxisGroup.transition().duration(500).call(xAxis);
@@ -381,7 +381,7 @@ const InstitutionEvolution = forwardRef<InstitutionEvolutionRef, InstitutionEvol
             .attr('text-anchor', 'middle')
           .style('font-size', '16px')
           .style('font-weight', 'bold')
-          .style('fill', '#333');
+          .style('fill', '#fff');
         }
         yearLabel.text(`${year}年`);
       },

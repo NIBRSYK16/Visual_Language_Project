@@ -43,7 +43,7 @@ const CitationCascade: React.FC<CitationCascadeProps> = ({ papers, filter }) => 
         .attr('y', height / 2)
         .attr('text-anchor', 'middle')
         .style('font-size', '16px')
-        .style('fill', '#999')
+        .style('fill', '#aaa')
         .text('暂无数据');
       return;
     }
@@ -75,7 +75,7 @@ const CitationCascade: React.FC<CitationCascadeProps> = ({ papers, filter }) => 
         .attr('y', height / 2)
         .attr('text-anchor', 'middle')
         .style('font-size', '16px')
-        .style('fill', '#999')
+        .style('fill', '#aaa')
         .text('暂无有效年份数据');
       return;
     }
@@ -146,7 +146,7 @@ const CitationCascade: React.FC<CitationCascadeProps> = ({ papers, filter }) => 
         // 使用曲线路径
         return `M ${sourceX} ${sourceY} C ${sourceX + 50} ${sourceY}, ${targetX + 50} ${targetY}, ${targetX} ${targetY}`;
       })
-      .attr('stroke', '#999')
+      .attr('stroke', 'rgba(255, 255, 255, 0.3)')
       .attr('stroke-width', 1.5)
       .attr('stroke-opacity', 0.4)
       .attr('fill', 'none');
@@ -177,7 +177,7 @@ const CitationCascade: React.FC<CitationCascadeProps> = ({ papers, filter }) => 
           .append('circle')
           .attr('r', 6)
           .attr('fill', '#1890ff')
-          .attr('stroke', '#fff')
+          .attr('stroke', 'rgba(255, 255, 255, 0.5)')
           .attr('stroke-width', 2)
           .on('mouseover', function (event) {
             d3.select(this).attr('r', 8);
@@ -204,7 +204,7 @@ const CitationCascade: React.FC<CitationCascadeProps> = ({ papers, filter }) => 
           .attr('x', 12)
           .attr('y', 4)
           .style('font-size', '10px')
-          .style('fill', '#333')
+          .style('fill', '#fff')
           .text(paper.title.length > 30 ? paper.title.substring(0, 30) + '...' : paper.title)
           .style('pointer-events', 'none');
       });
@@ -217,7 +217,7 @@ const CitationCascade: React.FC<CitationCascadeProps> = ({ papers, filter }) => 
       .call(d3.axisLeft(yearScale).tickFormat((d) => d + '年'))
       .selectAll('text')
       .style('font-size', '12px')
-      .style('fill', '#666');
+      .style('fill', '#aaa');
 
     g.append('text')
       .attr('transform', 'rotate(-90)')
@@ -226,7 +226,7 @@ const CitationCascade: React.FC<CitationCascadeProps> = ({ papers, filter }) => 
       .style('text-anchor', 'middle')
       .style('font-size', '13px')
       .style('font-weight', 'bold')
-      .style('fill', '#333')
+      .style('fill', '#fff')
       .text('年份');
 
     // 绘制统计信息（右侧）
@@ -237,7 +237,7 @@ const CitationCascade: React.FC<CitationCascadeProps> = ({ papers, filter }) => 
       .attr('y', -10)
       .style('font-size', '14px')
       .style('font-weight', 'bold')
-      .style('fill', '#333')
+      .style('fill', '#fff')
       .text('统计信息');
 
     let statsY = 20;
@@ -245,7 +245,7 @@ const CitationCascade: React.FC<CitationCascadeProps> = ({ papers, filter }) => 
       .append('text')
       .attr('y', statsY)
       .style('font-size', '12px')
-      .style('fill', '#666')
+      .style('fill', '#aaa')
       .text(`总论文数: ${filteredPapers.length}`);
 
     statsY += 20;
@@ -253,7 +253,7 @@ const CitationCascade: React.FC<CitationCascadeProps> = ({ papers, filter }) => 
       .append('text')
       .attr('y', statsY)
       .style('font-size', '12px')
-      .style('fill', '#666')
+      .style('fill', '#aaa')
       .text(`引用关系数: ${links.length}`);
 
     statsY += 20;
@@ -261,7 +261,7 @@ const CitationCascade: React.FC<CitationCascadeProps> = ({ papers, filter }) => 
       .append('text')
       .attr('y', statsY)
       .style('font-size', '12px')
-      .style('fill', '#666')
+      .style('fill', '#aaa')
       .text(`年份范围: ${years[0]} - ${years[years.length - 1]}`);
 
     // 添加标题
@@ -271,7 +271,7 @@ const CitationCascade: React.FC<CitationCascadeProps> = ({ papers, filter }) => 
       .attr('text-anchor', 'middle')
       .style('font-size', '16px')
       .style('font-weight', 'bold')
-      .style('fill', '#333')
+      .style('fill', '#fff')
       .text('文献引用关系时间轴');
   }, [papers, filter]);
 
