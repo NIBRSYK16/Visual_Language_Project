@@ -148,8 +148,14 @@ export function applyFilter(papers: Paper[], filter: FilterCondition): Paper[] {
   }
 
   if (filter.keywords && filter.keywords.length > 0) {
+    // 将筛选关键词转换为小写用于匹配
+    const filterKeywordsLower = filter.keywords.map(k => k.toLowerCase().trim());
     filtered = filtered.filter((paper) =>
-      paper.keywords.some((keyword) => filter.keywords!.includes(keyword)),
+      paper.keywords && paper.keywords.length > 0 &&
+      paper.keywords.some((keyword) => {
+        const keywordLower = keyword.toLowerCase().trim();
+        return filterKeywordsLower.includes(keywordLower);
+      }),
     );
   }
 
@@ -160,4 +166,149 @@ export function applyFilter(papers: Paper[], filter: FilterCondition): Paper[] {
   }
 
   return filtered;
+}
+
+/**
+ * 机构统计信息
+ */
+export interface InstitutionData {
+  name: string;
+  count: number;
+  papers: Paper[];
+}
+
+/**
+ * 学者统计信息
+ */
+export interface ScholarData {
+  id: string;
+  name: string;
+  count: number;
+  country?: string;
+  affiliations: string[];
+}
+
+/**
+ * 获取国家的Top N机构
+ * 统计该国家所有符合要求的论文中，所有作者所属的机构
+ */
+export function getTopInstitutionsByCountry(
+  papers: Paper[],
+  country: string,
+  topN: number = 5,
+): InstitutionData[] {
+  const institutionMap = new Map<string, Paper[]>();
+  
+  // 大小写不敏感匹配
+  const normalizeCountry = (c: string) => c?.trim().toLowerCase() || '';
+  const targetCountry = normalizeCountry(country);
+  
+  // 调试信息
+  console.log('getTopInstitutionsByCountry 调用:', {
+    country,
+    targetCountry,
+    papersCount: papers.length,
+  });
+
+  let matchedPapersCount = 0;
+  papers.forEach((paper) => {
+    // 检查论文或作者是否属于该国家（大小写不敏感）
+    const paperCountry = normalizeCountry(paper.country || '');
+    const authorCountries = paper.authors.map(a => normalizeCountry(a.country || ''));
+    const isCountryMatch = 
+      paperCountry === targetCountry ||
+      authorCountries.some(authorCountry => authorCountry === targetCountry);
+
+    if (!isCountryMatch) return;
+    
+    matchedPapersCount++;
+
+    // 统计这篇论文中所有作者的机构（不限制作者必须是该国家的）
+    paper.authors.forEach((author) => {
+      if (author.affiliations && author.affiliations.length > 0) {
+        author.affiliations.forEach((affiliation) => {
+          if (affiliation && affiliation.trim()) {
+            const normalized = affiliation.trim();
+            if (!institutionMap.has(normalized)) {
+              institutionMap.set(normalized, []);
+            }
+            // 避免重复计算同一篇论文
+            if (!institutionMap.get(normalized)!.some((p) => p.id === paper.id)) {
+              institutionMap.get(normalized)!.push(paper);
+            }
+          }
+        });
+      }
+    });
+  });
+  
+  console.log('getTopInstitutionsByCountry 结果:', {
+    matchedPapersCount,
+    institutionsCount: institutionMap.size,
+  });
+
+  return Array.from(institutionMap.entries())
+    .map(([name, papers]) => ({
+      name,
+      count: papers.length,
+      papers,
+    }))
+    .sort((a, b) => b.count - a.count)
+    .slice(0, topN);
+}
+
+/**
+ * 获取机构的Top N学者
+ */
+export function getTopScholarsByInstitution(
+  papers: Paper[],
+  institution: string,
+  topN: number = 5,
+): ScholarData[] {
+  const scholarMap = new Map<
+    string,
+    {
+      name: string;
+      count: number;
+      country?: string;
+      affiliations: Set<string>;
+    }
+  >();
+
+  papers.forEach((paper) => {
+    paper.authors.forEach((author) => {
+      // 检查作者是否属于该机构
+      const hasInstitution =
+        author.affiliations &&
+        author.affiliations.some((aff) => aff.trim() === institution.trim());
+
+      if (hasInstitution) {
+        const authorId = author.id || `author-${author.name}`;
+        if (!scholarMap.has(authorId)) {
+          scholarMap.set(authorId, {
+            name: author.name || authorId,
+            count: 0,
+            country: author.country,
+            affiliations: new Set(),
+          });
+        }
+        const scholar = scholarMap.get(authorId)!;
+        scholar.count++;
+        if (author.affiliations) {
+          author.affiliations.forEach((aff) => scholar.affiliations.add(aff));
+        }
+      }
+    });
+  });
+
+  return Array.from(scholarMap.entries())
+    .map(([id, data]) => ({
+      id,
+      name: data.name,
+      count: data.count,
+      country: data.country,
+      affiliations: Array.from(data.affiliations),
+    }))
+    .sort((a, b) => b.count - a.count)
+    .slice(0, topN);
 }

@@ -1,24 +1,29 @@
 .word-cloud-container {
   width: 100%;
   height: 500px;
-  border: 1px solid #d9d9d9;
-  border-radius: 4px;
+  border: 1px solid #e8e8e8;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  background: #ffffff;
   position: relative;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 
   svg {
     display: block;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.05));
+    position: relative;
+    z-index: 1;
 
     text {
       user-select: none;
       -webkit-user-select: none;
       -moz-user-select: none;
       -ms-user-select: none;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
   }
 }

@@ -52,4 +52,32 @@
     margin-bottom: 4px;
     font-size: 13px;
   }
+
+  // 链接样式
+  a {
+    transition: all 0.2s ease;
+    
+    &:hover {
+      text-decoration: underline !important;
+    }
+  }
+
+  // 自定义滚动条样式
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.5);
+    }
+  }
 }

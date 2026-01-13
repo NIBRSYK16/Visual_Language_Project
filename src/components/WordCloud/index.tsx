@@ -20,6 +20,7 @@ const WordCloud: React.FC<WordCloudProps> = ({ papers, filter, onKeywordClick })
   const containerRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
   const tooltipRef = useRef<HTMLDivElement | null>(null);
+  const layoutCacheRef = useRef<Map<string, { x: number; y: number; rotate: number }>>(new Map());
 
   // 绘制词云
   const drawWordCloud = useCallback(() => {
@@ -35,7 +36,10 @@ const WordCloud: React.FC<WordCloudProps> = ({ papers, filter, onKeywordClick })
     svg.selectAll('*').remove();
     svg.attr('width', width).attr('height', height);
 
-    const filteredPapers = applyFilter(papers, filter);
+    // 词云应该显示所有可能的关键词，所以排除关键词筛选
+    // 只应用其他筛选条件（年份、国家、会议等）
+    const filterWithoutKeywords = { ...filter, keywords: undefined };
+    const filteredPapers = applyFilter(papers, filterWithoutKeywords);
     const wordData = extractWordCloudData(filteredPapers).slice(0, 50);
 
            if (wordData.length === 0) {
@@ -61,11 +65,11 @@ const WordCloud: React.FC<WordCloudProps> = ({ papers, filter, onKeywordClick })
     const maxFrequency = d3.max(wordData, (d) => d.frequency) || 1;
     const minFrequency = d3.min(wordData, (d) => d.frequency) || 0;
 
-    // 字体大小范围调整
+    // 字体大小范围调整（更大的范围，更明显的差异）
     const fontSizeScale = d3
       .scaleLinear()
       .domain([minFrequency, maxFrequency])
-      .range([14, 70]);
+      .range([16, 80]);
 
     // 判断关键词是否被选中
     const isKeywordSelected = (keyword: string): boolean => {
@@ -92,6 +96,35 @@ const WordCloud: React.FC<WordCloudProps> = ({ papers, filter, onKeywordClick })
     }
     const tooltip = d3.select(tooltipRef.current);
 
+    // 只在年份改变时重新计算布局，否则使用缓存的布局
+    const yearKey = filter.years ? `${filter.years[0]}-${filter.years[1]}` : 'all';
+    const shouldRecalculateLayout = !layoutCacheRef.current.has(yearKey) || 
+      layoutCacheRef.current.size === 0 ||
+      !wordData.every(d => layoutCacheRef.current.has(`${yearKey}-${d.word}`));
+
+    // 如果不需要重新计算布局，直接使用缓存的位置绘制
+    if (!shouldRecalculateLayout) {
+      const cachedWords = wordData.map((d, i) => {
+        const cacheKey = `${yearKey}-${d.word}`;
+        const cached = layoutCacheRef.current.get(cacheKey);
+        return {
+          text: d.word,
+          size: fontSizeScale(d.frequency),
+          frequency: d.frequency,
+          papers: d.papers,
+          selected: isKeywordSelected(d.word),
+          index: i,
+          x: cached?.x || 0,
+          y: cached?.y || 0,
+          rotate: cached?.rotate || 0,
+        };
+      });
+      draw(cachedWords);
+      return;
+    }
+
+    // 需要重新计算布局时，使用d3-cloud进行布局
+    // d3-cloud会自动处理碰撞检测，避免重叠
     const layout = cloud()
       .size([width, height])
       .words(
@@ -106,31 +139,44 @@ const WordCloud: React.FC<WordCloudProps> = ({ papers, filter, onKeywordClick })
       )
       .padding(8)
       .rotate(() => {
-        // 更多的旋转角度选择，但保持可读性
-        const angles = [0, 90];
+        // 随机选择角度
+        const angles = [0, -15, 15, -30, 30, -45, 45, 90];
         return angles[Math.floor(Math.random() * angles.length)];
       })
-      .font('Arial, sans-serif')
-      .fontWeight('bold')
+      .font('Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif')
+      .fontWeight('600')
       .fontSize((d: any) => d.size)
-      .on('end', draw);
+      .on('end', (words: any[]) => {
+        // 保存布局到缓存
+        words.forEach((word: any) => {
+          const cacheKey = `${yearKey}-${word.text}`;
+          layoutCacheRef.current.set(cacheKey, {
+            x: word.x,
+            y: word.y,
+            rotate: word.rotate,
+          });
+        });
+        draw(words);
+      });
 
     layout.start();
 
     function draw(words: any[]) {
       const g = svg.append('g').attr('transform', `translate(${width / 2},${height / 2})`);
 
-      // 定义渐变和颜色方案
+      // 更简洁的颜色方案（适合白色背景）
       const colorSchemes = [
-        ['#1890ff', '#096dd9', '#0050b3'], // 蓝色系
-        ['#52c41a', '#389e0d', '#237804'], // 绿色系
-        ['#fa8c16', '#d46b08', '#ad4e00'], // 橙色系
-        ['#eb2f96', '#c41d7f', '#9e1068'], // 粉色系
-        ['#722ed1', '#531dab', '#391085'], // 紫色系
-        ['#13c2c2', '#08979c', '#006d75'], // 青色系
+        ['#1890ff', '#096dd9'], // 蓝色系
+        ['#52c41a', '#389e0d'], // 绿色系
+        ['#fa8c16', '#d46b08'], // 橙色系
+        ['#eb2f96', '#c41d7f'], // 粉色系
+        ['#722ed1', '#531dab'], // 紫色系
+        ['#13c2c2', '#08979c'], // 青色系
+        ['#f5222d', '#cf1322'], // 红色系
+        ['#2f54eb', '#1d39c4'], // 深蓝系
       ];
 
-      // 为每个词选择颜色
+      // 为每个词选择颜色（使用更智能的分配策略）
       const getColor = (d: any, isHover: boolean = false): string => {
         if (d.selected) {
           return '#1890ff'; // 选中的关键词使用蓝色
@@ -138,45 +184,91 @@ const WordCloud: React.FC<WordCloudProps> = ({ papers, filter, onKeywordClick })
         if (isHover) {
           return '#1890ff'; // 悬停时使用蓝色
         }
-        // 根据频率选择颜色方案
-        const schemeIndex = Math.floor((d.frequency - minFrequency) / (maxFrequency - minFrequency) * colorSchemes.length);
-        const scheme = colorSchemes[Math.min(schemeIndex, colorSchemes.length - 1)];
-        // 在同一颜色方案内根据索引选择深浅
-        const colorIndex = d.index % scheme.length;
-        return scheme[colorIndex];
+        // 根据索引分配颜色方案，确保颜色分布均匀
+        const schemeIndex = d.index % colorSchemes.length;
+        const scheme = colorSchemes[schemeIndex];
+        // 根据频率在颜色方案内选择深浅
+        const frequencyRatio = (d.frequency - minFrequency) / (maxFrequency - minFrequency || 1);
+        const colorIndex = Math.floor(frequencyRatio * (scheme.length - 1));
+        return scheme[colorIndex] || scheme[0];
+      };
+      
+      // 首字母大写函数
+      const capitalizeFirst = (str: string): string => {
+        if (!str || str.length === 0) return str;
+        return str.charAt(0).toUpperCase() + str.slice(1);
       };
 
-      g.selectAll('text')
+      const texts = g.selectAll('text')
         .data(words)
         .enter()
         .append('text')
         .style('font-size', (d: any) => `${d.size}px`)
-        .style('font-family', 'Arial, sans-serif')
-        .style('font-weight', 'bold')
+        .style('font-family', 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif')
+        .style('font-weight', '600')
         .style('fill', (d: any) => getColor(d))
         .style('stroke', (d: any) => {
-          // 为选中的词添加白色描边
+          // 为选中的词添加描边
           if (d.selected) {
-            return '#fff';
+            return '#1890ff';
           }
           return 'none';
         })
-        .style('stroke-width', (d: any) => (d.selected ? '1px' : '0px'))
-        .style('stroke-opacity', 0.3)
+        .style('stroke-width', (d: any) => {
+          if (d.selected) {
+            return '2px';
+          }
+          return '0px';
+        })
+        .style('stroke-opacity', (d: any) => (d.selected ? 0.8 : 0))
+        .style('opacity', 0) // 初始透明，用于动画
         .attr('text-anchor', 'middle')
         .attr('transform', (d: any) => `translate(${d.x},${d.y})rotate(${d.rotate})`)
-        .text((d: any) => d.text)
+        .text((d: any) => capitalizeFirst(d.text)) // 首字母大写
         .style('cursor', 'pointer')
-        .style('transition', 'all 0.2s ease')
-        .on('mouseover', function (event, d: any) {
+        .style('filter', (d: any) => {
+          // 为选中的词添加阴影
+          if (d.selected) {
+            return 'drop-shadow(0 0 6px rgba(24, 144, 255, 0.5))';
+          }
+          return 'drop-shadow(0 1px 2px rgba(0, 0, 0, 0.08))';
+        });
+      
+      // 添加淡入动画
+      texts.transition()
+        .duration(800)
+        .delay((d: any, i: number) => i * 20)
+        .style('opacity', 1);
+      
+      // 绑定事件处理器
+      texts.on('mouseover', function (event, d: any) {
           d3.select(this)
+            .transition()
+            .duration(200)
             .style('fill', getColor(d, true))
-            .style('font-size', `${d.size * 1.1}px`)
+            .style('font-size', `${d.size * 1.15}px`)
             .style('opacity', 1)
-            .style('filter', 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))');
+            .style('filter', 'drop-shadow(0 4px 12px rgba(24, 144, 255, 0.5))')
+            .style('stroke', '#1890ff')
+            .style('stroke-width', '2px')
+            .style('stroke-opacity', 0.8);
+          
+          // 计算应用当前筛选条件后包含该关键词的论文数量
+          // 如果已经有关键词筛选，需要合并筛选条件
+          const currentFilter = { ...filter };
+          const keywordToCheck = d.text;
+          
+          // 如果当前关键词不在筛选列表中，需要临时添加它来计算数量
+          const tempFilter = currentFilter.keywords?.includes(keywordToCheck)
+            ? currentFilter
+            : { ...currentFilter, keywords: [...(currentFilter.keywords || []), keywordToCheck] };
+          
+          const papersWithKeyword = applyFilter(papers, tempFilter);
+          const count = papersWithKeyword.length;
+          
           tooltip
             .html(
-              `<strong>${d.text}</strong><br/>出现次数: ${d.frequency}<br/>相关论文: ${d.papers.length} 篇<br/>点击查看相关论文`,
+              `<strong>${d.text}</strong><br/>出现次数: ${d.frequency}<br/>相关论文: ${count} 篇<br/>点击查看相关论文`,
             )
             .style('visibility', 'visible')
             .style('left', event.pageX + 10 + 'px')
@@ -186,11 +278,24 @@ const WordCloud: React.FC<WordCloudProps> = ({ papers, filter, onKeywordClick })
           tooltip.style('left', event.pageX + 10 + 'px').style('top', event.pageY - 10 + 'px');
         })
         .on('mouseout', function (event, d: any) {
-          d3.select(this)
+          const element = d3.select(this);
+          const filterValue = d.selected
+            ? 'drop-shadow(0 0 6px rgba(24, 144, 255, 0.5))'
+            : 'drop-shadow(0 1px 2px rgba(0, 0, 0, 0.08))';
+          const strokeValue = d.selected ? '#1890ff' : 'none';
+          const strokeWidth = d.selected ? '2px' : '0px';
+          const strokeOpacity = d.selected ? 0.8 : 0;
+          
+          element
+            .transition()
+            .duration(200)
             .style('fill', getColor(d))
             .style('font-size', `${d.size}px`)
             .style('opacity', 1)
-            .style('filter', 'none');
+            .style('filter', filterValue)
+            .style('stroke', strokeValue)
+            .style('stroke-width', strokeWidth)
+            .style('stroke-opacity', strokeOpacity);
           tooltip.style('visibility', 'hidden');
         })
         .on('click', (event, d: any) => {

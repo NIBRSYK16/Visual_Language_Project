@@ -98,9 +98,14 @@ const IndexPage: React.FC = () => {
            }
 
            if (filter.keywords && filter.keywords.length > 0) {
+             // 将筛选关键词转换为小写用于匹配
+             const filterKeywordsLower = filter.keywords.map(k => k.toLowerCase().trim());
              currentPapers = currentPapers.filter((paper) =>
                paper.keywords && paper.keywords.length > 0 &&
-               paper.keywords.some((keyword) => filter.keywords!.includes(keyword)),
+               paper.keywords.some((keyword) => {
+                 const keywordLower = keyword.toLowerCase().trim();
+                 return filterKeywordsLower.includes(keywordLower);
+               }),
              );
            }
 
