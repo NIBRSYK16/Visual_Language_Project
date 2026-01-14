@@ -204,6 +204,25 @@ body {
   }
 }
 
+// 普通按钮样式
+:global(.ant-btn:not(.ant-btn-primary)) {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  color: #ffffff !important;
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.2) !important;
+    border-color: rgba(255, 255, 255, 0.5) !important;
+    color: #ffffff !important;
+  }
+  
+  &:focus {
+    background: rgba(255, 255, 255, 0.2) !important;
+    border-color: rgba(255, 255, 255, 0.5) !important;
+    color: #ffffff !important;
+  }
+}
+
 :global(.ant-btn-primary) {
   background: linear-gradient(135deg, #4dabf7 0%, #339af0 100%) !important;
   border-color: #4dabf7 !important;

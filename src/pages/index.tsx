@@ -386,12 +386,24 @@ const IndexPage: React.FC = () => {
                       keywords: newKeywords.length > 0 ? newKeywords : undefined,
                     }));
                   }}
-                  color="blue"
+                  style={{
+                    background: 'rgba(77, 171, 247, 0.3)',
+                    borderColor: 'rgba(77, 171, 247, 0.6)',
+                    color: '#ffffff',
+                  }}
                 >
                   {keyword}
                 </Tag>
               ))}
-              <Button size="small" onClick={handleClearKeywords}>
+              <Button 
+                size="small" 
+                onClick={handleClearKeywords}
+                style={{
+                  background: 'rgba(255, 255, 255, 0.1)',
+                  borderColor: 'rgba(255, 255, 255, 0.3)',
+                  color: '#ffffff',
+                }}
+              >
                 清除
               </Button>
             </>

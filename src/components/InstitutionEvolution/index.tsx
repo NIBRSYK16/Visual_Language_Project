@@ -75,7 +75,7 @@ const InstitutionEvolution = forwardRef<InstitutionEvolutionRef, InstitutionEvol
       }
     }, [externalYear]);
 
-    // 获取年份范围
+    // 获取年份范围（使用选定的年份区间）
     const getYearRange = useCallback(() => {
       const filteredPapers = applyFilter(papers, filter);
       const years = filteredPapers
@@ -83,9 +83,19 @@ const InstitutionEvolution = forwardRef<InstitutionEvolutionRef, InstitutionEvol
         .filter((y) => y && y > 0)
         .sort((a, b) => a - b);
       if (years.length === 0) return [];
-      const minYear = Math.min(...years);
-      const maxYear = Math.max(...years);
-      return Array.from({ length: maxYear - minYear + 1 }, (_, i) => minYear + i);
+      
+      // 如果用户选择了年份区间，使用该区间；否则使用所有数据的年份范围
+      if (filter.years && filter.years.length === 2) {
+        const [minSelected, maxSelected] = filter.years;
+        const availableYears = years.filter((y) => y >= minSelected && y <= maxSelected);
+        if (availableYears.length === 0) return [];
+        return Array.from({ length: maxSelected - minSelected + 1 }, (_, i) => minSelected + i)
+          .filter((y) => availableYears.includes(y));
+      } else {
+        const minYear = Math.min(...years);
+        const maxYear = Math.max(...years);
+        return Array.from({ length: maxYear - minYear + 1 }, (_, i) => minYear + i);
+      }
     }, [papers, filter]);
 
     // 获取指定年份的机构数据
@@ -97,11 +107,13 @@ const InstitutionEvolution = forwardRef<InstitutionEvolutionRef, InstitutionEvol
         const institutionMap = new Map<string, number>();
         yearPapers.forEach((paper) => {
           paper.authors.forEach((author) => {
-            if (author.affiliations && author.affiliations.length > 0) {
+            if (author.affiliations && Array.isArray(author.affiliations) && author.affiliations.length > 0) {
               author.affiliations.forEach((affiliation) => {
-                const normalized = affiliation.trim();
-                if (normalized) {
-                  institutionMap.set(normalized, (institutionMap.get(normalized) || 0) + 1);
+                if (affiliation && typeof affiliation === 'string') {
+                  const normalized = affiliation.trim();
+                  if (normalized) {
+                    institutionMap.set(normalized, (institutionMap.get(normalized) || 0) + 1);
+                  }
                 }
               });
             }
@@ -181,14 +193,6 @@ const InstitutionEvolution = forwardRef<InstitutionEvolutionRef, InstitutionEvol
 
         if (data.length === 0) {
           svg.selectAll('g.chart-container, text').remove();
-          svg
-            .append('text')
-            .attr('x', width / 2)
-            .attr('y', height / 2)
-            .attr('text-anchor', 'middle')
-            .style('font-size', '16px')
-            .style('fill', '#aaa')
-            .text(`${year}年暂无数据`);
           return;
         }
 

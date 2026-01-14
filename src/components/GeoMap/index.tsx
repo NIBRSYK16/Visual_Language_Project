@@ -386,6 +386,7 @@ const GeoMap: React.FC<GeoMapProps> = ({ papers, filter, onFilterChange }) => {
       .attr('text-anchor', 'middle')
       .style('font-size', '12px')
       .style('font-weight', 'bold')
+      .style('fill', '#e8f4f8')
       .text('论文数量');
 
     // 渐变定义
