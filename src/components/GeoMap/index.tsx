@@ -337,20 +337,35 @@ const GeoMap: React.FC<GeoMapProps> = ({ papers, filter, onFilterChange }) => {
           y: clickY,
         });
         
-        // 同时更新筛选（保持原有功能）
-        if (data) {
-          if (selectedCountry === iso) {
-            setSelectedCountry(null);
-            onFilterChange({ ...filter, countries: undefined });
+        // 同时更新筛选（使用实际的国家名称，支持多选）
+        if (actualCountryName) {
+          const currentCountries = filter.countries || [];
+          const countryIndex = currentCountries.findIndex(c => 
+            c.toLowerCase() === actualCountryName.toLowerCase()
+          );
+          
+          if (countryIndex > -1) {
+            // 如果已选中，则取消选择
+            const newCountries = currentCountries.filter((c, i) => i !== countryIndex);
+            setSelectedCountry(newCountries.length === 0 ? null : iso);
+            onFilterChange({ 
+              ...filter, 
+              countries: newCountries.length > 0 ? newCountries : undefined 
+            });
           } else {
+            // 如果未选中，则添加（支持多选）
             setSelectedCountry(iso);
-            onFilterChange({ ...filter, countries: [displayName] });
+            onFilterChange({ 
+              ...filter, 
+              countries: [...currentCountries, actualCountryName] 
+            });
           }
         }
       });
 
-    // 高亮选中的国家
-    if (selectedCountry) {
+    // 高亮选中的国家（支持多选）
+    const selectedCountries = filter.countries || [];
+    if (selectedCountries.length > 0) {
       svg
         .selectAll('.country-with-data')
         .filter((d: any) => {
@@ -361,7 +376,27 @@ const GeoMap: React.FC<GeoMapProps> = ({ papers, filter, onFilterChange }) => {
             const countryName = props.NAME || props.NAME_LONG || props.name || '';
             iso = getNameToISO(countryName);
           }
-          return iso === selectedCountry;
+          
+          // 检查这个ISO对应的国家是否在选中列表中
+          const countryData = countryMap.get(iso);
+          if (countryData) {
+            return selectedCountries.some(c => 
+              c.toLowerCase() === countryData.country.toLowerCase()
+            );
+          }
+          
+          // 如果countryMap中没有数据，尝试通过ISO查找
+          const allCountryData = aggregateByCountry(papers);
+          for (const countryData of allCountryData) {
+            const countryISO = getCountryISO(countryData.country);
+            if (countryISO === iso) {
+              return selectedCountries.some(c => 
+                c.toLowerCase() === countryData.country.toLowerCase()
+              );
+            }
+          }
+          
+          return false;
         })
         .attr('stroke', '#1890ff')
         .attr('stroke-width', 3);
@@ -550,10 +585,10 @@ const GeoMap: React.FC<GeoMapProps> = ({ papers, filter, onFilterChange }) => {
     if (!institutionCard) return null;
 
     const { country, countryName, x, y } = institutionCard;
-    // 先应用筛选条件，然后统计该国家的机构
+    // 先应用筛选条件，然后统计该国家的机构（显示所有机构）
     // 使用 country（数据中的实际国家名称，如"USA"）而不是 countryName（显示名称）
     const filteredPapers = applyFilter(papers, filter);
-    const institutions = getTopInstitutionsByCountry(filteredPapers, country, 5);
+    const institutions = getTopInstitutionsByCountry(filteredPapers, country, 9999); // 显示所有机构
     
     // 调试信息
     console.log('机构卡片数据:', {
@@ -570,7 +605,7 @@ const GeoMap: React.FC<GeoMapProps> = ({ papers, filter, onFilterChange }) => {
 
     const containerRect = container.getBoundingClientRect();
     const cardWidth = 350;
-    const cardHeight = Math.min(400, 100 + institutions.length * 60);
+    const cardHeight = 400; // 固定高度，内容可滚动
     const padding = 15;
 
     let cardLeft = x + padding;
@@ -594,22 +629,28 @@ const GeoMap: React.FC<GeoMapProps> = ({ papers, filter, onFilterChange }) => {
           left: `${cardLeft}px`,
           top: `${cardTop}px`,
           width: `${cardWidth}px`,
-          maxHeight: `${cardHeight}px`,
+          height: `${cardHeight}px`,
           background: 'rgba(0, 0, 0, 0.9)',
           color: 'white',
-          padding: '12px 16px',
           borderRadius: '8px',
           boxShadow: '0 4px 12px rgba(0,0,0,0.4)',
           zIndex: 1001,
-          overflowY: 'auto',
-          lineHeight: '1.6',
+          display: 'flex',
+          flexDirection: 'column',
           pointerEvents: 'auto',
         }}
         onClick={(e) => e.stopPropagation()}
       >
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+        <div style={{ 
+          display: 'flex', 
+          justifyContent: 'space-between', 
+          alignItems: 'center', 
+          padding: '12px 16px',
+          borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
+          flexShrink: 0,
+        }}>
           <div style={{ fontSize: '16px', fontWeight: 'bold', color: '#fff' }}>
-            {countryName} - Top 5 机构
+            {countryName} - 机构列表 ({institutions.length})
           </div>
           <button
             onClick={() => setInstitutionCard(null)}
@@ -626,29 +667,87 @@ const GeoMap: React.FC<GeoMapProps> = ({ papers, filter, onFilterChange }) => {
           </button>
         </div>
         {institutions.length === 0 ? (
-          <div style={{ color: '#aaa', fontSize: '12px', textAlign: 'center', padding: '20px' }}>
+          <div style={{ 
+            color: '#aaa', 
+            fontSize: '12px', 
+            textAlign: 'center', 
+            padding: '20px',
+            flex: 1,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
             暂无机构数据
           </div>
         ) : (
-          <div>
-            {institutions.map((institution, index) => (
-              <div
-                key={institution.name}
-                style={{
-                  marginBottom: '12px',
-                  padding: '10px',
-                  background: 'rgba(255, 255, 255, 0.1)',
-                  borderRadius: '4px',
-                }}
-              >
-                <div style={{ fontSize: '13px', fontWeight: '500', color: '#fff', marginBottom: '4px' }}>
-                  {index + 1}. {institution.name}
+          <div style={{ 
+            flex: 1, 
+            overflowY: 'auto', 
+            padding: '12px 16px',
+            lineHeight: '1.6',
+          }}>
+            {institutions.map((institution, index) => {
+              // 计算机构学者的位置（在机构卡片右侧）
+              const institutionItemY = 80 + index * 60; // 大约每个机构项的高度
+              
+              return (
+                <div
+                  key={institution.name}
+                  style={{
+                    marginBottom: '12px',
+                    padding: '10px',
+                    background: 'rgba(255, 255, 255, 0.1)',
+                    borderRadius: '4px',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = 'rgba(77, 171, 247, 0.3)';
+                    e.currentTarget.style.borderColor = 'rgba(77, 171, 247, 0.6)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
+                    e.currentTarget.style.borderColor = 'transparent';
+                  }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    // 获取该机构的所有学者
+                    const filteredPapers = applyFilter(papers, filter);
+                    const scholars = getTopScholarsByInstitution(filteredPapers, institution.name, 9999); // 显示所有学者
+                    
+                    // 计算学者列表卡片的位置（在机构卡片右侧）
+                    const container = containerRef.current;
+                    if (!container) return;
+                    const containerRect = container.getBoundingClientRect();
+                    const scholarsCardX = cardLeft + cardWidth + 20;
+                    const scholarsCardY = cardTop + institutionItemY;
+                    
+                    // 显示机构学者列表
+                    setInstitutionScholars({
+                      institution: institution.name,
+                      scholars,
+                      x: scholarsCardX,
+                      y: scholarsCardY,
+                    });
+                  }}
+                >
+                  <div>
+                    <div style={{ fontSize: '13px', fontWeight: '500', color: '#fff', marginBottom: '4px' }}>
+                      {index + 1}. {institution.name}
+                    </div>
+                    <div style={{ fontSize: '11px', color: '#aaa' }}>
+                      {institution.count} 篇论文
+                    </div>
+                  </div>
+                  <div style={{ fontSize: '14px', color: '#87ceeb', marginLeft: '10px' }}>
+                    →
+                  </div>
                 </div>
-                <div style={{ fontSize: '11px', color: '#aaa' }}>
-                  {institution.count} 篇论文
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         )}
       </div>
@@ -667,7 +766,7 @@ const GeoMap: React.FC<GeoMapProps> = ({ papers, filter, onFilterChange }) => {
 
     const containerRect = container.getBoundingClientRect();
     const cardWidth = 320;
-    const cardHeight = Math.min(400, 80 + scholars.length * 55);
+    const cardHeight = 400; // 固定高度，内容可滚动
     const padding = 15;
 
     let cardLeft = x + padding;
@@ -691,21 +790,27 @@ const GeoMap: React.FC<GeoMapProps> = ({ papers, filter, onFilterChange }) => {
           left: `${cardLeft}px`,
           top: `${cardTop}px`,
           width: `${cardWidth}px`,
-          maxHeight: `${cardHeight}px`,
+          height: `${cardHeight}px`,
           background: 'rgba(0, 0, 0, 0.9)',
           color: 'white',
-          padding: '12px 16px',
           borderRadius: '8px',
           boxShadow: '0 4px 12px rgba(0,0,0,0.4)',
           zIndex: 1001,
-          overflowY: 'auto',
-          lineHeight: '1.6',
+          display: 'flex',
+          flexDirection: 'column',
         }}
         onClick={(e) => e.stopPropagation()}
       >
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+        <div style={{ 
+          display: 'flex', 
+          justifyContent: 'space-between', 
+          alignItems: 'center', 
+          padding: '12px 16px',
+          borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
+          flexShrink: 0,
+        }}>
           <div style={{ fontSize: '14px', fontWeight: 'bold', color: '#fff' }}>
-            {institution} - Top 5 学者
+            {institution} - 学者列表 ({scholars.length})
           </div>
           <button
             onClick={() => setInstitutionScholars(null)}
@@ -722,11 +827,25 @@ const GeoMap: React.FC<GeoMapProps> = ({ papers, filter, onFilterChange }) => {
           </button>
         </div>
         {scholars.length === 0 ? (
-          <div style={{ color: '#aaa', fontSize: '12px', textAlign: 'center', padding: '20px' }}>
+          <div style={{ 
+            color: '#aaa', 
+            fontSize: '12px', 
+            textAlign: 'center', 
+            padding: '20px',
+            flex: 1,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
             暂无学者数据
           </div>
         ) : (
-          <div>
+          <div style={{ 
+            flex: 1, 
+            overflowY: 'auto', 
+            padding: '12px 16px',
+            lineHeight: '1.6',
+          }}>
             {scholars.map((scholar, index) => (
               <div
                 key={scholar.id}

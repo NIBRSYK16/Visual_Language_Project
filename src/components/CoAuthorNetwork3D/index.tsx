@@ -47,8 +47,8 @@ const CoAuthorNetwork3D: React.FC<CoAuthorNetwork3DProps> = ({ papers, filter })
     y: number;
   } | null>(null);
 
-  // 创建文本精灵
-  const createTextSprite = (text: string, fontSize: number, color: string) => {
+  // 创建文本精灵 - 改进版本，确保颜色对比明显，无边框
+  const createTextSprite = (text: string, fontSize: number, color: string, isHighlighted: boolean = false) => {
     const canvas = document.createElement('canvas');
     const context = canvas.getContext('2d');
     if (!context) return null;
@@ -58,20 +58,23 @@ const CoAuthorNetwork3D: React.FC<CoAuthorNetwork3DProps> = ({ papers, filter })
     const textWidth = metrics.width;
     const textHeight = fontSize;
 
-    const padding = 4;
+    const padding = 8;
     canvas.width = textWidth + padding * 2;
     canvas.height = textHeight + padding * 2;
 
     context.clearRect(0, 0, canvas.width, canvas.height);
     
-    // 添加白色描边以提高可读性
-    context.strokeStyle = 'rgba(0, 0, 0, 0.8)';
-    context.lineWidth = 3;
+    // 添加半透明背景以提高可读性（无边框）
+    context.fillStyle = isHighlighted ? 'rgba(77, 171, 247, 0.85)' : 'rgba(0, 0, 0, 0.75)';
+    context.fillRect(0, 0, canvas.width, canvas.height);
+    
+    // 不使用描边，直接使用高对比度文字颜色
     context.textAlign = 'center';
     context.textBaseline = 'middle';
-    context.strokeText(text, canvas.width / 2, canvas.height / 2);
-
-    context.fillStyle = color;
+    
+    // 使用高对比度颜色，确保清晰可见
+    const textColor = isHighlighted ? '#ffffff' : '#ffffff';
+    context.fillStyle = textColor;
     context.fillText(text, canvas.width / 2, canvas.height / 2);
 
     const texture = new THREE.CanvasTexture(canvas);
@@ -81,9 +84,11 @@ const CoAuthorNetwork3D: React.FC<CoAuthorNetwork3DProps> = ({ papers, filter })
       map: texture,
       transparent: true,
       alphaTest: 0.1,
+      depthTest: false, // 禁用深度测试，确保标签始终在前面
     });
     const sprite = new THREE.Sprite(spriteMaterial);
     sprite.scale.set(canvas.width * 0.5, canvas.height * 0.5, 1);
+    sprite.renderOrder = 999; // 设置高渲染顺序，确保标签在节点前面
     return sprite;
   };
 
@@ -395,13 +400,18 @@ const CoAuthorNetwork3D: React.FC<CoAuthorNetwork3DProps> = ({ papers, filter })
       node.sphere = sphere;
       scene.add(sphere);
 
-      // 创建标签
+      // 创建标签 - 确保始终在节点前面显示
       const labelText = node.name || (node.id ? `作者-${node.id}` : '未知作者');
-      const labelColor = isMatched || isSelected ? '#4dabf7' : '#fff';
-      const label = createTextSprite(labelText, 10, labelColor);
+      const isHighlighted = isMatched || isSelected;
+      const labelColor = isHighlighted ? '#4dabf7' : '#fff';
+      const label = createTextSprite(labelText, 12, labelColor, isHighlighted);
       if (label) {
+        // 将标签位置设置在节点前面（相对于相机方向）
         label.position.copy(node.position);
-        label.position.y += radius + 5;
+        // 将标签放在节点上方，并稍微向前偏移，确保始终可见
+        label.position.y += radius + 8;
+        // 设置标签始终面向相机
+        label.lookAt(cameraRef.current?.position || new THREE.Vector3(0, 0, 0));
         node.label = label;
         scene.add(label);
       }
@@ -558,10 +568,12 @@ const CoAuthorNetwork3D: React.FC<CoAuthorNetwork3DProps> = ({ papers, filter })
       if (node.sphere) {
         node.sphere.position.copy(node.position);
       }
-      if (node.label) {
+      if (node.label && cameraRef.current) {
         const radius = Math.sqrt(node.count) * 2 + 3;
         node.label.position.copy(node.position);
-        node.label.position.y += radius + 5;
+        node.label.position.y += radius + 8;
+        // 确保标签始终面向相机
+        node.label.lookAt(cameraRef.current.position);
       }
     });
 
@@ -602,6 +614,16 @@ const CoAuthorNetwork3D: React.FC<CoAuthorNetwork3DProps> = ({ papers, filter })
     if (!rendererRef.current || !sceneRef.current || !cameraRef.current) return;
 
     simulatePhysics();
+    
+    // 更新所有标签的朝向，确保始终面向相机
+    if (cameraRef.current) {
+      nodesRef.current.forEach((node) => {
+        if (node.label) {
+          node.label.lookAt(cameraRef.current!.position);
+        }
+      });
+    }
+    
     rendererRef.current.render(sceneRef.current, cameraRef.current);
     animationFrameRef.current = requestAnimationFrame(animate);
   }, [simulatePhysics]);
@@ -802,24 +824,56 @@ const CoAuthorNetwork3D: React.FC<CoAuthorNetwork3DProps> = ({ papers, filter })
                     }}
                   >
                     <span style={{ color: '#87ceeb', fontWeight: 500 }}>{index + 1}.</span>{' '}
-                    <a
-                      href={paper.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{
-                        color: '#4dabf7',
-                        textDecoration: 'none',
-                        wordBreak: 'break-word',
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.color = '#74c0fc';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.color = '#4dabf7';
-                      }}
-                    >
-                      {paper.title}
-                    </a>
+                    {(() => {
+                      // 构建论文链接：优先使用url，其次doi，再次dblpKey
+                      let paperUrl: string | undefined;
+                      if (paper.url) {
+                        paperUrl = paper.url;
+                      } else if (paper.doi) {
+                        paperUrl = `https://doi.org/${paper.doi}`;
+                      } else if (paper.dblpKey) {
+                        paperUrl = `https://dblp.org/rec/${paper.dblpKey}.html`;
+                      }
+                      
+                      // 如果有链接，使用a标签；否则使用span
+                      if (paperUrl) {
+                        return (
+                          <a
+                            href={paperUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{
+                              color: '#4dabf7',
+                              textDecoration: 'none',
+                              wordBreak: 'break-word',
+                              cursor: 'pointer',
+                            }}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.color = '#74c0fc';
+                              e.currentTarget.style.textDecoration = 'underline';
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.color = '#4dabf7';
+                              e.currentTarget.style.textDecoration = 'none';
+                            }}
+                          >
+                            {paper.title}
+                          </a>
+                        );
+                      } else {
+                        return (
+                          <span
+                            style={{
+                              color: '#e8f4f8',
+                              wordBreak: 'break-word',
+                              cursor: 'default',
+                            }}
+                          >
+                            {paper.title}
+                          </span>
+                        );
+                      }
+                    })()}
                     <div style={{ fontSize: '9px', color: '#aaa', marginTop: '2px' }}>
                       {paper.venue?.name} ({paper.year})
                     </div>

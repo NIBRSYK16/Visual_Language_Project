@@ -292,6 +292,24 @@ body {
   }
 }
 
+// 论文列表抽屉特殊样式 - 从Header下方开始显示（使用最高优先级）
+:global {
+  .paper-list-drawer.ant-drawer .ant-drawer-content-wrapper {
+    top: 64px !important;
+    height: calc(100vh - 64px) !important;
+    position: fixed !important;
+  }
+  
+  // 更强制的方式，直接选择所有可能的类名组合
+  .ant-drawer.paper-list-drawer .ant-drawer-content-wrapper,
+  .paper-list-drawer .ant-drawer-content-wrapper,
+  .ant-drawer-content-wrapper.paper-list-drawer {
+    top: 64px !important;
+    height: calc(100vh - 64px) !important;
+    position: fixed !important;
+  }
+}
+
 // 选择器样式
 :global(.ant-select) {
   .ant-select-selector {

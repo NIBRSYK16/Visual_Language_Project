@@ -1,6 +1,6 @@
 /**
  * 主页面
- * 学术文献全景分析系统
+ * 学术文献可视化分析
  */
 
 import React, { useState, useEffect, useMemo, useRef } from 'react';
@@ -8,10 +8,10 @@ import { Layout, Card, Row, Col, Slider, Space, Table, Tag, Button, Drawer, Tool
 import { PlayCircleOutlined, PauseCircleOutlined, FileTextOutlined, SearchOutlined } from '@ant-design/icons';
 import { fetchPapers } from '@/services/api';
 import { Paper, FilterCondition } from '@/types';
-import { applyFilter } from '@/services/dataProcessor';
+import { applyFilter, extractWordCloudData } from '@/services/dataProcessor';
 import GeoMap from '@/components/GeoMap';
 import WordCloud from '@/components/WordCloud';
-import CoAuthorNetwork3D from '@/components/CoAuthorNetwork3D';
+import CoAuthorNetwork from '@/components/CoAuthorNetwork';
 import KeywordEvolution, { KeywordEvolutionRef } from '@/components/KeywordEvolution';
 import CountryEvolution, { CountryEvolutionRef } from '@/components/CountryEvolution';
 import InstitutionEvolution, { InstitutionEvolutionRef } from '@/components/InstitutionEvolution';
@@ -35,6 +35,7 @@ const IndexPage: React.FC = () => {
   const [paperListVisible, setPaperListVisible] = useState(false);
   const [paperListSearchText, setPaperListSearchText] = useState('');
   const [paperListSortBy, setPaperListSortBy] = useState<'time' | 'venue'>('time');
+  
   
   // 三个演化模块的ref
   const keywordEvolutionRef = useRef<KeywordEvolutionRef>(null);
@@ -94,6 +95,12 @@ const IndexPage: React.FC = () => {
     setFilter((prev) => ({ ...prev, keywords: undefined }));
   };
 
+  // 获取所有唯一关键词（用于全局选择器）
+  const allKeywords = useMemo(() => {
+    const wordCloudData = extractWordCloudData(papers);
+    return wordCloudData.map(item => item.word).sort();
+  }, [papers]);
+
   // 统一播放控制
   const handleGlobalPlayPause = () => {
     if (globalIsPlaying) {
@@ -123,23 +130,18 @@ const IndexPage: React.FC = () => {
     }
   };
 
-  // 处理单个模块的播放状态变化和年份同步
+  // 处理单个模块的播放状态变化（不触发全局同步）
+  // 只有当用户点击"播放全部"按钮时，才会同步播放所有模块
   const handleKeywordPlayStateChange = (isPlaying: boolean) => {
-    if (isPlaying && !globalIsPlaying) {
-      setGlobalIsPlaying(true);
-    }
+    // 不设置 globalIsPlaying，让各个模块独立播放
   };
 
   const handleCountryPlayStateChange = (isPlaying: boolean) => {
-    if (isPlaying && !globalIsPlaying) {
-      setGlobalIsPlaying(true);
-    }
+    // 不设置 globalIsPlaying，让各个模块独立播放
   };
 
   const handleInstitutionPlayStateChange = (isPlaying: boolean) => {
-    if (isPlaying && !globalIsPlaying) {
-      setGlobalIsPlaying(true);
-    }
+    // 不设置 globalIsPlaying，让各个模块独立播放
   };
 
          // 应用筛选条件（用于大多数视图，包括关键词筛选）
@@ -351,7 +353,7 @@ const IndexPage: React.FC = () => {
         }}
       >
         <h1 style={{ margin: 0, fontSize: '20px', fontWeight: 500, color: '#fff' }}>
-          学术文献全景分析系统
+          学术文献可视化分析
         </h1>
         <Space>
           <span style={{ whiteSpace: 'nowrap', color: '#fff' }}>年份范围:</span>
@@ -420,8 +422,85 @@ const IndexPage: React.FC = () => {
         </Button>
       </Header>
       
-      {/* 内容区域，添加顶部padding以避免被固定Header遮挡 */}
-      <Content style={{ padding: '24px', background: '#0a0a0a', marginTop: '64px' }}>
+      {/* 全局关键词选择器 */}
+      <div
+        style={{
+          position: 'fixed',
+          top: '64px',
+          left: 0,
+          right: 0,
+          zIndex: 999,
+          background: 'rgba(26, 26, 46, 0.95)',
+          borderBottom: '2px solid rgba(77, 171, 247, 0.3)',
+          padding: '12px 24px',
+          backdropFilter: 'blur(10px)',
+        }}
+      >
+        <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '8px' }}>
+          <span style={{ color: '#e8f4f8', fontWeight: 500, marginRight: '8px', whiteSpace: 'nowrap' }}>
+            关键词筛选:
+          </span>
+          {allKeywords.slice(0, 50).map((keyword) => {
+            const isSelected = filter.keywords?.some(
+              (k) => k.toLowerCase().trim() === keyword.toLowerCase().trim()
+            );
+            return (
+              <Tag
+                key={keyword}
+                onClick={() => handleKeywordClick(keyword)}
+                style={{
+                  cursor: 'pointer',
+                  background: isSelected
+                    ? 'rgba(77, 171, 247, 0.4)'
+                    : 'rgba(255, 255, 255, 0.1)',
+                  borderColor: isSelected
+                    ? 'rgba(77, 171, 247, 0.8)'
+                    : 'rgba(255, 255, 255, 0.3)',
+                  color: isSelected ? '#ffffff' : '#e8f4f8',
+                  fontWeight: isSelected ? 600 : 400,
+                  transition: 'all 0.2s',
+                }}
+                onMouseEnter={(e) => {
+                  if (!isSelected) {
+                    e.currentTarget.style.background = 'rgba(77, 171, 247, 0.2)';
+                    e.currentTarget.style.borderColor = 'rgba(77, 171, 247, 0.5)';
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (!isSelected) {
+                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
+                    e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+                  }
+                }}
+              >
+                {keyword}
+              </Tag>
+            );
+          })}
+          {allKeywords.length > 50 && (
+            <span style={{ color: '#b8d4e3', fontSize: '12px' }}>
+              ... 还有 {allKeywords.length - 50} 个关键词
+            </span>
+          )}
+          {filter.keywords && filter.keywords.length > 0 && (
+            <Button
+              size="small"
+              onClick={handleClearKeywords}
+              style={{
+                background: 'rgba(255, 255, 255, 0.1)',
+                borderColor: 'rgba(255, 255, 255, 0.3)',
+                color: '#ffffff',
+                marginLeft: '8px',
+              }}
+            >
+              清除全部
+            </Button>
+          )}
+        </div>
+      </div>
+      
+      {/* 内容区域，添加顶部padding以避免被固定Header和关键词选择器遮挡 */}
+      <Content style={{ padding: '24px', background: '#0a0a0a', marginTop: '64px', paddingTop: '100px' }}>
         {/* 第一行：地图和词云 */}
         <Row gutter={16} style={{ marginBottom: 16 }}>
           <Col span={12}>
@@ -454,7 +533,7 @@ const IndexPage: React.FC = () => {
         <Row gutter={16} style={{ marginBottom: 16 }}>
           <Col span={24}>
             <Card title="作者合作网络" loading={loading}>
-              <CoAuthorNetwork3D papers={filteredPapers} filter={filter} />
+              <CoAuthorNetwork papers={filteredPapers} filter={filter} />
             </Card>
           </Col>
         </Row>
@@ -540,41 +619,80 @@ const IndexPage: React.FC = () => {
 
       </Content>
       
-      {/* 论文列表侧边栏 */}
-      <Drawer
-        title={`论文列表 (${displayedPapers.length} / ${filteredPapers.length} 篇)`}
-        placement="right"
-        width={420}
-        open={paperListVisible}
-        onClose={() => {
-          setPaperListVisible(false);
-          setPaperListSearchText('');
-        }}
-        mask={false}
-        style={{ zIndex: 999 }}
-        getContainer={false}
-      >
-        {/* 搜索和排序控件 */}
-        <div style={{ marginBottom: '16px' }}>
-          <Input
-            placeholder="搜索论文标题、作者、机构..."
-            prefix={<SearchOutlined />}
-            value={paperListSearchText}
-            onChange={(e) => setPaperListSearchText(e.target.value)}
-            allowClear
-            style={{ marginBottom: '12px' }}
-          />
-          <Select
-            value={paperListSortBy}
-            onChange={setPaperListSortBy}
-            style={{ width: '100%' }}
+      {/* 论文列表侧边栏 - 使用自定义悬浮框 */}
+      {paperListVisible && (
+        <div
+          className="paper-list-sidebar"
+          style={{
+            position: 'fixed',
+            top: '64px',
+            right: 0,
+            width: '420px',
+            height: 'calc(100vh - 64px)',
+            background: '#1a1a2e',
+            borderLeft: '2px solid rgba(77, 171, 247, 0.3)',
+            boxShadow: '-4px 0 16px rgba(0, 0, 0, 0.5)',
+            zIndex: 999,
+            display: 'flex',
+            flexDirection: 'column',
+            overflow: 'hidden',
+          }}
+        >
+          {/* 标题栏 */}
+          <div
+            style={{
+              padding: '16px 20px',
+              borderBottom: '2px solid rgba(77, 171, 247, 0.3)',
+              background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)',
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}
           >
-            <Select.Option value="time">按时间排序（最新优先）</Select.Option>
-            <Select.Option value="venue">按会议排序</Select.Option>
-          </Select>
-        </div>
-        
-        <div style={{ height: 'calc(100vh - 180px)', overflowY: 'auto', paddingRight: '8px' }}>
+            <div style={{ fontSize: '16px', fontWeight: 'bold', color: '#e8f4f8' }}>
+              论文列表 ({displayedPapers.length} / {filteredPapers.length} 篇)
+            </div>
+            <button
+              onClick={() => {
+                setPaperListVisible(false);
+                setPaperListSearchText('');
+              }}
+              style={{
+                background: 'transparent',
+                border: 'none',
+                color: '#e8f4f8',
+                fontSize: '20px',
+                cursor: 'pointer',
+                padding: '0 8px',
+                lineHeight: '1',
+              }}
+            >
+              ×
+            </button>
+          </div>
+          
+          {/* 搜索和排序控件 */}
+          <div style={{ padding: '16px', borderBottom: '1px solid rgba(77, 171, 247, 0.2)', flexShrink: 0 }}>
+            <Input
+              placeholder="搜索论文标题、作者、机构..."
+              prefix={<SearchOutlined />}
+              value={paperListSearchText}
+              onChange={(e) => setPaperListSearchText(e.target.value)}
+              allowClear
+              style={{ marginBottom: '12px' }}
+            />
+            <Select
+              value={paperListSortBy}
+              onChange={setPaperListSortBy}
+              style={{ width: '100%' }}
+            >
+              <Select.Option value="time">按时间排序（最新优先）</Select.Option>
+              <Select.Option value="venue">按会议排序</Select.Option>
+            </Select>
+          </div>
+          
+          {/* 论文列表内容区域 */}
+          <div style={{ flex: 1, overflowY: 'auto', padding: '16px', paddingRight: '8px' }}>
           {displayedPapers.length === 0 ? (
             <div style={{ textAlign: 'center', padding: '40px', color: '#b8d4e3' }}>
               {paperListSearchText ? '未找到匹配的论文' : '暂无论文数据'}
@@ -701,8 +819,9 @@ const IndexPage: React.FC = () => {
             </div>
             ))
           )}
+          </div>
         </div>
-      </Drawer>
+      )}
     </Layout>
   );
 };

@@ -225,9 +225,9 @@ export function getTopInstitutionsByCountry(
 
     // 统计这篇论文中所有作者的机构（不限制作者必须是该国家的）
     paper.authors.forEach((author) => {
-      if (author.affiliations && author.affiliations.length > 0) {
+      if (author.affiliations && Array.isArray(author.affiliations) && author.affiliations.length > 0) {
         author.affiliations.forEach((affiliation) => {
-          if (affiliation && affiliation.trim()) {
+          if (affiliation && typeof affiliation === 'string' && affiliation.trim()) {
             const normalized = affiliation.trim();
             if (!institutionMap.has(normalized)) {
               institutionMap.set(normalized, []);
@@ -277,10 +277,17 @@ export function getTopScholarsByInstitution(
 
   papers.forEach((paper) => {
     paper.authors.forEach((author) => {
-      // 检查作者是否属于该机构
+      // 检查作者是否属于该机构（确保affiliations是数组）
       const hasInstitution =
         author.affiliations &&
-        author.affiliations.some((aff) => aff.trim() === institution.trim());
+        Array.isArray(author.affiliations) &&
+        author.affiliations.length > 0 &&
+        author.affiliations.some((aff) => {
+          if (typeof aff === 'string') {
+            return aff.trim() === institution.trim();
+          }
+          return false;
+        });
 
       if (hasInstitution) {
         const authorId = author.id || `author-${author.name}`;
@@ -294,8 +301,12 @@ export function getTopScholarsByInstitution(
         }
         const scholar = scholarMap.get(authorId)!;
         scholar.count++;
-        if (author.affiliations) {
-          author.affiliations.forEach((aff) => scholar.affiliations.add(aff));
+        if (author.affiliations && Array.isArray(author.affiliations)) {
+          author.affiliations.forEach((aff) => {
+            if (typeof aff === 'string' && aff.trim()) {
+              scholar.affiliations.add(aff.trim());
+            }
+          });
         }
       }
     });

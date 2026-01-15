@@ -36,6 +36,9 @@ export interface Paper {
   references: string[]; // 引用ID列表
   citations: number;
   country?: string; // 从机构推导
+  url?: string; // 论文URL
+  doi?: string; // DOI标识
+  dblpKey?: string; // DBLP键值
 }
 
 /**

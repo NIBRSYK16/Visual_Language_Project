@@ -1,7 +1,7 @@
 {
   "name": "literature-analysis-platform",
   "version": "1.0.0",
-  "description": "学术文献全景分析系统 - 多维可视化分析平台",
+  "description": "学术文献可视化分析 - 多维可视化分析平台",
   "private": true,
   "scripts": {
     "start": "umi dev",

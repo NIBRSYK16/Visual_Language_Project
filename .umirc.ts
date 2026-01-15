@@ -1,7 +1,7 @@
 import { defineConfig } from 'umi';
 
 export default defineConfig({
-  title: '学术文献全景分析系统',
+  title: '学术文献可视化分析',
   chainWebpack(memo, args) {
     memo.module
       .rule('csvLoader')

@@ -362,41 +362,65 @@ const CoAuthorNetwork: React.FC<CoAuthorNetworkProps> = ({ papers, filter }) => 
         }
       });
 
-    // 添加标签
+    // 添加标签 - 优化版本，确保名字始终在节点前面，颜色对比明显
     const labels = g
       .append('g')
       .attr('class', 'labels')
-      .selectAll('text')
+      .selectAll('g')
       .data(nodesToDisplay)
       .enter()
+      .append('g')
+      .attr('transform', (d) => {
+        const radius = Math.sqrt(d.count) * 3;
+        return `translate(${radius + 8}, 0)`;
+      });
+
+    // 添加背景矩形以提高可读性
+    labels
+      .append('rect')
+      .attr('x', -4)
+      .attr('y', -8)
+      .attr('width', (d) => {
+        const text = d.name || (d.id ? `作者-${d.id}` : '未知作者');
+        return text.length * 6.5 + 8;
+      })
+      .attr('height', 16)
+      .attr('rx', 3)
+      .attr('fill', (d) => {
+        // 匹配的节点使用蓝色背景
+        if (isNodeMatched(d)) {
+          return 'rgba(77, 171, 247, 0.85)';
+        }
+        return 'rgba(0, 0, 0, 0.75)';
+      })
+      .attr('stroke', (d) => {
+        if (isNodeMatched(d)) {
+          return 'rgba(77, 171, 247, 0.9)';
+        }
+        return 'rgba(255, 255, 255, 0.2)';
+      })
+      .attr('stroke-width', 0.5);
+
+    // 添加文字
+    labels
       .append('text')
-      .text((d) => d.name || (d.id ? `作者-${d.id}` : '未知作者')) // 显示作者名称或ID
+      .text((d) => d.name || (d.id ? `作者-${d.id}` : '未知作者'))
       .style('font-size', (d) => {
-        // 匹配的节点使用更大的字体
         if (isNodeMatched(d)) {
           return '12px';
         }
-        return '10px';
+        return '11px';
       })
-      .style('fill', (d) => {
-        // 匹配的节点使用高亮颜色
-        if (isNodeMatched(d)) {
-          return '#4dabf7';
-        }
-        return '#fff';
-      })
-      .style('stroke', 'rgba(0, 0, 0, 0.5)')
-      .style('stroke-width', '0.5px')
-      .style('paint-order', 'stroke')
+      .style('fill', '#ffffff')
       .style('font-weight', (d) => {
         if (isNodeMatched(d)) {
           return 'bold';
         }
-        return 'normal';
+        return '500';
       })
-      .style('pointer-events', 'none') // 避免遮挡鼠标事件
-      .attr('dx', (d) => Math.sqrt(d.count) * 3 + 8)
-      .attr('dy', 4);
+      .style('pointer-events', 'none')
+      .attr('dy', 4)
+      .attr('text-anchor', 'start');
 
     simulation.on('tick', () => {
       link
@@ -407,7 +431,11 @@ const CoAuthorNetwork: React.FC<CoAuthorNetworkProps> = ({ papers, filter }) => 
 
       node.attr('cx', (d: any) => d.x).attr('cy', (d: any) => d.y);
 
-      labels.attr('x', (d: any) => d.x).attr('y', (d: any) => d.y);
+      // 更新标签位置，确保始终在节点前面
+      labels.attr('transform', (d: any) => {
+        const radius = Math.sqrt(d.count) * 3;
+        return `translate(${(d.x || 0) + radius + 8}, ${d.y || 0})`;
+      });
     });
 
     function dragstarted(event: any, d: AuthorNode) {
