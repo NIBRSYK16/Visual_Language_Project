@@ -242,8 +242,12 @@ const IndexPage: React.FC = () => {
         
         // 搜索机构名字
         if (paper.authors?.some((author) => 
-          author.affiliations?.some((affiliation) => 
-            affiliation?.toLowerCase().includes(searchLower)
+          author.affiliations && 
+          Array.isArray(author.affiliations) &&
+          author.affiliations.some((affiliation) => 
+            affiliation && 
+            typeof affiliation === 'string' &&
+            affiliation.toLowerCase().includes(searchLower)
           )
         )) {
           return true;
