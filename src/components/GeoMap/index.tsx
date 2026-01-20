@@ -57,6 +57,7 @@ const GeoMap: React.FC<GeoMapProps> = ({ papers, filter, onFilterChange }) => {
   const [institutionCard, setInstitutionCard] = useState<InstitutionCardData | null>(null);
   const [institutionScholars, setInstitutionScholars] = useState<InstitutionScholarsData | null>(null);
   const [scholarCard, setScholarCard] = useState<ScholarCardData | null>(null);
+  const zoomTransformRef = useRef<d3.ZoomTransform | null>(null);
 
   // 加载世界地图数据
   useEffect(() => {
@@ -97,6 +98,9 @@ const GeoMap: React.FC<GeoMapProps> = ({ papers, filter, onFilterChange }) => {
     svg.selectAll('*').remove();
 
     svg.attr('width', width).attr('height', height);
+
+    // 创建一个用于缩放和平移的分组
+    const mapGroup = svg.append('g').attr('class', 'map-group');
 
     // 创建投影
     const projection = d3
@@ -149,8 +153,8 @@ const GeoMap: React.FC<GeoMapProps> = ({ papers, filter, onFilterChange }) => {
       tooltipRef.current = tooltipDiv.node() as HTMLDivElement;
     }
 
-    // 绘制国家
-    const countries = svg
+    // 绘制国家（放在可缩放的分组中）
+    const countries = mapGroup
       .append('g')
       .attr('class', 'countries')
       .selectAll('path')
@@ -366,7 +370,7 @@ const GeoMap: React.FC<GeoMapProps> = ({ papers, filter, onFilterChange }) => {
     // 高亮选中的国家（支持多选）
     const selectedCountries = filter.countries || [];
     if (selectedCountries.length > 0) {
-      svg
+      mapGroup
         .selectAll('.country-with-data')
         .filter((d: any) => {
           const props = d.properties || {};
@@ -402,7 +406,7 @@ const GeoMap: React.FC<GeoMapProps> = ({ papers, filter, onFilterChange }) => {
         .attr('stroke-width', 3);
     }
 
-    // 添加图例
+    // 添加图例（不参与缩放，固定在视图右上角）
     const legendWidth = 200;
     const legendHeight = 20;
     const legendX = width - legendWidth - 20;
@@ -465,6 +469,22 @@ const GeoMap: React.FC<GeoMapProps> = ({ papers, filter, onFilterChange }) => {
       .call(legendAxis)
       .selectAll('text')
       .style('font-size', '10px');
+
+    // 启用缩放和平移（鼠标滚轮缩放，拖动画布平移）
+    const zoomBehavior = d3
+      .zoom<SVGSVGElement, unknown>()
+      .scaleExtent([1, 8])
+      .on('zoom', (event) => {
+        zoomTransformRef.current = event.transform;
+        mapGroup.attr('transform', event.transform.toString());
+      });
+
+    // 如果之前有缩放状态，则恢复
+    if (zoomTransformRef.current) {
+      svg.call(zoomBehavior.transform, zoomTransformRef.current);
+    }
+
+    svg.call(zoomBehavior as any);
   }, [papers, filter, worldMapData, selectedCountry, onFilterChange]);
 
   // 当地图数据或论文数据变化时重绘
@@ -1074,7 +1094,11 @@ const GeoMap: React.FC<GeoMapProps> = ({ papers, filter, onFilterChange }) => {
   };
 
   return (
-    <div ref={containerRef} className="geo-map-container" style={{ width: '100%', height: '500px', position: 'relative' }}>
+    <div
+      ref={containerRef}
+      className="geo-map-container"
+      style={{ width: '100%', height: '100%', position: 'relative', overflow: 'hidden' }}
+    >
       {!worldMapData && (
         <div
           style={{

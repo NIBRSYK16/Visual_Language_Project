@@ -65,11 +65,11 @@ const WordCloud: React.FC<WordCloudProps> = ({ papers, filter, onKeywordClick })
     const maxFrequency = d3.max(wordData, (d) => d.frequency) || 1;
     const minFrequency = d3.min(wordData, (d) => d.frequency) || 0;
 
-    // 字体大小范围调整（更大的范围，更明显的差异）
+    // 字体大小范围调整（小视图中更紧凑）
     const fontSizeScale = d3
       .scaleLinear()
       .domain([minFrequency, maxFrequency])
-      .range([16, 80]);
+      .range([10, 36]);
 
     // 判断关键词是否被选中
     const isKeywordSelected = (keyword: string): boolean => {

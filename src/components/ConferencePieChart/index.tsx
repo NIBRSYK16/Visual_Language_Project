@@ -82,9 +82,10 @@ const ConferencePieChart: React.FC<ConferencePieChartProps> = ({ papers, filter 
 
     const container = containerRef.current;
     const width = container.clientWidth || 600;
-    const height = container.clientHeight || 500;
-    // 减小半径，留出更多空间给图例和标签
-    const radius = Math.min(width, height) / 2 - 80;
+    // 小视图中：直接使用容器高度绘图，确保完整显示
+    const height = container.clientHeight || 260;
+    // 根据实际高度自适应半径，保证整圆可见
+    const radius = Math.max(Math.min(width, height) / 2 - 40, 60);
 
     const svg = d3.select(svgRef.current);
     svg.selectAll('*').remove();

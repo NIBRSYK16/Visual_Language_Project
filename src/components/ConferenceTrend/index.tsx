@@ -32,7 +32,8 @@ const ConferenceTrend: React.FC<ConferenceTrendProps> = ({ papers, filter }) => 
 
     const container = containerRef.current;
     const width = container.clientWidth || 800;
-    const height = Math.min(width * 0.7, 500);
+    // 小视图中：直接使用容器高度绘图，确保完整显示
+    const height = container.clientHeight || Math.min(width * 0.5, 260);
 
     const svg = d3.select(svgRef.current);
     svg.selectAll('*').remove();

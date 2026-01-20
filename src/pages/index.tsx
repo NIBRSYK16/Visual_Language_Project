@@ -4,7 +4,7 @@
  */
 
 import React, { useState, useEffect, useMemo, useRef } from 'react';
-import { Layout, Card, Row, Col, Slider, Space, Table, Tag, Button, Drawer, Tooltip, Input, Select } from 'antd';
+import { Layout, Card, Row, Col, Slider, Space, Table, Tag, Button, Drawer, Tooltip, Input, Select, Popover } from 'antd';
 import { PlayCircleOutlined, PauseCircleOutlined, FileTextOutlined, SearchOutlined } from '@ant-design/icons';
 import { fetchPapers } from '@/services/api';
 import { Paper, FilterCondition } from '@/types';
@@ -19,7 +19,6 @@ import ConferenceTrend from '@/components/ConferenceTrend';
 import ConferencePieChart from '@/components/ConferencePieChart';
 import CitationCascade from '@/components/CitationCascade';
 import KeywordSphere3D from '@/components/KeywordSphere3D';
-import CursorEffect from '@/components/CursorEffect';
 import './index.less';
 
 const { Header, Content } = Layout;
@@ -35,9 +34,10 @@ const IndexPage: React.FC = () => {
   const [paperListVisible, setPaperListVisible] = useState(false);
   const [paperListSearchText, setPaperListSearchText] = useState('');
   const [paperListSortBy, setPaperListSortBy] = useState<'time' | 'venue'>('time');
+  const [selectedEvolutionView, setSelectedEvolutionView] = useState<'keyword' | 'country' | 'institution'>('keyword');
+  const [keywordFilterVisible, setKeywordFilterVisible] = useState(false);
   
-  
-  // 三个演化模块的ref
+  // 三个演化模块的ref（仅用于右侧放大版，左侧缩略图不带交互）
   const keywordEvolutionRef = useRef<KeywordEvolutionRef>(null);
   const countryEvolutionRef = useRef<CountryEvolutionRef>(null);
   const institutionEvolutionRef = useRef<InstitutionEvolutionRef>(null);
@@ -101,16 +101,16 @@ const IndexPage: React.FC = () => {
     return wordCloudData.map(item => item.word).sort();
   }, [papers]);
 
-  // 统一播放控制
+  // 统一播放控制（只控制右侧放大版，左侧缩略图不参与）
   const handleGlobalPlayPause = () => {
     if (globalIsPlaying) {
-      // 暂停所有模块
+      // 暂停右侧所有模块
       keywordEvolutionRef.current?.pause();
       countryEvolutionRef.current?.pause();
       institutionEvolutionRef.current?.pause();
       setGlobalIsPlaying(false);
     } else {
-      // 播放所有模块 - 先同步到第一个年份
+      // 播放右侧所有模块 - 先同步到第一个年份
       const years = filteredPapersForEvolution
         .map((p) => p.year)
         .filter((y) => y && y > 0)
@@ -336,8 +336,6 @@ const IndexPage: React.FC = () => {
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
-      {/* 鼠标特效 */}
-      <CursorEffect />
       {/* 固定Header */}
       <Header
         className="fixed-header"
@@ -376,6 +374,18 @@ const IndexPage: React.FC = () => {
           <span style={{ whiteSpace: 'nowrap', color: '#aaa' }}>
             ({filteredPapers.length} 篇论文)
           </span>
+          <Button
+            size="small"
+            onClick={() => setKeywordFilterVisible((v) => !v)}
+            style={{
+              marginLeft: 8,
+              background: 'rgba(255, 255, 255, 0.06)',
+              borderColor: 'rgba(255, 255, 255, 0.2)',
+              color: '#ffffff',
+            }}
+          >
+            关键词筛选
+          </Button>
           {filter.keywords && filter.keywords.length > 0 && (
             <>
               <span style={{ whiteSpace: 'nowrap', color: '#aaa', marginLeft: '16px' }}>
@@ -426,110 +436,139 @@ const IndexPage: React.FC = () => {
         </Button>
       </Header>
       
-      {/* 全局关键词选择器 */}
-      <div
-        style={{
-          position: 'fixed',
-          top: '64px',
-          left: 0,
-          right: 0,
-          zIndex: 999,
-          background: 'rgba(26, 26, 46, 0.95)',
-          borderBottom: '2px solid rgba(77, 171, 247, 0.3)',
-          padding: '12px 24px',
-          backdropFilter: 'blur(10px)',
-        }}
-      >
-        <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '8px' }}>
-          <span style={{ color: '#e8f4f8', fontWeight: 500, marginRight: '8px', whiteSpace: 'nowrap' }}>
-            关键词筛选:
-          </span>
-          {allKeywords.slice(0, 50).map((keyword) => {
-            const isSelected = filter.keywords?.some(
-              (k) => k.toLowerCase().trim() === keyword.toLowerCase().trim()
-            );
-            return (
-              <Tag
-                key={keyword}
-                onClick={() => handleKeywordClick(keyword)}
+      {/* 全局关键词选择器（通过按钮展开/收起） */}
+      {keywordFilterVisible && (
+        <div
+          style={{
+            position: 'fixed',
+            top: '64px',
+            left: 0,
+            right: 0,
+            zIndex: 999,
+            background: 'rgba(26, 26, 46, 0.95)',
+            borderBottom: '2px solid rgba(77, 171, 247, 0.3)',
+            padding: '12px 24px',
+            backdropFilter: 'blur(10px)',
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '8px' }}>
+            <span style={{ color: '#e8f4f8', fontWeight: 500, marginRight: '8px', whiteSpace: 'nowrap' }}>
+              关键词筛选:
+            </span>
+            {allKeywords.slice(0, 50).map((keyword) => {
+              const isSelected = filter.keywords?.some(
+                (k) => k.toLowerCase().trim() === keyword.toLowerCase().trim()
+              );
+              return (
+                <Tag
+                  key={keyword}
+                  onClick={() => handleKeywordClick(keyword)}
+                  style={{
+                    cursor: 'pointer',
+                    background: isSelected
+                      ? 'rgba(77, 171, 247, 0.4)'
+                      : 'rgba(255, 255, 255, 0.1)',
+                    borderColor: isSelected
+                      ? 'rgba(77, 171, 247, 0.8)'
+                      : 'rgba(255, 255, 255, 0.3)',
+                    color: isSelected ? '#ffffff' : '#e8f4f8',
+                    fontWeight: isSelected ? 600 : 400,
+                    transition: 'all 0.2s',
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!isSelected) {
+                      e.currentTarget.style.background = 'rgba(77, 171, 247, 0.2)';
+                      e.currentTarget.style.borderColor = 'rgba(77, 171, 247, 0.5)';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!isSelected) {
+                      e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
+                      e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+                    }
+                  }}
+                >
+                  {keyword}
+                </Tag>
+              );
+            })}
+            {allKeywords.length > 50 && (
+              <span style={{ color: '#b8d4e3', fontSize: '12px' }}>
+                ... 还有 {allKeywords.length - 50} 个关键词
+              </span>
+            )}
+            {filter.keywords && filter.keywords.length > 0 && (
+              <Button
+                size="small"
+                onClick={handleClearKeywords}
                 style={{
-                  cursor: 'pointer',
-                  background: isSelected
-                    ? 'rgba(77, 171, 247, 0.4)'
-                    : 'rgba(255, 255, 255, 0.1)',
-                  borderColor: isSelected
-                    ? 'rgba(77, 171, 247, 0.8)'
-                    : 'rgba(255, 255, 255, 0.3)',
-                  color: isSelected ? '#ffffff' : '#e8f4f8',
-                  fontWeight: isSelected ? 600 : 400,
-                  transition: 'all 0.2s',
-                }}
-                onMouseEnter={(e) => {
-                  if (!isSelected) {
-                    e.currentTarget.style.background = 'rgba(77, 171, 247, 0.2)';
-                    e.currentTarget.style.borderColor = 'rgba(77, 171, 247, 0.5)';
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (!isSelected) {
-                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
-                    e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.3)';
-                  }
+                  background: 'rgba(255, 255, 255, 0.1)',
+                  borderColor: 'rgba(255, 255, 255, 0.3)',
+                  color: '#ffffff',
+                  marginLeft: '8px',
                 }}
               >
-                {keyword}
-              </Tag>
-            );
-          })}
-          {allKeywords.length > 50 && (
-            <span style={{ color: '#b8d4e3', fontSize: '12px' }}>
-              ... 还有 {allKeywords.length - 50} 个关键词
-            </span>
-          )}
-          {filter.keywords && filter.keywords.length > 0 && (
-            <Button
-              size="small"
-              onClick={handleClearKeywords}
-              style={{
-                background: 'rgba(255, 255, 255, 0.1)',
-                borderColor: 'rgba(255, 255, 255, 0.3)',
-                color: '#ffffff',
-                marginLeft: '8px',
-              }}
-            >
-              清除全部
-            </Button>
-          )}
+                清除全部
+              </Button>
+            )}
+          </div>
         </div>
-      </div>
+      )}
       
-      {/* 内容区域，添加顶部padding以避免被固定Header和关键词选择器遮挡 */}
-      <Content style={{ padding: '24px', background: '#0a0a0a', marginTop: '64px', paddingTop: '100px' }}>
-        {/* 第一行：地图和词云 */}
-        <Row gutter={16} style={{ marginBottom: 16 }}>
-          <Col span={12}>
-            <Card title="全球科研产出地图" loading={loading}>
-              <GeoMap papers={filteredPapers} filter={filter} onFilterChange={handleFilterChange} />
+      {/* 内容区域，根据关键词筛选条是否展开调整顶部间距 */}
+      <Content
+        style={{
+          padding: '0 24px 24px',
+          background: '#0a0a0a',
+          marginTop: '64px',
+          paddingTop: keywordFilterVisible ? '80px' : '4px',
+        }}
+      >
+        {/* 第一行：地图热力图在左边，其他三个视图在右边垂直排列 */}
+        <Row gutter={16} style={{ marginBottom: 12 }}>
+          {/* 左边：地图热力图 */}
+          <Col span={14}>
+            <Card title="全球科研产出地图" loading={loading} style={{ height: '100%' }}>
+              {/* 左侧地图保持较大，但不压缩右侧三个视图过多 */}
+              <div style={{ height: '480px' }}>
+                <GeoMap papers={filteredPapers} filter={filter} onFilterChange={handleFilterChange} />
+              </div>
             </Card>
           </Col>
-          <Col span={12}>
-            <Card title="动态交互词云" loading={loading}>
-              <WordCloud papers={filteredPapers} filter={filter} onKeywordClick={handleKeywordClick} />
-            </Card>
-          </Col>
-        </Row>
-
-        {/* 第二行：顶会趋势和会议占比饼图 */}
-        <Row gutter={16} style={{ marginBottom: 16 }}>
-          <Col span={12}>
-            <Card title="顶会趋势分析" loading={loading}>
-              <ConferenceTrend papers={filteredPapers} filter={filter} />
-            </Card>
-          </Col>
-          <Col span={12}>
-            <Card title="会议占比分析" loading={loading}>
-              <ConferencePieChart papers={filteredPapers} filter={filter} />
-            </Card>
+          {/* 右边：三个视图垂直排列（每个视图有足够高度，整体略高于左侧地图） */}
+          <Col span={10}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+              <Card
+                title="动态交互词云"
+                loading={loading}
+                size="small"
+                style={{ height: 200, overflow: 'hidden' }}
+              >
+                <div style={{ height: '100%' }}>
+                  <WordCloud papers={filteredPapers} filter={filter} onKeywordClick={handleKeywordClick} />
+                </div>
+              </Card>
+              <Card
+                title="顶会趋势分析"
+                loading={loading}
+                size="small"
+                style={{ height: 200, overflow: 'hidden' }}
+              >
+                <div style={{ height: '100%' }}>
+                  <ConferenceTrend papers={filteredPapers} filter={filter} />
+                </div>
+              </Card>
+              <Card
+                title="会议占比分析"
+                loading={loading}
+                size="small"
+                style={{ height: 200, overflow: 'hidden' }}
+              >
+                <div style={{ height: '100%' }}>
+                  <ConferencePieChart papers={filteredPapers} filter={filter} />
+                </div>
+              </Card>
+            </div>
           </Col>
         </Row>
 
@@ -542,63 +581,95 @@ const IndexPage: React.FC = () => {
           </Col>
         </Row>
 
-        {/* 第四行：关键词演化图谱 */}
+        {/* 第四行：单个卡片，通过“选择趋势图”按钮切换三种趋势图 */}
         <Row gutter={16} style={{ marginBottom: 16 }}>
           <Col span={24}>
-            <Card 
-              title="关键词演化图谱" 
+            <Card
+              title={
+                selectedEvolutionView === 'keyword'
+                  ? '关键词演化图谱'
+                  : selectedEvolutionView === 'country'
+                  ? '国家论文发表数演化'
+                  : '机构论文发表数演化'
+              }
               loading={loading}
               extra={
-                <Button
-                  type="primary"
-                  size="small"
-                  icon={globalIsPlaying ? <PauseCircleOutlined /> : <PlayCircleOutlined />}
-                  onClick={handleGlobalPlayPause}
-                >
-                  {globalIsPlaying ? '暂停全部' : '播放全部'}
-                </Button>
+                <Space>
+                  <Popover
+                    trigger="click"
+                    placement="bottomRight"
+                    content={
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                        <Button
+                          type={selectedEvolutionView === 'keyword' ? 'primary' : 'default'}
+                          size="small"
+                          onClick={() => setSelectedEvolutionView('keyword')}
+                        >
+                          关键词演化
+                        </Button>
+                        <Button
+                          type={selectedEvolutionView === 'country' ? 'primary' : 'default'}
+                          size="small"
+                          onClick={() => setSelectedEvolutionView('country')}
+                        >
+                          国家论文发表数演化
+                        </Button>
+                        <Button
+                          type={selectedEvolutionView === 'institution' ? 'primary' : 'default'}
+                          size="small"
+                          onClick={() => setSelectedEvolutionView('institution')}
+                        >
+                          机构论文发表数演化
+                        </Button>
+                      </div>
+                    }
+                  >
+                    <Button size="small">选择趋势图</Button>
+                  </Popover>
+                  <Button
+                    type="primary"
+                    size="small"
+                    icon={globalIsPlaying ? <PauseCircleOutlined /> : <PlayCircleOutlined />}
+                    onClick={handleGlobalPlayPause}
+                  >
+                    {globalIsPlaying ? '暂停全部' : '播放全部'}
+                  </Button>
+                </Space>
               }
+              style={{ minHeight: 360, display: 'flex', flexDirection: 'column' }}
             >
-              <KeywordEvolution 
-                ref={keywordEvolutionRef}
-                papers={filteredPapersForEvolution} 
-                filter={filter}
-                onPlayStateChange={handleKeywordPlayStateChange}
-                externalYear={globalYear}
-                externalIsPlaying={globalIsPlaying}
-              />
-            </Card>
-          </Col>
-        </Row>
-
-        {/* 第五行：国家论文发表数演化 */}
-        <Row gutter={16} style={{ marginBottom: 16 }}>
-          <Col span={24}>
-            <Card title="国家论文发表数演化" loading={loading}>
-              <CountryEvolution 
-                ref={countryEvolutionRef}
-                papers={filteredPapersForEvolution} 
-                filter={filter}
-                onPlayStateChange={handleCountryPlayStateChange}
-                externalYear={globalYear}
-                externalIsPlaying={globalIsPlaying}
-              />
-            </Card>
-          </Col>
-        </Row>
-
-        {/* 第六行：机构论文发表数演化 */}
-        <Row gutter={16} style={{ marginBottom: 16 }}>
-          <Col span={24}>
-            <Card title="机构论文发表数演化" loading={loading}>
-              <InstitutionEvolution 
-                ref={institutionEvolutionRef}
-                papers={filteredPapersForEvolution} 
-                filter={filter}
-                onPlayStateChange={handleInstitutionPlayStateChange}
-                externalYear={globalYear}
-                externalIsPlaying={globalIsPlaying}
-              />
+              <div style={{ flex: 1, minHeight: 0 }}>
+                {selectedEvolutionView === 'keyword' && (
+                  <KeywordEvolution
+                    ref={keywordEvolutionRef}
+                    papers={filteredPapersForEvolution}
+                    filter={filter}
+                    onPlayStateChange={handleKeywordPlayStateChange}
+                    externalYear={globalYear}
+                    externalIsPlaying={globalIsPlaying}
+                  />
+                )}
+                {selectedEvolutionView === 'country' && (
+                  <CountryEvolution
+                    ref={countryEvolutionRef}
+                    papers={filteredPapersForEvolution}
+                    filter={filter}
+                    onPlayStateChange={handleCountryPlayStateChange}
+                    externalYear={globalYear}
+                    externalIsPlaying={globalIsPlaying}
+                  />
+                )}
+                {selectedEvolutionView === 'institution' && (
+                  <InstitutionEvolution
+                    ref={institutionEvolutionRef}
+                    papers={filteredPapersForEvolution}
+                    filter={filter}
+                    onPlayStateChange={handleInstitutionPlayStateChange}
+                    externalYear={globalYear}
+                    externalIsPlaying={globalIsPlaying}
+                  />
+                )}
+              </div>
             </Card>
           </Col>
         </Row>

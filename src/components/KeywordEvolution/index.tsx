@@ -158,7 +158,7 @@ const KeywordEvolution = forwardRef<KeywordEvolutionRef, KeywordEvolutionProps>(
 
       const container = containerRef.current;
       const width = container.clientWidth || 800;
-      const height = Math.min(width * 0.4, 350); // 更扁的高度
+      const height = Math.min(width * 0.35, 260); // 更扁、更矮，避免超出卡片
 
       const svg = d3.select(svgRef.current);
 
