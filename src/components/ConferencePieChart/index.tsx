@@ -3,11 +3,11 @@
  * 展示不同会议在论文总数中的占比
  */
 
-import React, { useEffect, useRef, useCallback } from 'react';
-import * as d3 from 'd3';
-import { Paper, FilterCondition } from '@/types';
-import { applyFilter } from '@/services/dataProcessor';
-import './index.less';
+import React, { useEffect, useRef, useCallback } from "react";
+import * as d3 from "d3";
+import { Paper, FilterCondition } from "@/types";
+import { applyFilter } from "@/services/dataProcessor";
+import "./index.less";
 
 interface ConferencePieChartProps {
   papers: Paper[];
@@ -20,7 +20,10 @@ interface ConferenceData {
   percentage: number;
 }
 
-const ConferencePieChart: React.FC<ConferencePieChartProps> = ({ papers, filter }) => {
+const ConferencePieChart: React.FC<ConferencePieChartProps> = ({
+  papers,
+  filter,
+}) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
   const tooltipRef = useRef<HTMLDivElement | null>(null);
@@ -31,7 +34,7 @@ const ConferencePieChart: React.FC<ConferencePieChartProps> = ({ papers, filter 
     const venueMap = new Map<string, number>();
 
     filteredPapers.forEach((paper) => {
-      const venueName = paper.venue?.name || 'Unknown';
+      const venueName = paper.venue?.name || "Unknown";
       venueMap.set(venueName, (venueMap.get(venueName) || 0) + 1);
     });
 
@@ -50,25 +53,30 @@ const ConferencePieChart: React.FC<ConferencePieChartProps> = ({ papers, filter 
   // 创建或获取工具提示
   const getTooltip = useCallback(() => {
     let tooltip: d3.Selection<HTMLDivElement, unknown, HTMLElement, any>;
-    const existingTooltip = d3.select('.conference-pie-tooltip');
+    const existingTooltip = d3.select(".conference-pie-tooltip");
     if (existingTooltip.empty()) {
       tooltip = d3
-        .select('body')
-        .append('div')
-        .attr('class', 'conference-pie-tooltip')
-        .style('position', 'absolute')
-        .style('visibility', 'hidden')
-        .style('background', 'rgba(0, 0, 0, 0.85)')
-        .style('color', 'white')
-        .style('padding', '8px 12px')
-        .style('border-radius', '4px')
-        .style('pointer-events', 'none')
-        .style('font-size', '12px')
-        .style('z-index', '9999')
-        .style('box-shadow', '0 2px 8px rgba(0,0,0,0.3)');
+        .select("body")
+        .append("div")
+        .attr("class", "conference-pie-tooltip")
+        .style("position", "absolute")
+        .style("visibility", "hidden")
+        .style("background", "rgba(0, 0, 0, 0.85)")
+        .style("color", "white")
+        .style("padding", "8px 12px")
+        .style("border-radius", "4px")
+        .style("pointer-events", "none")
+        .style("font-size", "12px")
+        .style("z-index", "9999")
+        .style("box-shadow", "0 2px 8px rgba(0,0,0,0.3)");
       tooltipRef.current = tooltip.node() as HTMLDivElement;
     } else {
-      tooltip = existingTooltip as d3.Selection<HTMLDivElement, unknown, HTMLElement, any>;
+      tooltip = existingTooltip as unknown as d3.Selection<
+        HTMLDivElement,
+        unknown,
+        HTMLElement,
+        any
+      >;
       tooltipRef.current = tooltip.node() as HTMLDivElement;
     }
     return tooltip;
@@ -88,20 +96,20 @@ const ConferencePieChart: React.FC<ConferencePieChartProps> = ({ papers, filter 
     const radius = Math.max(Math.min(width, height) / 2 - 40, 60);
 
     const svg = d3.select(svgRef.current);
-    svg.selectAll('*').remove();
-    svg.attr('width', width).attr('height', height);
+    svg.selectAll("*").remove();
+    svg.attr("width", width).attr("height", height);
 
     const data = getConferenceData();
 
     if (data.length === 0) {
       svg
-        .append('text')
-        .attr('x', width / 2)
-        .attr('y', height / 2)
-        .attr('text-anchor', 'middle')
-        .style('font-size', '16px')
-        .style('fill', '#999')
-        .text('暂无数据');
+        .append("text")
+        .attr("x", width / 2)
+        .attr("y", height / 2)
+        .attr("text-anchor", "middle")
+        .style("font-size", "16px")
+        .style("fill", "#999")
+        .text("暂无数据");
       return;
     }
 
@@ -124,115 +132,125 @@ const ConferencePieChart: React.FC<ConferencePieChartProps> = ({ papers, filter 
       .outerRadius(radius * 0.6);
 
     // 创建颜色比例尺
-    const colorScale = d3.scaleOrdinal(d3.schemeCategory10).domain(data.map((d) => d.name));
+    const colorScale = d3
+      .scaleOrdinal(d3.schemeCategory10)
+      .domain(data.map((d) => d.name));
 
     // 创建SVG组
     const g = svg
-      .append('g')
-      .attr('transform', `translate(${width / 2}, ${height / 2})`);
+      .append("g")
+      .attr("transform", `translate(${width / 2}, ${height / 2})`);
 
     const tooltip = getTooltip();
 
     // 绘制饼图
-    const arcs = g.selectAll<SVGPathElement, d3.PieArcDatum<ConferenceData>>('.arc').data(pie(data));
+    const arcs = g
+      .selectAll<SVGPathElement, d3.PieArcDatum<ConferenceData>>(".arc")
+      .data(pie(data));
 
     arcs
       .enter()
-      .append('path')
-      .attr('class', 'arc')
-      .attr('d', arc)
-      .attr('fill', (d) => colorScale(d.data.name) as string)
-      .attr('stroke', 'rgba(255, 255, 255, 0.2)')
-      .attr('stroke-width', 2)
-      .style('cursor', 'pointer')
-      .on('mouseover', function (event, d) {
-        d3.select(this).attr('opacity', 0.8).attr('stroke-width', 3);
+      .append("path")
+      .attr("class", "arc")
+      .attr("d", arc)
+      .attr("fill", (d) => colorScale(d.data.name) as string)
+      .attr("stroke", "rgba(255, 255, 255, 0.2)")
+      .attr("stroke-width", 2)
+      .style("cursor", "pointer")
+      .on("mouseover", function (event, d) {
+        d3.select(this).attr("opacity", 0.8).attr("stroke-width", 3);
         tooltip
           .html(
-            `<strong>${d.data.name}</strong><br/>论文数: ${d.data.count}<br/>占比: ${d.data.percentage.toFixed(2)}%`,
+            `<strong>${d.data.name}</strong><br/>论文数: ${
+              d.data.count
+            }<br/>占比: ${d.data.percentage.toFixed(2)}%`
           )
-          .style('visibility', 'visible')
-          .style('left', event.pageX + 10 + 'px')
-          .style('top', event.pageY - 10 + 'px');
+          .style("visibility", "visible")
+          .style("left", event.pageX + 10 + "px")
+          .style("top", event.pageY - 10 + "px");
       })
-      .on('mousemove', function (event) {
-        tooltip.style('left', event.pageX + 10 + 'px').style('top', event.pageY - 10 + 'px');
+      .on("mousemove", function (event) {
+        tooltip
+          .style("left", event.pageX + 10 + "px")
+          .style("top", event.pageY - 10 + "px");
       })
-      .on('mouseout', function () {
-        d3.select(this).attr('opacity', 1).attr('stroke-width', 2);
-        tooltip.style('visibility', 'hidden');
+      .on("mouseout", function () {
+        d3.select(this).attr("opacity", 1).attr("stroke-width", 2);
+        tooltip.style("visibility", "hidden");
       });
 
     // 绘制标签
     const labels = g
-      .selectAll<SVGTextElement, d3.PieArcDatum<ConferenceData>>('.label')
+      .selectAll<SVGTextElement, d3.PieArcDatum<ConferenceData>>(".label")
       .data(pie(data));
 
     labels
       .enter()
-      .append('text')
-      .attr('class', 'label')
-      .attr('transform', (d) => {
+      .append("text")
+      .attr("class", "label")
+      .attr("transform", (d) => {
         const [x, y] = labelArc.centroid(d);
         return `translate(${x}, ${y})`;
       })
-      .attr('text-anchor', 'middle')
-      .style('font-size', '11px')
-      .style('fill', '#fff')
+      .attr("text-anchor", "middle")
+      .style("font-size", "11px")
+      .style("fill", "#fff")
       .text((d) => {
         const percentage = d.data.percentage;
-        return percentage > 5 ? `${percentage.toFixed(1)}%` : '';
+        return percentage > 5 ? `${percentage.toFixed(1)}%` : "";
       });
 
     // 绘制图例（调整位置和大小以适应容器）
     const legendWidth = Math.min(150, width * 0.25);
     const legendX = width - legendWidth - 10;
     const legend = svg
-      .append('g')
-      .attr('class', 'legend')
-      .attr('transform', `translate(${legendX}, 20)`);
+      .append("g")
+      .attr("class", "legend")
+      .attr("transform", `translate(${legendX}, 20)`);
 
     const legendItems = legend
-      .selectAll<SVGGElement, ConferenceData>('.legend-item')
+      .selectAll<SVGGElement, ConferenceData>(".legend-item")
       .data(data.slice(0, 8)) // 只显示前8个，减少占用空间
       .enter()
-      .append('g')
-      .attr('class', 'legend-item')
-      .attr('transform', (d, i) => `translate(0, ${i * 18})`);
+      .append("g")
+      .attr("class", "legend-item")
+      .attr("transform", (d, i) => `translate(0, ${i * 18})`);
 
     legendItems
-      .append('rect')
-      .attr('width', 10)
-      .attr('height', 10)
-      .attr('fill', (d) => colorScale(d.name) as string);
+      .append("rect")
+      .attr("width", 10)
+      .attr("height", 10)
+      .attr("fill", (d) => colorScale(d.name) as string);
 
     legendItems
-      .append('text')
-      .attr('x', 15)
-      .attr('y', 8)
-      .style('font-size', '9px')
-      .style('fill', '#fff')
+      .append("text")
+      .attr("x", 15)
+      .attr("y", 8)
+      .style("font-size", "9px")
+      .style("fill", "#fff")
       .text((d) => {
         const text = d.name;
         const maxLength = Math.floor((legendWidth - 15) / 6); // 根据可用宽度动态调整
-        return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
+        return text.length > maxLength
+          ? text.substring(0, maxLength) + "..."
+          : text;
       });
 
     // 添加中心文本（总数）
     const total = data.reduce((sum, d) => sum + d.count, 0);
-    g.append('text')
-      .attr('text-anchor', 'middle')
-      .attr('dy', '-10')
-      .style('font-size', '16px')
-      .style('font-weight', 'bold')
-      .style('fill', '#fff')
-      .text('总计');
+    g.append("text")
+      .attr("text-anchor", "middle")
+      .attr("dy", "-10")
+      .style("font-size", "16px")
+      .style("font-weight", "bold")
+      .style("fill", "#fff")
+      .text("总计");
 
-    g.append('text')
-      .attr('text-anchor', 'middle')
-      .attr('dy', '10')
-      .style('font-size', '14px')
-      .style('fill', '#aaa')
+    g.append("text")
+      .attr("text-anchor", "middle")
+      .attr("dy", "10")
+      .style("font-size", "14px")
+      .style("fill", "#aaa")
       .text(`${total} 篇论文`);
   }, [getConferenceData, getTooltip]);
 
@@ -242,8 +260,11 @@ const ConferencePieChart: React.FC<ConferencePieChartProps> = ({ papers, filter 
 
   return (
     <div className="conference-pie-chart-container">
-      <div ref={containerRef} style={{ width: '100%', height: '500px' }}>
-        <svg ref={svgRef} style={{ width: '100%', height: '100%' }} />
+      <div
+        ref={containerRef}
+        style={{ width: "100%", height: "100%", minHeight: 0 }}
+      >
+        <svg ref={svgRef} style={{ width: "100%", height: "100%" }} />
       </div>
     </div>
   );
