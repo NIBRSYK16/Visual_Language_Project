@@ -67,7 +67,18 @@ const IndexPage: React.FC = () => {
   >("keyword");
   const [keywordFilterVisible, setKeywordFilterVisible] = useState(false);
 
-  // 三个演化模块的ref（仅用于右侧放大版，左侧缩略图不带交互）
+  // 主/次视图布局状态（默认作者合作网络为主，趋势图为上次视图，3D球形为下次视图）
+  const [layoutSlots, setLayoutSlots] = useState<{
+    main: "network" | "trend" | "sphere";
+    top: "network" | "trend" | "sphere";
+    bottom: "network" | "trend" | "sphere";
+  }>({
+    main: "network",
+    top: "trend",
+    bottom: "sphere",
+  });
+
+  // 三个演化模块的ref（统一播放控制）
   const keywordEvolutionRef = useRef<KeywordEvolutionRef>(null);
   const countryEvolutionRef = useRef<CountryEvolutionRef>(null);
   const institutionEvolutionRef = useRef<InstitutionEvolutionRef>(null);
@@ -178,6 +189,18 @@ const IndexPage: React.FC = () => {
 
   const handleInstitutionPlayStateChange = (isPlaying: boolean) => {
     // 不设置 globalIsPlaying，让各个模块独立播放
+  };
+
+  // 点击次视图切换为主视图，并将原主视图放回被点击的位置
+  const handleSwapToMain = (slot: "top" | "bottom") => {
+    setLayoutSlots((prev) => {
+      const target = prev[slot];
+      return {
+        ...prev,
+        main: target,
+        [slot]: prev.main,
+      };
+    });
   };
 
   // 应用筛选条件（用于大多数视图，包括关键词筛选）
@@ -727,156 +750,362 @@ const IndexPage: React.FC = () => {
           </Col>
         </Row>
 
-        {/* 第三行：作者网络 */}
+        {/* 作者合作网络（主视图） + 趋势图 / 3D关键词球形（次视图上下）可点击互换 */}
         <Row gutter={16} style={{ marginBottom: 16 }}>
-          <Col span={24}>
-            <Card title="作者合作网络" loading={loading}>
-              <CoAuthorNetwork papers={filteredPapers} filter={filter} />
-            </Card>
+          <Col span={16}>
+            {layoutSlots.main === "network" && (
+              <Card
+                title="作者合作网络"
+                loading={loading}
+                style={{
+                  height: 720,
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+                styles={{
+                  body: { padding: 0, height: "100%", overflow: "hidden" },
+                }}
+              >
+                <div style={{ flex: 1, minHeight: 0 }}>
+                  <CoAuthorNetwork
+                    papers={filteredPapers}
+                    filter={filter}
+                    height={660}
+                  />
+                </div>
+              </Card>
+            )}
+            {layoutSlots.main === "trend" && (
+              <Card
+                title={
+                  selectedEvolutionView === "keyword"
+                    ? "关键词演化图谱"
+                    : selectedEvolutionView === "country"
+                    ? "国家论文发表数演化"
+                    : "机构论文发表数演化"
+                }
+                loading={loading}
+                extra={
+                  <Space>
+                    <Popover
+                      trigger="click"
+                      placement="bottomRight"
+                      content={
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            gap: 8,
+                          }}
+                        >
+                          <Button
+                            type={
+                              selectedEvolutionView === "keyword"
+                                ? "primary"
+                                : "default"
+                            }
+                            size="small"
+                            onClick={() => setSelectedEvolutionView("keyword")}
+                          >
+                            关键词演化
+                          </Button>
+                          <Button
+                            type={
+                              selectedEvolutionView === "country"
+                                ? "primary"
+                                : "default"
+                            }
+                            size="small"
+                            onClick={() => setSelectedEvolutionView("country")}
+                          >
+                            国家论文发表数演化
+                          </Button>
+                          <Button
+                            type={
+                              selectedEvolutionView === "institution"
+                                ? "primary"
+                                : "default"
+                            }
+                            size="small"
+                            onClick={() =>
+                              setSelectedEvolutionView("institution")
+                            }
+                          >
+                            机构论文发表数演化
+                          </Button>
+                        </div>
+                      }
+                    >
+                      <Button size="small">选择趋势图</Button>
+                    </Popover>
+                    <Button
+                      type="primary"
+                      size="small"
+                      icon={
+                        globalIsPlaying ? (
+                          <PauseCircleOutlined />
+                        ) : (
+                          <PlayCircleOutlined />
+                        )
+                      }
+                      onClick={handleGlobalPlayPause}
+                    >
+                      {globalIsPlaying ? "暂停全部" : "播放全部"}
+                    </Button>
+                  </Space>
+                }
+                style={{
+                  height: 720,
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+                styles={{
+                  body: { padding: 0, height: "100%", overflow: "hidden" },
+                }}
+              >
+                <div style={{ flex: 1, minHeight: 0 }}>
+                  {selectedEvolutionView === "keyword" && (
+                    <KeywordEvolution
+                      ref={keywordEvolutionRef}
+                      papers={filteredPapersForEvolution}
+                      filter={filter}
+                      height={660}
+                      onPlayStateChange={handleKeywordPlayStateChange}
+                      externalYear={globalYear}
+                      externalIsPlaying={globalIsPlaying}
+                    />
+                  )}
+                  {selectedEvolutionView === "country" && (
+                    <CountryEvolution
+                      ref={countryEvolutionRef}
+                      papers={filteredPapersForEvolution}
+                      filter={filter}
+                      height={660}
+                      onPlayStateChange={handleCountryPlayStateChange}
+                      externalYear={globalYear}
+                      externalIsPlaying={globalIsPlaying}
+                    />
+                  )}
+                  {selectedEvolutionView === "institution" && (
+                    <InstitutionEvolution
+                      ref={institutionEvolutionRef}
+                      papers={filteredPapersForEvolution}
+                      filter={filter}
+                      height={660}
+                      onPlayStateChange={handleInstitutionPlayStateChange}
+                      externalYear={globalYear}
+                      externalIsPlaying={globalIsPlaying}
+                    />
+                  )}
+                </div>
+              </Card>
+            )}
+            {layoutSlots.main === "sphere" && (
+              <Card
+                title="3D关键词球形"
+                loading={loading}
+                style={{
+                  height: 720,
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+                styles={{
+                  body: { padding: 0, height: "100%", overflow: "hidden" },
+                }}
+              >
+                <div style={{ flex: 1, minHeight: 0 }}>
+                  <KeywordSphere3D
+                    papers={filteredPapers}
+                    filter={filter}
+                    onKeywordClick={handleKeywordClick}
+                  />
+                </div>
+              </Card>
+            )}
           </Col>
-        </Row>
 
-        {/* 第四行：单个卡片，通过“选择趋势图”按钮切换三种趋势图 */}
-        <Row gutter={16} style={{ marginBottom: 16 }}>
-          <Col span={24}>
-            <Card
-              title={
-                selectedEvolutionView === "keyword"
-                  ? "关键词演化图谱"
-                  : selectedEvolutionView === "country"
-                  ? "国家论文发表数演化"
-                  : "机构论文发表数演化"
-              }
-              loading={loading}
-              extra={
-                <Space>
-                  <Popover
-                    trigger="click"
-                    placement="bottomRight"
-                    content={
-                      <div
-                        style={{
-                          display: "flex",
-                          flexDirection: "column",
-                          gap: 8,
-                        }}
-                      >
-                        <Button
-                          type={
-                            selectedEvolutionView === "keyword"
-                              ? "primary"
-                              : "default"
-                          }
-                          size="small"
-                          onClick={() => setSelectedEvolutionView("keyword")}
-                        >
-                          关键词演化
-                        </Button>
-                        <Button
-                          type={
-                            selectedEvolutionView === "country"
-                              ? "primary"
-                              : "default"
-                          }
-                          size="small"
-                          onClick={() => setSelectedEvolutionView("country")}
-                        >
-                          国家论文发表数演化
-                        </Button>
-                        <Button
-                          type={
-                            selectedEvolutionView === "institution"
-                              ? "primary"
-                              : "default"
-                          }
-                          size="small"
-                          onClick={() =>
-                            setSelectedEvolutionView("institution")
-                          }
-                        >
-                          机构论文发表数演化
-                        </Button>
+          <Col span={8}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+              {/* 上方次视图 */}
+              <Card
+                title={
+                  layoutSlots.top === "network"
+                    ? "作者合作网络"
+                    : layoutSlots.top === "trend"
+                    ? "趋势图模块"
+                    : "3D关键词球形"
+                }
+                loading={loading}
+                size="small"
+                style={{
+                  height: 360,
+                  cursor: "pointer",
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+                styles={{
+                  body: { padding: 0, height: "100%", overflow: "hidden" },
+                }}
+                onClick={() => handleSwapToMain("top")}
+              >
+                <div style={{ flex: 1, minHeight: 0 }}>
+                  {layoutSlots.top === "network" && (
+                    <CoAuthorNetwork
+                      papers={filteredPapers}
+                      filter={filter}
+                      compact
+                      height={300}
+                    />
+                  )}
+                  {layoutSlots.top === "trend" && (
+                    <div
+                      style={{
+                        height: "100%",
+                        display: "flex",
+                        flexDirection: "column",
+                      }}
+                    >
+                      <div style={{ flex: 1, minHeight: 0 }}>
+                        {selectedEvolutionView === "keyword" && (
+                          <KeywordEvolution
+                            papers={filteredPapersForEvolution}
+                            filter={filter}
+                            compact
+                            height={300}
+                            onPlayStateChange={handleKeywordPlayStateChange}
+                            externalYear={globalYear}
+                            externalIsPlaying={globalIsPlaying}
+                          />
+                        )}
+                        {selectedEvolutionView === "country" && (
+                          <CountryEvolution
+                            papers={filteredPapersForEvolution}
+                            filter={filter}
+                            compact
+                            height={300}
+                            onPlayStateChange={handleCountryPlayStateChange}
+                            externalYear={globalYear}
+                            externalIsPlaying={globalIsPlaying}
+                          />
+                        )}
+                        {selectedEvolutionView === "institution" && (
+                          <InstitutionEvolution
+                            papers={filteredPapersForEvolution}
+                            filter={filter}
+                            compact
+                            height={300}
+                            onPlayStateChange={handleInstitutionPlayStateChange}
+                            externalYear={globalYear}
+                            externalIsPlaying={globalIsPlaying}
+                          />
+                        )}
                       </div>
-                    }
-                  >
-                    <Button size="small">选择趋势图</Button>
-                  </Popover>
-                  <Button
-                    type="primary"
-                    size="small"
-                    icon={
-                      globalIsPlaying ? (
-                        <PauseCircleOutlined />
-                      ) : (
-                        <PlayCircleOutlined />
-                      )
-                    }
-                    onClick={handleGlobalPlayPause}
-                  >
-                    {globalIsPlaying ? "暂停全部" : "播放全部"}
-                  </Button>
-                </Space>
-              }
-              style={{
-                minHeight: 360,
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
-              <div style={{ flex: 1, minHeight: 0 }}>
-                {selectedEvolutionView === "keyword" && (
-                  <KeywordEvolution
-                    ref={keywordEvolutionRef}
-                    papers={filteredPapersForEvolution}
-                    filter={filter}
-                    onPlayStateChange={handleKeywordPlayStateChange}
-                    externalYear={globalYear}
-                    externalIsPlaying={globalIsPlaying}
-                  />
-                )}
-                {selectedEvolutionView === "country" && (
-                  <CountryEvolution
-                    ref={countryEvolutionRef}
-                    papers={filteredPapersForEvolution}
-                    filter={filter}
-                    onPlayStateChange={handleCountryPlayStateChange}
-                    externalYear={globalYear}
-                    externalIsPlaying={globalIsPlaying}
-                  />
-                )}
-                {selectedEvolutionView === "institution" && (
-                  <InstitutionEvolution
-                    ref={institutionEvolutionRef}
-                    papers={filteredPapersForEvolution}
-                    filter={filter}
-                    onPlayStateChange={handleInstitutionPlayStateChange}
-                    externalYear={globalYear}
-                    externalIsPlaying={globalIsPlaying}
-                  />
-                )}
-              </div>
-            </Card>
+                    </div>
+                  )}
+                  {layoutSlots.top === "sphere" && (
+                    <KeywordSphere3D
+                      papers={filteredPapers}
+                      filter={filter}
+                      onKeywordClick={handleKeywordClick}
+                    />
+                  )}
+                </div>
+              </Card>
+
+              {/* 下方次视图 */}
+              <Card
+                title={
+                  layoutSlots.bottom === "network"
+                    ? "作者合作网络"
+                    : layoutSlots.bottom === "trend"
+                    ? "趋势图模块"
+                    : "3D关键词球形"
+                }
+                loading={loading}
+                size="small"
+                style={{
+                  height: 360,
+                  cursor: "pointer",
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+                styles={{
+                  body: { padding: 0, height: "100%", overflow: "hidden" },
+                }}
+                onClick={() => handleSwapToMain("bottom")}
+              >
+                <div style={{ flex: 1, minHeight: 0 }}>
+                  {layoutSlots.bottom === "network" && (
+                    <CoAuthorNetwork
+                      papers={filteredPapers}
+                      filter={filter}
+                      compact
+                      height={300}
+                    />
+                  )}
+                  {layoutSlots.bottom === "trend" && (
+                    <div
+                      style={{
+                        height: "100%",
+                        display: "flex",
+                        flexDirection: "column",
+                      }}
+                    >
+                      <div style={{ flex: 1, minHeight: 0 }}>
+                        {selectedEvolutionView === "keyword" && (
+                          <KeywordEvolution
+                            papers={filteredPapersForEvolution}
+                            filter={filter}
+                            compact
+                            height={300}
+                            onPlayStateChange={handleKeywordPlayStateChange}
+                            externalYear={globalYear}
+                            externalIsPlaying={globalIsPlaying}
+                          />
+                        )}
+                        {selectedEvolutionView === "country" && (
+                          <CountryEvolution
+                            papers={filteredPapersForEvolution}
+                            filter={filter}
+                            compact
+                            height={300}
+                            onPlayStateChange={handleCountryPlayStateChange}
+                            externalYear={globalYear}
+                            externalIsPlaying={globalIsPlaying}
+                          />
+                        )}
+                        {selectedEvolutionView === "institution" && (
+                          <InstitutionEvolution
+                            papers={filteredPapersForEvolution}
+                            filter={filter}
+                            compact
+                            height={300}
+                            onPlayStateChange={handleInstitutionPlayStateChange}
+                            externalYear={globalYear}
+                            externalIsPlaying={globalIsPlaying}
+                          />
+                        )}
+                      </div>
+                    </div>
+                  )}
+                  {layoutSlots.bottom === "sphere" && (
+                    <KeywordSphere3D
+                      papers={filteredPapers}
+                      filter={filter}
+                      onKeywordClick={handleKeywordClick}
+                    />
+                  )}
+                </div>
+              </Card>
+            </div>
           </Col>
         </Row>
 
-        {/* 第七行：引用关系 */}
+        {/* 引用关系 */}
         <Row gutter={16} style={{ marginBottom: 16 }}>
           <Col span={24}>
             <Card title="文献引用瀑布" loading={loading}>
               <CitationCascade papers={filteredPapers} filter={filter} />
-            </Card>
-          </Col>
-        </Row>
-
-        {/* 第八行：3D关键词球形 */}
-        <Row gutter={16} style={{ marginBottom: 16 }}>
-          <Col span={24}>
-            <Card title="3D关键词球形" loading={loading}>
-              <KeywordSphere3D
-                papers={filteredPapers}
-                filter={filter}
-                onKeywordClick={handleKeywordClick}
-              />
             </Card>
           </Col>
         </Row>

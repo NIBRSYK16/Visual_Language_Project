@@ -1,0 +1,85 @@
+.layout-content {
+  min-height: calc(100vh - 64px);
+  background: #0a0a0a !important;
+}
+.fixed-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(77, 171, 247, 0.2) inset !important;
+  border-bottom: 2px solid rgba(77, 171, 247, 0.3) !important;
+}
+.fixed-header h1 {
+  color: #e8f4f8 !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+  font-weight: 600 !important;
+  letter-spacing: 1px !important;
+}
+.fixed-header span {
+  color: #e8f4f8 !important;
+  font-weight: 500 !important;
+}
+:global .paper-list-drawer.ant-drawer .ant-drawer-content-wrapper {
+  top: 64px !important;
+  height: calc(100vh - 64px) !important;
+  position: fixed !important;
+}
+:global .paper-list-drawer .ant-drawer-header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: rgba(26, 26, 46, 0.95);
+  border-bottom: 1px solid rgba(77, 171, 247, 0.3);
+}
+:global .paper-list-drawer .ant-drawer-body {
+  padding: 16px !important;
+}
+.paper-list-item {
+  padding: 12px;
+  margin-bottom: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  background: #1a1a2e;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.paper-list-item:hover {
+  border-color: #4dabf7;
+  box-shadow: 0 2px 8px rgba(77, 171, 247, 0.3);
+}
+.evolution-thumbnail {
+  transform: scale(0.8);
+  transform-origin: top left;
+  width: 125%;
+  height: 125%;
+}
+:global .ant-card {
+  background: #111827 !important;
+  border-radius: 6px !important;
+  border-color: rgba(148, 163, 184, 0.4) !important;
+}
+:global .ant-card-head {
+  min-height: 32px !important;
+  padding: 4px 12px !important;
+  background: linear-gradient(90deg, #020617, #0f172a) !important;
+  border-bottom: 1px solid rgba(51, 65, 85, 0.8) !important;
+}
+:global .ant-card-head-title {
+  padding: 0 !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: #e5e7eb !important;
+}
+:global .ant-card-extra {
+  padding: 0 !important;
+}
+:global .ant-card-body {
+  padding: 8px 10px !important;
+  background: #020617 !important;
+}
+:global .ant-card-body > div {
+  height: 100%;
+}

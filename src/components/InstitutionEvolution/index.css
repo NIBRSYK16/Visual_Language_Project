@@ -1,0 +1,40 @@
+.institution-evolution-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: #1a1a2e;
+  border: 1px solid rgba(77, 171, 247, 0.2);
+  border-radius: 8px;
+  padding: 8px 8px 12px 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+.institution-evolution-container .institution-evolution-controls {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.institution-evolution-container svg {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+.institution-evolution-container svg .bar {
+  transition: opacity 0.2s;
+}
+.institution-evolution-container svg .axis .domain {
+  stroke: #aaa;
+}
+.institution-evolution-container svg .axis .tick line {
+  stroke: #aaa;
+}
+.institution-evolution-container svg .axis .tick text {
+  fill: #fff;
+}
+:global(.institution-evolution-tooltip) {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.5;
+}
+:global(.institution-evolution-tooltip) strong {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 13px;
+}
