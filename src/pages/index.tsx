@@ -28,7 +28,7 @@ import {
 } from "@ant-design/icons";
 import { fetchPapers } from "@/services/api";
 import { Paper, FilterCondition } from "@/types";
-import { applyFilter, extractWordCloudData } from "@/services/dataProcessor";
+import { extractWordCloudData } from "@/services/dataProcessor";
 import GeoMap from "@/components/GeoMap";
 import WordCloud from "@/components/WordCloud";
 import CoAuthorNetwork from "@/components/CoAuthorNetwork";
@@ -51,6 +51,7 @@ const { Header, Content } = Layout;
 
 const IndexPage: React.FC = () => {
   const [papers, setPapers] = useState<Paper[]>([]);
+  const [mockCascadePapers, setMockCascadePapers] = useState<Paper[]>([]);
   const [filter, setFilter] = useState<FilterCondition>({});
   const [loading, setLoading] = useState(true);
   const [minYear, setMinYear] = useState(2000);
@@ -66,7 +67,6 @@ const IndexPage: React.FC = () => {
     "keyword" | "country" | "institution"
   >("keyword");
   const [keywordFilterVisible, setKeywordFilterVisible] = useState(false);
-
   // 主/次视图布局状态（默认作者合作网络为主，趋势图为上次视图，3D球形为下次视图）
   const [layoutSlots, setLayoutSlots] = useState<{
     main: "network" | "trend" | "sphere";
@@ -85,7 +85,22 @@ const IndexPage: React.FC = () => {
 
   useEffect(() => {
     loadData();
+    loadMockCascade();
   }, []);
+
+  // Load mock cascade data from public folder for reference fallback
+  const loadMockCascade = async () => {
+    try {
+      const response = await fetch("/data/mock.json");
+      if (!response.ok) {
+        throw new Error(`Failed to load mock.json: ${response.status}`);
+      }
+      const data = await response.json();
+      setMockCascadePapers(data);
+    } catch (error) {
+      console.error("Failed to load mock cascade data:", error);
+    }
+  };
 
   const loadData = async () => {
     setLoading(true);
@@ -116,8 +131,10 @@ const IndexPage: React.FC = () => {
     setFilter(newFilter);
   };
 
-  const handleYearSliderChange = (value: [number, number]) => {
-    setFilter((prev) => ({ ...prev, years: value }));
+  const handleYearSliderChange = (value: number | number[]) => {
+    if (Array.isArray(value)) {
+      setFilter((prev) => ({ ...prev, years: value as [number, number] }));
+    }
   };
 
   // 处理关键词点击事件
@@ -249,6 +266,24 @@ const IndexPage: React.FC = () => {
 
     return currentPapers;
   }, [papers, filter]);
+
+  // Ensure the citation cascade has reference data; fall back to mock data if missing
+  const { cascadePapers, cascadeFilter } = useMemo(() => {
+    const hasReferences = filteredPapers.some(
+      (p) => p.references && p.references.length > 0
+    );
+
+    const fallbackPapers = hasReferences
+      ? filteredPapers
+      : mockCascadePapers.length > 0
+      ? mockCascadePapers
+      : filteredPapers;
+
+    return {
+      cascadePapers: fallbackPapers,
+      cascadeFilter: hasReferences ? filter : ({} as FilterCondition),
+    };
+  }, [filteredPapers, filter, mockCascadePapers]);
 
   // 用于关键词演化的筛选（不包含关键词筛选）
   const filteredPapersForEvolution = useMemo(() => {
@@ -1105,7 +1140,8 @@ const IndexPage: React.FC = () => {
         <Row gutter={16} style={{ marginBottom: 16 }}>
           <Col span={24}>
             <Card title="文献引用瀑布" loading={loading}>
-              <CitationCascade papers={filteredPapers} filter={filter} />
+              <CitationCascade papers={cascadePapers} filter={cascadeFilter} />
+              {console.log("cascadePapers:", cascadePapers)}
             </Card>
           </Col>
         </Row>
