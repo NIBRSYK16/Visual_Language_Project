@@ -1,0 +1,61 @@
+.co-author-network-container {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: #1a1a2e;
+}
+.co-author-network-container .co-author-network-search {
+  padding: 10px;
+  background: #1a1a2e;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+}
+.co-author-network-container svg {
+  flex: 1;
+  display: block;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+.co-author-network-container svg .links line {
+  transition: stroke-opacity 0.2s;
+}
+.co-author-network-container svg .nodes circle {
+  transition: stroke-width 0.2s;
+}
+.co-author-network-container svg .labels text {
+  user-select: none;
+}
+:global(.coauthor-network-tooltip) {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.5;
+}
+:global(.coauthor-network-tooltip) strong {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 13px;
+}
+:global(.coauthor-network-tooltip) a {
+  transition: all 0.2s ease;
+}
+:global(.coauthor-network-tooltip) a:hover {
+  text-decoration: underline !important;
+}
+:global(.coauthor-network-tooltip)::-webkit-scrollbar {
+  width: 6px;
+}
+:global(.coauthor-network-tooltip)::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+:global(.coauthor-network-tooltip)::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+:global(.coauthor-network-tooltip)::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}

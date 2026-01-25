@@ -3,13 +3,20 @@
  * 横向柱状图展示国家论文数量变化，支持动画播放
  */
 
-import React, { useEffect, useRef, useCallback, useState, useImperativeHandle, forwardRef } from 'react';
-import { Button, Space } from 'antd';
-import { PlayCircleOutlined, PauseCircleOutlined } from '@ant-design/icons';
-import * as d3 from 'd3';
-import { Paper, FilterCondition } from '@/types';
-import { applyFilter } from '@/services/dataProcessor';
-import './index.less';
+import React, {
+  useEffect,
+  useRef,
+  useCallback,
+  useState,
+  useImperativeHandle,
+  forwardRef,
+} from "react";
+import { Button, Space } from "antd";
+import { PlayCircleOutlined, PauseCircleOutlined } from "@ant-design/icons";
+import * as d3 from "d3";
+import { Paper, FilterCondition } from "@/types";
+import { applyFilter } from "@/services/dataProcessor";
+import "./index.less";
 
 interface CountryEvolutionProps {
   papers: Paper[];
@@ -17,6 +24,8 @@ interface CountryEvolutionProps {
   onPlayStateChange?: (isPlaying: boolean) => void;
   externalYear?: number | null;
   externalIsPlaying?: boolean;
+  compact?: boolean;
+  height?: number;
 }
 
 export interface CountryEvolutionRef {
@@ -31,7 +40,18 @@ interface CountryData {
 }
 
 const CountryEvolution = forwardRef<CountryEvolutionRef, CountryEvolutionProps>(
-  ({ papers, filter, onPlayStateChange, externalYear, externalIsPlaying }, ref) => {
+  (
+    {
+      papers,
+      filter,
+      onPlayStateChange,
+      externalYear,
+      externalIsPlaying,
+      compact,
+      height: propHeight,
+    },
+    ref
+  ) => {
     const containerRef = useRef<HTMLDivElement>(null);
     const svgRef = useRef<SVGSVGElement>(null);
     const tooltipRef = useRef<HTMLDivElement | null>(null);
@@ -83,18 +103,25 @@ const CountryEvolution = forwardRef<CountryEvolutionRef, CountryEvolutionProps>(
         .filter((y) => y && y > 0)
         .sort((a, b) => a - b);
       if (years.length === 0) return [];
-      
+
       // 如果用户选择了年份区间，使用该区间；否则使用所有数据的年份范围
       if (filter.years && filter.years.length === 2) {
         const [minSelected, maxSelected] = filter.years;
-        const availableYears = years.filter((y) => y >= minSelected && y <= maxSelected);
+        const availableYears = years.filter(
+          (y) => y >= minSelected && y <= maxSelected
+        );
         if (availableYears.length === 0) return [];
-        return Array.from({ length: maxSelected - minSelected + 1 }, (_, i) => minSelected + i)
-          .filter((y) => availableYears.includes(y));
+        return Array.from(
+          { length: maxSelected - minSelected + 1 },
+          (_, i) => minSelected + i
+        ).filter((y) => availableYears.includes(y));
       } else {
         const minYear = Math.min(...years);
         const maxYear = Math.max(...years);
-        return Array.from({ length: maxYear - minYear + 1 }, (_, i) => minYear + i);
+        return Array.from(
+          { length: maxYear - minYear + 1 },
+          (_, i) => minYear + i
+        );
       }
     }, [papers, filter]);
 
@@ -119,31 +146,36 @@ const CountryEvolution = forwardRef<CountryEvolutionRef, CountryEvolutionProps>(
           .sort((a, b) => b.count - a.count)
           .slice(0, 15); // 显示前15个
       },
-      [papers, filter],
+      [papers, filter]
     );
 
     // 创建或获取工具提示
     const getTooltip = useCallback(() => {
       let tooltip: d3.Selection<HTMLDivElement, unknown, HTMLElement, any>;
-      const existingTooltip = d3.select('.country-evolution-tooltip');
+      const existingTooltip = d3.select(".country-evolution-tooltip");
       if (existingTooltip.empty()) {
         tooltip = d3
-          .select('body')
-          .append('div')
-          .attr('class', 'country-evolution-tooltip')
-          .style('position', 'absolute')
-          .style('visibility', 'hidden')
-          .style('background', 'rgba(0, 0, 0, 0.85)')
-          .style('color', 'white')
-          .style('padding', '8px 12px')
-          .style('border-radius', '4px')
-          .style('pointer-events', 'none')
-          .style('font-size', '12px')
-          .style('z-index', '9999')
-          .style('box-shadow', '0 2px 8px rgba(0,0,0,0.3)');
+          .select("body")
+          .append("div")
+          .attr("class", "country-evolution-tooltip")
+          .style("position", "absolute")
+          .style("visibility", "hidden")
+          .style("background", "rgba(0, 0, 0, 0.85)")
+          .style("color", "white")
+          .style("padding", "8px 12px")
+          .style("border-radius", "4px")
+          .style("pointer-events", "none")
+          .style("font-size", "12px")
+          .style("z-index", "9999")
+          .style("box-shadow", "0 2px 8px rgba(0,0,0,0.3)");
         tooltipRef.current = tooltip.node() as HTMLDivElement;
       } else {
-        tooltip = existingTooltip as d3.Selection<HTMLDivElement, unknown, HTMLElement, any>;
+        tooltip = existingTooltip as d3.Selection<
+          HTMLDivElement,
+          unknown,
+          HTMLElement,
+          any
+        >;
         tooltipRef.current = tooltip.node() as HTMLDivElement;
       }
       return tooltip;
@@ -158,54 +190,64 @@ const CountryEvolution = forwardRef<CountryEvolutionRef, CountryEvolutionProps>(
 
         const container = containerRef.current;
         const width = container.clientWidth || 800;
-        const height = Math.min(width * 0.4, 350); // 更扁的高度
+        const containerH = container.clientHeight || 0;
+        const isCompact = compact === true;
+        const minHeight = isCompact ? 260 : 320;
+        const baseHeight =
+          containerH > 0 ? containerH : Math.min(width * 0.4, minHeight);
+        const height = Math.max(baseHeight, minHeight);
 
         const svg = d3.select(svgRef.current);
-
-        // 只在初始化时设置尺寸和清空
-        if (!isInitializedRef.current) {
-          svg.attr('width', width).attr('height', height);
-          svg.selectAll('*').remove();
-          isInitializedRef.current = true;
-        }
+        // 每次根据容器尺寸更新画布，避免在主/次视图切换时尺寸不匹配
+        svg.attr("width", width).attr("height", height);
+        svg.selectAll(".year-placeholder").remove();
 
         if (year === null) {
-          if (svg.select('g.chart-container').empty()) {
-            svg
-              .append('text')
-              .attr('x', width / 2)
-              .attr('y', height / 2)
-              .attr('text-anchor', 'middle')
-              .style('font-size', '16px')
-              .style('fill', '#aaa')
-              .text('请选择年份或点击播放');
-          }
+          svg.selectAll("g.chart-container").remove();
+          svg
+            .append("text")
+            .attr("class", "year-placeholder")
+            .attr("x", width / 2)
+            .attr("y", height / 2)
+            .attr("text-anchor", "middle")
+            .style("font-size", "16px")
+            .style("fill", "#aaa")
+            .text("请选择年份或点击播放");
           return;
         }
 
         const data = getYearData(year);
 
         if (data.length === 0) {
-          svg.selectAll('g.chart-container, text').remove();
+          svg.selectAll("g.chart-container, text").remove();
           return;
         }
 
-        // 设置边距
-        const margin = { top: 20, right: 100, bottom: 40, left: 150 };
-        const chartWidth = width - margin.left - margin.right;
-        const chartHeight = height - margin.top - margin.bottom;
+        // 设置边距（紧凑模式收紧）
+        const margin = isCompact
+          ? { top: 10, right: 60, bottom: 26, left: 110 }
+          : { top: 20, right: 100, bottom: 40, left: 150 };
+        const chartWidth = Math.max(width - margin.left - margin.right, 120);
+        const chartHeight = Math.max(height - margin.top - margin.bottom, 120);
 
         // 获取或创建图表容器
-        let g = svg.select('g.chart-container');
+        let g = svg.select("g.chart-container");
         if (g.empty()) {
-          g = svg.append('g').attr('class', 'chart-container').attr('transform', `translate(${margin.left},${margin.top})`);
+          g = svg
+            .append("g")
+            .attr("class", "chart-container")
+            .attr("transform", `translate(${margin.left},${margin.top})`);
         }
 
         // 创建比例尺
-        const xScale = d3.scaleLinear().domain([0, d3.max(data, (d) => d.count) || 1]).range([0, chartWidth]).nice();
-        
-        // 固定显示15个位置，即使数据不足也保持一致的柱子宽度
-        const maxItems = 15;
+        const xScale = d3
+          .scaleLinear()
+          .domain([0, d3.max(data, (d) => d.count) || 1])
+          .range([0, chartWidth])
+          .nice();
+
+        // 紧凑模式减少展示条数，避免柱子过厚
+        const maxItems = isCompact ? 8 : 15;
         // 创建固定大小的domain，包含实际数据和占位符
         const displayItems: (CountryData | null)[] = [];
         for (let i = 0; i < maxItems; i++) {
@@ -215,93 +257,107 @@ const CountryEvolution = forwardRef<CountryEvolutionRef, CountryEvolutionProps>(
             displayItems.push(null); // 占位符
           }
         }
-        const yDomain = displayItems.map((d, i) => d ? d.country : `_placeholder_${i}`);
-        const yScale = d3.scaleBand().domain(yDomain).range([0, chartHeight]).padding(0.2);
+        const yDomain = displayItems.map((d, i) =>
+          d ? d.country : `_placeholder_${i}`
+        );
+        const yScale = d3
+          .scaleBand()
+          .domain(yDomain)
+          .range([0, chartHeight])
+          .padding(isCompact ? 0.1 : 0.18);
 
         // 创建颜色比例尺（固定颜色映射）
         const allCountriesSet = new Set<string>();
-        const years = getYearRange();
+        const years = getYearRange() || [];
         years.forEach((y) => {
           getYearData(y).forEach((d) => allCountriesSet.add(d.country));
         });
         const allCountries = Array.from(allCountriesSet);
-        const colorScale = d3.scaleOrdinal(d3.schemeCategory10).domain(allCountries);
+        const colorScale = d3
+          .scaleOrdinal(d3.schemeCategory10)
+          .domain(allCountries);
 
         const tooltip = getTooltip();
 
         // 绘制柱状图（只绘制有数据的项）
-        const barsData = displayItems.filter(d => d !== null) as CountryData[];
+        const barsData = displayItems.filter(
+          (d) => d !== null
+        ) as CountryData[];
         const bars = g
-          .selectAll<SVGRectElement, CountryData>('.bar')
+          .selectAll<SVGRectElement, CountryData>(".bar")
           .data(barsData, (d) => d.country);
 
         bars
           .exit()
-        .transition()
-        .duration(300)
-        .ease(d3.easeCubicInOut)
-          .attr('width', 0)
-          .attr('y', chartHeight)
+          .transition()
+          .duration(300)
+          .ease(d3.easeCubicInOut)
+          .attr("width", 0)
+          .attr("y", chartHeight)
           .remove();
 
         const barsEnter = bars
           .enter()
-          .append('rect')
-          .attr('class', 'bar')
-          .attr('x', 0)
-          .attr('y', (d) => yScale(d.country)!)
-          .attr('width', 0)
-          .attr('height', yScale.bandwidth())
-          .attr('fill', (d) => colorScale(d.country) as string)
-          .attr('rx', 4)
-          .attr('ry', 4)
-          .style('cursor', 'pointer');
+          .append("rect")
+          .attr("class", "bar")
+          .attr("x", 0)
+          .attr("y", (d) => yScale(d.country)!)
+          .attr("width", 0)
+          .attr("height", yScale.bandwidth())
+          .attr("fill", (d) => colorScale(d.country) as string)
+          .attr("rx", 4)
+          .attr("ry", 4)
+          .style("cursor", "pointer");
 
         barsEnter
           .merge(bars as any)
-        .transition()
-        .duration(300)
-        .ease(d3.easeCubicInOut)
-          .attr('y', (d) => yScale(d.country)!)
-          .attr('width', (d) => xScale(d.count))
-          .attr('fill', (d) => colorScale(d.country) as string);
+          .transition()
+          .duration(300)
+          .ease(d3.easeCubicInOut)
+          .attr("y", (d) => yScale(d.country)!)
+          .attr("width", (d) => xScale(d.count))
+          .attr("fill", (d) => colorScale(d.country) as string);
 
         // 添加交互
-        g.selectAll('.bar')
-          .on('mouseover', function (event, d: any) {
-            d3.select(this).attr('opacity', 0.7);
+        g.selectAll(".bar")
+          .on("mouseover", function (event, d: any) {
+            d3.select(this).attr("opacity", 0.7);
             tooltip
               .html(`<strong>${d.country}</strong><br/>论文数: ${d.count}`)
-              .style('visibility', 'visible')
-              .style('left', event.pageX + 10 + 'px')
-              .style('top', event.pageY - 10 + 'px');
+              .style("visibility", "visible")
+              .style("left", event.pageX + 10 + "px")
+              .style("top", event.pageY - 10 + "px");
           })
-          .on('mousemove', function (event) {
-            tooltip.style('left', event.pageX + 10 + 'px').style('top', event.pageY - 10 + 'px');
+          .on("mousemove", function (event) {
+            tooltip
+              .style("left", event.pageX + 10 + "px")
+              .style("top", event.pageY - 10 + "px");
           })
-          .on('mouseout', function () {
-            d3.select(this).attr('opacity', 1);
-            tooltip.style('visibility', 'hidden');
+          .on("mouseout", function () {
+            d3.select(this).attr("opacity", 1);
+            tooltip.style("visibility", "hidden");
           });
 
         // 绘制标签（只绘制有数据的项）
-        const labelsData = displayItems.filter(d => d !== null) as CountryData[];
+        const labelsData = displayItems.filter(
+          (d) => d !== null
+        ) as CountryData[];
         const labels = g
-          .selectAll<SVGTextElement, CountryData>('.label')
+          .selectAll<SVGTextElement, CountryData>(".label")
           .data(labelsData, (d) => d.country);
 
         labels.exit().remove();
 
         const labelsEnter = labels
           .enter()
-          .append('text')
-          .attr('class', 'label')
-          .attr('x', -5)
-          .attr('y', (d) => yScale(d.country)! + yScale.bandwidth() / 2)
-          .attr('dy', '0.35em')
-          .attr('text-anchor', 'end')
-          .style('font-size', '10px')
-          .style('fill', '#fff')
+          .append("text")
+          .attr("class", "label")
+          .attr("x", -5)
+          .attr("y", (d) => yScale(d.country)! + yScale.bandwidth() / 2)
+          .attr("dy", "0.35em")
+          .attr("text-anchor", "end")
+          .style("font-size", "10px")
+          .style("fill", "#fff")
           .text((d) => d.country);
 
         labelsEnter
@@ -309,86 +365,101 @@ const CountryEvolution = forwardRef<CountryEvolutionRef, CountryEvolutionProps>(
           .transition()
           .duration(300)
           .ease(d3.easeCubicInOut)
-          .attr('y', (d) => yScale(d.country)! + yScale.bandwidth() / 2);
+          .attr("y", (d) => yScale(d.country)! + yScale.bandwidth() / 2);
 
         // 绘制数值标签（只绘制有数据的项）
-        const valueLabelsData = displayItems.filter(d => d !== null) as CountryData[];
+        const valueLabelsData = displayItems.filter(
+          (d) => d !== null
+        ) as CountryData[];
         const valueLabels = g
-          .selectAll<SVGTextElement, CountryData>('.value-label')
+          .selectAll<SVGTextElement, CountryData>(".value-label")
           .data(valueLabelsData, (d) => d.country);
 
         valueLabels.exit().remove();
 
         const valueLabelsEnter = valueLabels
           .enter()
-          .append('text')
-          .attr('class', 'value-label')
-          .attr('x', (d) => xScale(d.count) + 5)
-          .attr('y', (d) => yScale(d.country)! + yScale.bandwidth() / 2)
-          .attr('dy', '0.35em')
-          .style('font-size', '9px')
-          .style('fill', '#aaa')
+          .append("text")
+          .attr("class", "value-label")
+          .attr("x", (d) => xScale(d.count) + 5)
+          .attr("y", (d) => yScale(d.country)! + yScale.bandwidth() / 2)
+          .attr("dy", "0.35em")
+          .style("font-size", "9px")
+          .style("fill", "#aaa")
           .text((d) => d.count.toString())
-          .attr('opacity', 0);
+          .attr("opacity", 0);
 
         valueLabelsEnter
           .merge(valueLabels as any)
           .transition()
           .duration(300)
           .ease(d3.easeCubicInOut)
-          .attr('x', (d) => xScale(d.count) + 5)
-          .attr('y', (d) => yScale(d.country)! + yScale.bandwidth() / 2)
-          .attr('opacity', 1)
+          .attr("x", (d) => xScale(d.count) + 5)
+          .attr("y", (d) => yScale(d.country)! + yScale.bandwidth() / 2)
+          .attr("opacity", 1)
           .text((d) => d.count.toString());
 
         // 绘制或更新坐标轴
-        let axesGroup = g.select('g.axes-group');
+        let axesGroup = g.select("g.axes-group");
         if (axesGroup.empty()) {
-          axesGroup = g.append('g').attr('class', 'axes-group');
+          axesGroup = g.append("g").attr("class", "axes-group");
         }
 
         // 更新X轴
         const xAxis = d3.axisBottom(xScale);
-        let xAxisGroup = axesGroup.select('g.x-axis');
+        let xAxisGroup = axesGroup.select("g.x-axis");
         if (xAxisGroup.empty()) {
-          xAxisGroup = axesGroup.append('g').attr('class', 'x-axis').attr('transform', `translate(0, ${chartHeight})`);
+          xAxisGroup = axesGroup
+            .append("g")
+            .attr("class", "x-axis")
+            .attr("transform", `translate(0, ${chartHeight})`);
           xAxisGroup.call(xAxis);
-          xAxisGroup.selectAll('text').style('font-size', '9px').style('fill', '#666');
+          xAxisGroup
+            .selectAll("text")
+            .style("font-size", "9px")
+            .style("fill", "#666");
 
           axesGroup
-            .append('text')
-            .attr('class', 'x-axis-label')
-            .attr('transform', `translate(${chartWidth / 2}, ${chartHeight + 30})`)
-            .style('text-anchor', 'middle')
-            .style('font-size', '10px')
-            .style('fill', '#aaa')
-            .text('论文数量');
+            .append("text")
+            .attr("class", "x-axis-label")
+            .attr(
+              "transform",
+              `translate(${chartWidth / 2}, ${chartHeight + 30})`
+            )
+            .style("text-anchor", "middle")
+            .style("font-size", "10px")
+            .style("fill", "#aaa")
+            .text("论文数量");
         } else {
           xAxisGroup.transition().duration(500).call(xAxis);
         }
 
         // 更新年份标题
-        let yearLabel = g.select('text.year-label');
+        let yearLabel = g.select("text.year-label");
         if (yearLabel.empty()) {
           yearLabel = g
-            .append('text')
-            .attr('class', 'year-label')
-            .attr('x', chartWidth / 2)
-            .attr('y', -5)
-            .attr('text-anchor', 'middle')
-          .style('font-size', '16px')
-          .style('font-weight', 'bold')
-          .style('fill', '#fff');
+            .append("text")
+            .attr("class", "year-label")
+            .attr("x", chartWidth / 2)
+            .attr("y", -5)
+            .attr("text-anchor", "middle")
+            .style("font-size", "16px")
+            .style("font-weight", "bold")
+            .style("fill", "#fff");
         }
         yearLabel.text(`${year}年`);
       },
-      [getYearData, getYearRange, getTooltip],
+      [getYearData, getYearRange, getTooltip]
     );
 
     // 初始化显示第一个年份
     useEffect(() => {
-      const years = getYearRange();
-      if (years.length > 0 && currentYear === null && externalYear === undefined) {
+      const years = getYearRange() || [];
+      if (
+        years.length > 0 &&
+        currentYear === null &&
+        externalYear === undefined
+      ) {
         setCurrentYear(years[0]);
         isInitializedRef.current = false;
       }
@@ -411,7 +482,7 @@ const CountryEvolution = forwardRef<CountryEvolutionRef, CountryEvolutionProps>(
         onPlayStateChange?.(false);
       } else {
         // 播放
-        const years = getYearRange();
+        const years = getYearRange() || [];
         if (years.length === 0) return;
 
         let currentIndex = years.indexOf(currentYear || years[0]);
@@ -435,35 +506,48 @@ const CountryEvolution = forwardRef<CountryEvolutionRef, CountryEvolutionProps>(
       };
     }, []);
 
-    const years = getYearRange();
+    const years = getYearRange() || [];
 
     return (
       <div className="country-evolution-container">
-        <div className="country-evolution-controls" style={{ marginBottom: '16px', textAlign: 'right' }}>
-          <Space>
-            <Button
-              type="primary"
-              icon={isPlaying ? <PauseCircleOutlined /> : <PlayCircleOutlined />}
-              onClick={handlePlayPause}
-              disabled={years.length === 0}
-            >
-              {isPlaying ? '暂停' : '播放'}
-            </Button>
-            {currentYear && (
-              <span style={{ fontSize: '14px', color: '#666' }}>
-                当前年份: {currentYear}
-              </span>
-            )}
-          </Space>
-        </div>
-        <div ref={containerRef} style={{ width: '100%', height: '350px' }}>
-          <svg ref={svgRef} style={{ width: '100%', height: '100%' }} />
+        {!compact && (
+          <div
+            className="country-evolution-controls"
+            style={{ marginBottom: "16px", textAlign: "right" }}
+          >
+            <Space>
+              <Button
+                type="primary"
+                icon={
+                  isPlaying ? <PauseCircleOutlined /> : <PlayCircleOutlined />
+                }
+                onClick={handlePlayPause}
+                disabled={years.length === 0}
+              >
+                {isPlaying ? "暂停" : "播放"}
+              </Button>
+              {currentYear && (
+                <span style={{ fontSize: "14px", color: "#666" }}>
+                  当前年份: {currentYear}
+                </span>
+              )}
+            </Space>
+          </div>
+        )}
+        <div
+          ref={containerRef}
+          style={{
+            width: "100%",
+            height: `${propHeight ?? (compact ? 240 : 350)}px`,
+          }}
+        >
+          <svg ref={svgRef} style={{ width: "100%", height: "100%" }} />
         </div>
       </div>
     );
-  },
+  }
 );
 
-CountryEvolution.displayName = 'CountryEvolution';
+CountryEvolution.displayName = "CountryEvolution";
 
 export default CountryEvolution;
