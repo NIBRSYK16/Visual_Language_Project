@@ -1,0 +1,382 @@
+[
+  {
+    "id": "c1",
+    "title": "Consensus Foundations",
+    "authors": [
+      {
+        "id": "a1",
+        "name": "Alice Johnson",
+        "affiliations": ["Tech University"],
+        "country": "USA"
+      }
+    ],
+    "venue": { "name": "OSDI", "type": "conference", "tier": "A" },
+    "year": 2015,
+    "keywords": ["consensus", "distributed systems"],
+    "abstract": "Survey of consensus algorithms in large-scale systems.",
+    "references": [],
+    "citations": 64,
+    "country": "USA"
+  },
+  {
+    "id": "c2",
+    "title": "Byzantine Replication in Practice",
+    "authors": [
+      {
+        "id": "a2",
+        "name": "Brian Lee",
+        "affiliations": ["DataLab"],
+        "country": "Canada"
+      }
+    ],
+    "venue": { "name": "SOSP", "type": "conference", "tier": "A" },
+    "year": 2016,
+    "keywords": ["byzantine", "replication"],
+    "abstract": "Engineering lessons from deploying BFT replication.",
+    "references": ["c1"],
+    "citations": 51,
+    "country": "Canada"
+  },
+  {
+    "id": "c3",
+    "title": "Sharded Storage Design",
+    "authors": [
+      {
+        "id": "a3",
+        "name": "Carol Chen",
+        "affiliations": ["CloudWorks"],
+        "country": "Singapore"
+      }
+    ],
+    "venue": { "name": "USENIX ATC", "type": "conference", "tier": "A" },
+    "year": 2017,
+    "keywords": ["storage", "sharding"],
+    "abstract": "Design of a fault-tolerant sharded storage layer.",
+    "references": ["c1", "c2"],
+    "citations": 45,
+    "country": "Singapore"
+  },
+  {
+    "id": "c4",
+    "title": "Adaptive Caching for Logs",
+    "authors": [
+      {
+        "id": "a4",
+        "name": "Diego Martinez",
+        "affiliations": ["StreamLab"],
+        "country": "Spain"
+      }
+    ],
+    "venue": { "name": "EuroSys", "type": "conference", "tier": "A" },
+    "year": 2018,
+    "keywords": ["caching", "logging"],
+    "abstract": "Adaptive cache management for append-only logs.",
+    "references": ["c1", "c3"],
+    "citations": 38,
+    "country": "Spain"
+  },
+  {
+    "id": "c5",
+    "title": "Streaming Analytics Fabric",
+    "authors": [
+      {
+        "id": "a5",
+        "name": "Elena Petrova",
+        "affiliations": ["EdgeLab"],
+        "country": "Russia"
+      }
+    ],
+    "venue": { "name": "OSDI", "type": "conference", "tier": "A" },
+    "year": 2019,
+    "keywords": ["streaming", "analytics"],
+    "abstract": "Low-latency streaming analytics fabric with dynamic scaling.",
+    "references": ["c2", "c3", "c4"],
+    "citations": 33,
+    "country": "Russia"
+  },
+  {
+    "id": "c6",
+    "title": "Edge Coordination",
+    "authors": [
+      {
+        "id": "a6",
+        "name": "Fiona Zhang",
+        "affiliations": ["FunctionWorks"],
+        "country": "China"
+      }
+    ],
+    "venue": { "name": "SOSP", "type": "conference", "tier": "A" },
+    "year": 2020,
+    "keywords": ["edge", "coordination"],
+    "abstract": "Coordination protocols for geo-distributed edge clusters.",
+    "references": ["c3", "c5"],
+    "citations": 29,
+    "country": "China"
+  },
+  {
+    "id": "c7",
+    "title": "Serverless Scheduling",
+    "authors": [
+      {
+        "id": "a7",
+        "name": "Grace Kim",
+        "affiliations": ["SecureSys"],
+        "country": "Korea"
+      }
+    ],
+    "venue": { "name": "USENIX ATC", "type": "conference", "tier": "A" },
+    "year": 2021,
+    "keywords": ["serverless", "scheduling"],
+    "abstract": "Predictive scheduling for cold-start mitigation in serverless platforms.",
+    "references": ["c4", "c5", "c6"],
+    "citations": 31,
+    "country": "Korea"
+  },
+  {
+    "id": "c8",
+    "title": "Trusted Enclave Pipelines",
+    "authors": [
+      {
+        "id": "a8",
+        "name": "Hannah Brown",
+        "affiliations": ["MLScale"],
+        "country": "UK"
+      }
+    ],
+    "venue": { "name": "ASPLOS", "type": "conference", "tier": "A" },
+    "year": 2021,
+    "keywords": ["security", "enclave"],
+    "abstract": "Secure data pipelines leveraging trusted execution environments.",
+    "references": ["c4", "c6"],
+    "citations": 24,
+    "country": "UK"
+  },
+  {
+    "id": "c9",
+    "title": "Cost-Aware ML Serving",
+    "authors": [
+      {
+        "id": "a9",
+        "name": "Ivan Novak",
+        "affiliations": ["GreenCompute"],
+        "country": "Croatia"
+      }
+    ],
+    "venue": { "name": "EuroSys", "type": "conference", "tier": "A" },
+    "year": 2022,
+    "keywords": ["machine learning", "serving"],
+    "abstract": "Cost-aware scheduling for online model serving.",
+    "references": ["c5", "c7", "c8"],
+    "citations": 21,
+    "country": "Croatia"
+  },
+  {
+    "id": "c10",
+    "title": "Energy-Aware DAG Runtimes",
+    "authors": [
+      {
+        "id": "a10",
+        "name": "Julia Rossi",
+        "affiliations": ["GraphLab"],
+        "country": "Italy"
+      }
+    ],
+    "venue": { "name": "USENIX ATC", "type": "conference", "tier": "A" },
+    "year": 2022,
+    "keywords": ["runtime", "energy"],
+    "abstract": "Energy-aware scheduling for DAG-based analytics runtimes.",
+    "references": ["c6", "c7", "c9"],
+    "citations": 17,
+    "country": "Italy"
+  },
+  {
+    "id": "c11",
+    "title": "Federated Graph Learning",
+    "authors": [
+      {
+        "id": "a11",
+        "name": "Kenji Sato",
+        "affiliations": ["GraphLab"],
+        "country": "Japan"
+      }
+    ],
+    "venue": { "name": "NeurIPS", "type": "conference", "tier": "A" },
+    "year": 2023,
+    "keywords": ["federated", "graph"],
+    "abstract": "Federated training framework for graph neural networks.",
+    "references": ["c7", "c9", "c10"],
+    "citations": 12,
+    "country": "Japan"
+  },
+  {
+    "id": "c12",
+    "title": "Multi-Region Checkpointing",
+    "authors": [
+      {
+        "id": "a12",
+        "name": "Laura Silva",
+        "affiliations": ["CloudWorks"],
+        "country": "Brazil"
+      }
+    ],
+    "venue": { "name": "SOSP", "type": "conference", "tier": "A" },
+    "year": 2023,
+    "keywords": ["checkpointing", "fault tolerance"],
+    "abstract": "Geo-replicated checkpointing for low RPO services.",
+    "references": ["c3", "c5", "c7"],
+    "citations": 15,
+    "country": "Brazil"
+  },
+  {
+    "id": "c13",
+    "title": "Elastic Shuffle Mesh",
+    "authors": [
+      {
+        "id": "a13",
+        "name": "Marco Li",
+        "affiliations": ["DataLab"],
+        "country": "USA"
+      }
+    ],
+    "venue": { "name": "EuroSys", "type": "conference", "tier": "A" },
+    "year": 2024,
+    "keywords": ["shuffle", "analytics"],
+    "abstract": "Elastic shuffle mesh for large-scale batch analytics.",
+    "references": ["c5", "c9", "c12"],
+    "citations": 11,
+    "country": "USA"
+  },
+  {
+    "id": "c14",
+    "title": "Adaptive Indexing for Streams",
+    "authors": [
+      {
+        "id": "a14",
+        "name": "Nora Patel",
+        "affiliations": ["StreamLab"],
+        "country": "India"
+      }
+    ],
+    "venue": { "name": "VLDB", "type": "conference", "tier": "A" },
+    "year": 2024,
+    "keywords": ["streaming", "index"],
+    "abstract": "Adaptive indexing for high-rate event streams.",
+    "references": ["c5", "c9", "c13"],
+    "citations": 10,
+    "country": "India"
+  },
+  {
+    "id": "c15",
+    "title": "Trusted Edge Federation",
+    "authors": [
+      {
+        "id": "a15",
+        "name": "Omar Haddad",
+        "affiliations": ["EdgeLab"],
+        "country": "UAE"
+      }
+    ],
+    "venue": { "name": "NDSS", "type": "conference", "tier": "A" },
+    "year": 2024,
+    "keywords": ["edge", "security"],
+    "abstract": "Federated trust framework for edge clusters.",
+    "references": ["c6", "c8", "c12"],
+    "citations": 9,
+    "country": "UAE"
+  },
+  {
+    "id": "c16",
+    "title": "Learning-Assisted Scheduling",
+    "authors": [
+      {
+        "id": "a16",
+        "name": "Priya Gupta",
+        "affiliations": ["MLScale"],
+        "country": "India"
+      }
+    ],
+    "venue": { "name": "OSDI", "type": "conference", "tier": "A" },
+    "year": 2025,
+    "keywords": ["scheduling", "ml"],
+    "abstract": "Learning-assisted schedulers for heterogeneous clusters.",
+    "references": ["c7", "c9", "c13", "c14"],
+    "citations": 7,
+    "country": "India"
+  },
+  {
+    "id": "c17",
+    "title": "Privacy-Preserving Telemetry",
+    "authors": [
+      {
+        "id": "a17",
+        "name": "Qi Wang",
+        "affiliations": ["SecureSys"],
+        "country": "China"
+      }
+    ],
+    "venue": { "name": "USENIX Security", "type": "conference", "tier": "A" },
+    "year": 2025,
+    "keywords": ["privacy", "telemetry"],
+    "abstract": "Differentially private telemetry for cloud services.",
+    "references": ["c8", "c10", "c12", "c15"],
+    "citations": 6,
+    "country": "China"
+  },
+  {
+    "id": "c18",
+    "title": "Global Coordination Mesh",
+    "authors": [
+      {
+        "id": "a18",
+        "name": "Rita Gomez",
+        "affiliations": ["DataLab"],
+        "country": "Mexico"
+      }
+    ],
+    "venue": { "name": "SOSP", "type": "conference", "tier": "A" },
+    "year": 2026,
+    "keywords": ["coordination", "consistency"],
+    "abstract": "Mesh-based coordination for globally distributed services.",
+    "references": ["c2", "c5", "c12", "c16"],
+    "citations": 3,
+    "country": "Mexico"
+  },
+  {
+    "id": "c19",
+    "title": "Energy-Aware Edge Serving",
+    "authors": [
+      {
+        "id": "a19",
+        "name": "Sara Nilsson",
+        "affiliations": ["EdgeLab"],
+        "country": "Sweden"
+      }
+    ],
+    "venue": { "name": "EuroSys", "type": "conference", "tier": "A" },
+    "year": 2026,
+    "keywords": ["edge", "energy"],
+    "abstract": "Energy-aware inference serving on edge clusters.",
+    "references": ["c6", "c9", "c15", "c16"],
+    "citations": 2,
+    "country": "Sweden"
+  },
+  {
+    "id": "c20",
+    "title": "Programmable Data Plane Consensus",
+    "authors": [
+      {
+        "id": "a20",
+        "name": "Tom Becker",
+        "affiliations": ["NetSys"],
+        "country": "Germany"
+      }
+    ],
+    "venue": { "name": "NSDI", "type": "conference", "tier": "A" },
+    "year": 2026,
+    "keywords": ["consensus", "network"],
+    "abstract": "Offloading consensus fast paths into programmable switches.",
+    "references": ["c1", "c2", "c5", "c18"],
+    "citations": 1,
+    "country": "Germany"
+  }
+]
